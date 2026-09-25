@@ -1,4 +1,4 @@
-const CACHE_NAME = "confraria-pwa-v2";
+const CACHE_NAME = "confraria-pwa-v3";
 
 const APP_SHELL = [
   "./",
@@ -42,13 +42,17 @@ self.addEventListener("fetch", event => {
   // Isso permite que alterações no index.html/manifest sejam reconhecidas mais facilmente.
   if (request.mode === "navigate") {
     event.respondWith(
-      fetch(request)
-        .then(response => {
-          const copy = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
-          return response;
-        })
+      fetch(request, { cache: "no-store" })
+        .then(response => response)
         .catch(() => caches.match("./index.html"))
+    );
+    return;
+  }
+
+  if (url.pathname.endsWith("/index.html") || url.pathname.endsWith("/manifest.json")) {
+    event.respondWith(
+      fetch(request, { cache: "no-store" })
+        .catch(() => caches.match(request))
     );
     return;
   }
