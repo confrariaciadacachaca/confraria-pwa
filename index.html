@@ -5,8 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#123A2F">
   <meta name="description" content="Carteira Digital da Confraria Companhia da Cachaça">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Confraria">
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" href="./icon-192.png">
+  <link rel="apple-touch-icon" href="./icon-192.png">
   <title>Confraria</title>
 
   <style>
@@ -24,6 +29,7 @@
     }
 
     #app {
+      position: relative;
       width: 100vw;
       height: 100vh;
       min-height: 100dvh;
@@ -96,24 +102,40 @@
   </main>
 
   <script>
-    const APP_URL = "https://script.google.com/macros/s/AKfycbyBiHc666uXQ0npNWBHzyGGVQ79fFbtn93zKyCydZPRySbe7ie3_XpACkzO5zwe_4oO9Q/exec";
+    const APP_URL = "https://script.google.com/macros/s/AKfycbyBiHc666uX0npNWBHzyGGVQ79fFbtn93zKyCydZPRySbe7ie3_XpACkzO5zwe_4oO9Q/exec";
+    const STORAGE_KEY = "confraria_membro";
+
+    function numeroValido(numero) {
+      return /^\d{4}$/.test(numero || "");
+    }
 
     function obterNumeroMembro() {
       const params = new URLSearchParams(window.location.search);
       const daUrl = params.get("membro");
 
-      if (daUrl && /^\d{4}$/.test(daUrl)) {
-        localStorage.setItem("confraria_membro", daUrl);
+      if (numeroValido(daUrl)) {
+        localStorage.setItem(STORAGE_KEY, daUrl);
         return daUrl;
       }
 
-      const salvo = localStorage.getItem("confraria_membro");
+      const salvo = localStorage.getItem(STORAGE_KEY);
 
-      if (salvo && /^\d{4}$/.test(salvo)) {
+      if (numeroValido(salvo)) {
         return salvo;
       }
 
       return "";
+    }
+
+    function mostrarMensagem(titulo, texto) {
+      const app = document.getElementById("app");
+
+      app.innerHTML = `
+        <div id="mensagem">
+          <h1>${titulo}</h1>
+          <p>${texto}</p>
+        </div>
+      `;
     }
 
     function abrirCarteira() {
@@ -121,35 +143,44 @@
       const app = document.getElementById("app");
 
       if (!membro) {
-        app.innerHTML = `
-          <div id="mensagem">
-            <h1>Carteira Digital</h1>
-            <p>
-              Acesse o link individual da sua carteira para
-              instalar este aplicativo no celular.
-            </p>
-          </div>
-        `;
+        mostrarMensagem(
+          "Carteira Digital",
+          "Acesse primeiro o link individual da sua carteira para vincular seu número a este aplicativo."
+        );
         return;
       }
 
       const iframe = document.createElement("iframe");
       iframe.id = "carteira";
+      iframe.title = "Carteira Digital da Confraria Companhia da Cachaça";
       iframe.allow = "fullscreen";
+      iframe.setAttribute("loading", "eager");
       iframe.src = APP_URL + "?membro=" + encodeURIComponent(membro);
+
+      iframe.addEventListener("load", () => {
+        document.title = "Confraria";
+      });
 
       app.innerHTML = "";
       app.appendChild(iframe);
     }
 
-    if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./service-worker.js")
-          .catch(err => console.warn("Service Worker:", err));
+    function registrarServiceWorker() {
+      if (!("serviceWorker" in navigator)) {
+        return;
+      }
+
+      navigator.serviceWorker.register("./service-worker.js", {
+        scope: "./"
+      }).catch(err => {
+        console.warn("Service Worker:", err);
       });
     }
 
-    abrirCarteira();
+    window.addEventListener("load", () => {
+      registrarServiceWorker();
+      abrirCarteira();
+    });
   </script>
 </body>
 </html>

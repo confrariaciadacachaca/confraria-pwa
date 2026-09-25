@@ -1,10 +1,12 @@
 {
+  "id": "https://confrariadacachaca.github.io/confraria-pwa/",
   "name": "Confraria Companhia da Cachaça",
   "short_name": "Confraria",
   "description": "Carteira Digital da Confraria Companhia da Cachaça",
   "lang": "pt-BR",
-  "start_url": "./",
+  "start_url": "./?launcher=homescreen",
   "scope": "./",
+  "display_override": ["standalone"],
   "display": "standalone",
   "orientation": "landscape",
   "background_color": "#F5F1E8",

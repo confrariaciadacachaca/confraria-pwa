@@ -1,4 +1,4 @@
-const CACHE_NAME = "confraria-pwa-v1";
+const CACHE_NAME = "confraria-pwa-v2";
 
 const APP_SHELL = [
   "./",
@@ -29,19 +29,41 @@ self.addEventListener("activate", event => {
 });
 
 self.addEventListener("fetch", event => {
-  const url = new URL(event.request.url);
+  const request = event.request;
+  const url = new URL(request.url);
 
-  // Cache only the PWA's own files.
-  // The Google Apps Script wallet remains online and is not cached here.
+  // O PWA só controla arquivos da própria origem.
+  // A carteira do Google Apps Script continua online e não é armazenada em cache.
   if (url.origin !== self.location.origin) {
     return;
   }
 
+  // Para navegação, tenta primeiro a rede e usa o shell em caso de falha.
+  // Isso permite que alterações no index.html/manifest sejam reconhecidas mais facilmente.
+  if (request.mode === "navigate") {
+    event.respondWith(
+      fetch(request)
+        .then(response => {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+          return response;
+        })
+        .catch(() => caches.match("./index.html"))
+    );
+    return;
+  }
+
   event.respondWith(
-    caches.match(event.request).then(cached => {
-      return cached || fetch(event.request).then(response => {
-        const copy = response.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));
+    caches.match(request).then(cached => {
+      if (cached) {
+        return cached;
+      }
+
+      return fetch(request).then(response => {
+        if (response && response.ok) {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+        }
         return response;
       });
     })
