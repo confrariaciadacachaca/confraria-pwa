@@ -4,7 +4,7 @@
   "short_name": "Identidade Confraria",
   "description": "Carteira Digital da Confraria Companhia da Cachaça",
   "lang": "pt-BR",
-  "start_url": "./?launcher=homescreen&pwa=3c",
+  "start_url": "./?launcher=homescreen&pwa=3",
   "scope": "./",
   "display_override": ["standalone"],
   "display": "standalone",
