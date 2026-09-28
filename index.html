@@ -22,7 +22,7 @@
 
   <link
     rel="manifest"
-    href="./manifest.json?v=4"
+    href="./manifest.json?v=5"
   >
 
   <title>Identidade Confraria</title>
@@ -46,7 +46,7 @@
 
     body {
 
-      padding: 24px 15px;
+      padding: 22px 15px;
 
       background: #111111;
 
@@ -63,7 +63,7 @@
 
 
     /* =====================================================
-       ÁREA DA CARTEIRA
+       ÁREA PRINCIPAL
        ===================================================== */
 
     .area-carteira {
@@ -111,12 +111,12 @@
 
       background: #F5F1E8;
 
-      border: 1px solid #D9D0BF;
+      border: 1px solid #D4C9B6;
 
       border-radius: 18px;
 
       box-shadow:
-        0 14px 32px rgba(0,0,0,0.30);
+        0 15px 35px rgba(0,0,0,0.32);
 
       overflow: hidden;
 
@@ -144,24 +144,26 @@
 
       position: relative;
 
-      z-index: 2;
+      z-index: 5;
 
-      padding: 16px 25px 11px;
+      padding:
+        15px 24px 10px;
 
       text-align: center;
 
-      border-bottom: 1px solid #D9D0BF;
+      border-bottom:
+        1px solid #D8D0C2;
 
     }
 
 
     .titulo {
 
-      font-size: 18px;
+      font-size: 19px;
 
       font-weight: 700;
 
-      letter-spacing: 1.05px;
+      letter-spacing: 1px;
 
       color: #123A2F;
 
@@ -178,7 +180,7 @@
 
       font-size: 9px;
 
-      letter-spacing: 1.25px;
+      letter-spacing: 1.35px;
 
       color: #B58A2C;
 
@@ -201,17 +203,23 @@
 
       display: grid;
 
+      /*
+       * Os três blocos ficam mais próximos:
+       *
+       * FOTO | IDENTIFICAÇÃO | DADOS
+       */
+
       grid-template-columns:
-        29%
-        44%
-        27%;
+        27%
+        43%
+        30%;
 
       align-items: center;
 
       padding:
-        16px
-        25px
-        20px;
+        13px
+        24px
+        17px;
 
       overflow: hidden;
 
@@ -229,10 +237,6 @@
 
       position: absolute;
 
-      width: 140px;
-
-      height: 100px;
-
       pointer-events: none;
 
       z-index: 0;
@@ -245,6 +249,10 @@
       top: 0;
 
       left: 0;
+
+      width: 140px;
+
+      height: 100px;
 
       background: #123A2F;
 
@@ -262,6 +270,10 @@
       right: 0;
 
       bottom: 0;
+
+      width: 140px;
+
+      height: 100px;
 
       background: #123A2F;
 
@@ -309,7 +321,7 @@
 
       position: relative;
 
-      z-index: 1;
+      z-index: 3;
 
       min-width: 0;
 
@@ -328,19 +340,19 @@
 
       justify-content: center;
 
-      padding-right: 8px;
+      padding-right: 2px;
 
       transform:
-        translateX(10px);
+        translateX(8px);
 
     }
 
 
     .foto {
 
-      width: 166px;
+      width: 170px;
 
-      height: 190px;
+      height: 194px;
 
       object-fit: cover;
 
@@ -348,14 +360,15 @@
 
       border-radius: 11px;
 
-      border: 2px solid #B58A2C;
+      border:
+        2px solid #B58A2C;
 
       display: block;
 
       max-width: 100%;
 
       box-shadow:
-        0 6px 16px rgba(0,0,0,0.16);
+        0 7px 17px rgba(0,0,0,0.18);
 
     }
 
@@ -390,11 +403,12 @@
 
     .sem-foto {
 
-      width: 166px;
+      width: 170px;
 
-      height: 190px;
+      height: 194px;
 
-      border: 2px solid #B58A2C;
+      border:
+        2px solid #B58A2C;
 
       border-radius: 11px;
 
@@ -414,7 +428,7 @@
 
 
     /* =====================================================
-       COLUNA CENTRAL
+       BLOCO CENTRAL
        ===================================================== */
 
     .coluna-central {
@@ -422,27 +436,26 @@
       text-align: center;
 
       padding:
-        0 15px;
+        0 7px;
 
       transform:
+        translateX(0)
         translateY(-1px);
-
-      overflow: hidden;
 
     }
 
 
     .nome {
 
-      font-size: 28px;
+      font-size: 30px;
 
       font-weight: 700;
 
       color: #123A2F;
 
-      letter-spacing: 0.15px;
+      letter-spacing: 0;
 
-      line-height: 1.08;
+      line-height: 1.05;
 
       width: 100%;
 
@@ -484,17 +497,23 @@
 
 
     /* =====================================================
-       STATUS ATIVO
+       STATUS
        ===================================================== */
 
     .status {
 
-      display: inline-block;
+      display: inline-flex;
 
-      margin-top: 11px;
+      align-items: center;
+
+      justify-content: center;
+
+      margin-top: 10px;
 
       padding:
-        6px 19px;
+        6px 20px;
+
+      min-width: 72px;
 
       border-radius: 20px;
 
@@ -506,7 +525,7 @@
 
       font-weight: 700;
 
-      letter-spacing: 0.7px;
+      letter-spacing: 0.8px;
 
       line-height: 1;
 
@@ -519,7 +538,7 @@
 
     .lema {
 
-      margin-top: 12px;
+      margin-top: 11px;
 
       font-size: 9px;
 
@@ -544,14 +563,14 @@
 
       height: auto;
 
-      max-width: 125px;
+      max-width: 142px;
 
-      max-height: 58px;
+      max-height: 66px;
 
       object-fit: contain;
 
       margin:
-        12px auto 0;
+        10px auto 0;
 
     }
 
@@ -570,9 +589,11 @@
     .coluna-direita {
 
       border-left:
-        1px solid #D9D0BF;
+        1px solid #D8D0C2;
 
-      padding-left: 19px;
+      padding-left: 18px;
+
+      padding-right: 2px;
 
       display: flex;
 
@@ -600,10 +621,10 @@
 
       align-items: center;
 
-      min-height: 34px;
+      min-height: 35px;
 
       border-bottom:
-        1px solid #E3DDD2;
+        1px solid #E1DBD0;
 
       font-size: 11px;
 
@@ -625,7 +646,7 @@
 
       color: #123A2F;
 
-      font-weight: 600;
+      font-weight: 700;
 
       text-align: right;
 
@@ -640,7 +661,7 @@
 
     .qr-area {
 
-      margin-top: 14px;
+      margin-top: 13px;
 
       display: flex;
 
@@ -655,14 +676,14 @@
 
     .qr {
 
-      width: 86px;
+      width: 94px;
 
-      height: 86px;
+      height: 94px;
 
       object-fit: contain;
 
       border:
-        1px solid #D9D0BF;
+        1px solid #D8D0C2;
 
       border-radius: 4px;
 
@@ -681,7 +702,7 @@
 
       font-size: 7px;
 
-      letter-spacing: 0.42px;
+      letter-spacing: 0.45px;
 
       color: #6F685D;
 
@@ -714,7 +735,7 @@
 
 
     /* =====================================================
-       ELEMENTOS GEOMÉTRICOS DO VERSO
+       ELEMENTOS DO VERSO
        ===================================================== */
 
     .verso::before,
@@ -779,7 +800,7 @@
 
       position: relative;
 
-      z-index: 2;
+      z-index: 3;
 
       display: block;
 
@@ -787,13 +808,14 @@
 
       height: auto;
 
-      max-width: 330px;
+      max-width: 360px;
 
-      max-height: 175px;
+      max-height: 190px;
 
       object-fit: contain;
 
-      margin: 0;
+      margin:
+        -8px 0 0;
 
     }
 
@@ -802,9 +824,9 @@
 
       position: relative;
 
-      z-index: 2;
+      z-index: 3;
 
-      margin-top: 15px;
+      margin-top: 13px;
 
       color: #B58A2C;
 
@@ -831,7 +853,7 @@
 
       gap: 10px;
 
-      margin-top: 15px;
+      margin-top: 14px;
 
     }
 
@@ -902,7 +924,7 @@
 
     .identificacao-app {
 
-      margin-top: 9px;
+      margin-top: 8px;
 
       text-align: center;
 
@@ -1090,7 +1112,7 @@
 
 
     /* =====================================================
-       CELULAR
+       RESPONSIVO
        ===================================================== */
 
     @media (max-width: 650px) {
@@ -1120,34 +1142,10 @@
       .corpo {
 
         grid-template-columns:
-          27% 45% 28%;
+          27% 44% 29%;
 
         padding:
-          13px 12px;
-
-        background:
-
-          linear-gradient(
-            146deg,
-            transparent 0%,
-            transparent 47%,
-            #B58A2C 47%,
-            #B58A2C 51%,
-            transparent 51%
-          )
-          top left / 110px 82px
-          no-repeat,
-
-          linear-gradient(
-            326deg,
-            transparent 0%,
-            transparent 47%,
-            #B58A2C 47%,
-            #B58A2C 51%,
-            transparent 51%
-          )
-          bottom right / 110px 82px
-          no-repeat;
+          12px 11px;
 
       }
 
@@ -1165,9 +1163,7 @@
       .coluna-foto {
 
         transform:
-          translateX(7px);
-
-        padding-right: 4px;
+          translateX(5px);
 
       }
 
@@ -1175,9 +1171,9 @@
       .foto,
       .sem-foto {
 
-        width: 82px;
+        width: 88px;
 
-        height: 105px;
+        height: 108px;
 
       }
 
@@ -1185,14 +1181,14 @@
       .coluna-central {
 
         padding:
-          0 6px;
+          0 5px;
 
       }
 
 
       .nome {
 
-        font-size: 17px;
+        font-size: 18px;
 
       }
 
@@ -1208,8 +1204,6 @@
 
         font-size: 9px;
 
-        margin-top: 5px;
-
       }
 
 
@@ -1218,9 +1212,7 @@
         font-size: 8px;
 
         padding:
-          5px 11px;
-
-        margin-top: 8px;
+          5px 12px;
 
       }
 
@@ -1229,25 +1221,21 @@
 
         font-size: 7px;
 
-        margin-top: 8px;
-
       }
 
 
       .logo-frente {
 
-        max-width: 78px;
+        max-width: 82px;
 
-        max-height: 34px;
-
-        margin-top: 8px;
+        max-height: 38px;
 
       }
 
 
       .coluna-direita {
 
-        padding-left: 9px;
+        padding-left: 8px;
 
       }
 
@@ -1263,9 +1251,9 @@
 
       .qr {
 
-        width: 62px;
+        width: 64px;
 
-        height: 62px;
+        height: 64px;
 
       }
 
@@ -1281,7 +1269,7 @@
 
         max-width: 70%;
 
-        max-height: 120px;
+        max-height: 125px;
 
       }
 
@@ -1296,7 +1284,7 @@
 
 
     /* =====================================================
-       CELULAR EM RETRATO
+       RETRATO NO CELULAR
        ===================================================== */
 
     @media
@@ -1351,7 +1339,7 @@
 
 
   <!-- =====================================================
-       AVISO RETRATO
+       AVISO PARA CELULAR EM RETRATO
        ===================================================== -->
 
   <div
@@ -1415,22 +1403,9 @@
       "confraria_membro";
 
 
-    /*
-     * Logo oficial.
-     *
-     * Primeiro utilizamos a logo que venha da API.
-     * Como fallback, utilizamos o arquivo oficial
-     * armazenado no Google Drive.
-     */
-
-    const LOGO_FALLBACK =
-      "https://drive.google.com/thumbnail?id=1ypjxSnlqRoRJqsdUkM-YVoVUcobYvNDo&sz=w1000";
-
-
     /* =====================================================
        NÚMERO DO MEMBRO
        ===================================================== */
-
 
     function obterNumeroMembro() {
 
@@ -1479,9 +1454,8 @@
 
 
     /* =====================================================
-       JSONP
+       CONSULTA JSONP
        ===================================================== */
-
 
     function buscarMembro(numero) {
 
@@ -1634,7 +1608,6 @@
        ESCAPE HTML
        ===================================================== */
 
-
     function escaparHTML(valor) {
 
       if (
@@ -1681,7 +1654,6 @@
        LOGO
        ===================================================== */
 
-
     function obterLogo(membro) {
 
       if (
@@ -1694,15 +1666,14 @@
       }
 
 
-      return LOGO_FALLBACK;
+      return "";
 
     }
 
 
     /* =====================================================
-       QR CODE
+       QR
        ===================================================== */
-
 
     function gerarQRCode(link) {
 
@@ -1725,7 +1696,6 @@
     /* =====================================================
        CONSTRUIR CARTEIRA
        ===================================================== */
-
 
     function construirCarteira(
       membro
@@ -1908,33 +1878,38 @@
                     </div>
 
 
-                    <!-- STATUS -->
-
                     <div class="status">
                       ${status}
                     </div>
 
-
-                    <!-- LEMA -->
 
                     <div class="lema">
                       HONRA • TRADIÇÃO • PAIXÃO
                     </div>
 
 
-                    <!-- LOGO -->
+                    ${
+                      logo
+                        ?
 
-                    <img
-                      class="logo-frente"
-                      id="logoFrente"
-                      src="${logo}"
-                      alt=""
-                    >
+                        `
+                        <img
+                          class="logo-frente"
+                          id="logoFrente"
+                          src="${logo}"
+                          alt="Confraria Companhia da Cachaça"
+                        >
+                        `
+
+                        :
+                        ""
+                    }
+
 
                   </div>
 
 
-                  <!-- DIREITA -->
+                  <!-- DADOS -->
 
                   <div class="coluna-direita">
 
@@ -2081,12 +2056,22 @@
               >
 
 
-                <img
-                  class="logo-verso"
-                  id="logoVerso"
-                  src="${logo}"
-                  alt=""
-                >
+                ${
+                  logo
+                    ?
+
+                    `
+                    <img
+                      class="logo-verso"
+                      id="logoVerso"
+                      src="${logo}"
+                      alt="Confraria Companhia da Cachaça"
+                    >
+                    `
+
+                    :
+                    ""
+                }
 
 
                 <div class="lema-verso">
@@ -2148,70 +2133,11 @@
 
       ajustarFoto();
 
-      configurarLogo(
-        "logoFrente"
-      );
-
-      configurarLogo(
-        "logoVerso"
-      );
-
     }
 
 
     /* =====================================================
-       CONFIGURAR LOGO
-       ===================================================== */
-
-    function configurarLogo(id) {
-
-      const logo =
-        document.getElementById(id);
-
-
-      if (!logo) {
-        return;
-      }
-
-
-      logo.addEventListener(
-        "error",
-        function() {
-
-          if (
-            logo.dataset.fallback !==
-            "1"
-          ) {
-
-            logo.dataset.fallback =
-              "1";
-
-            logo.src =
-              LOGO_FALLBACK;
-
-          }
-
-          else {
-
-            /*
-             * Evita que apareça o texto
-             * alternativo da imagem quebrada.
-             */
-
-            logo.classList.add(
-              "logo-oculta"
-            );
-
-          }
-
-        }
-      );
-
-    }
-
-
-    /* =====================================================
-       AJUSTE DA FOTO
+       FOTO
        ===================================================== */
 
     function ajustarFoto() {
@@ -2337,7 +2263,7 @@
       }
 
 
-      let tamanho = 28;
+      let tamanho = 30;
 
 
       nome.style.fontSize =
@@ -2351,7 +2277,7 @@
       while (
         nome.scrollWidth >
         nome.clientWidth &&
-        tamanho > 20
+        tamanho > 21
       ) {
 
         tamanho--;
@@ -2488,7 +2414,7 @@
         catch (erro) {
 
           /*
-           * Cancelamento pelo usuário.
+           * Usuário cancelou.
            */
 
         }
@@ -2672,7 +2598,7 @@
 
           navigator.serviceWorker
             .register(
-              "./service-worker.js?v=4"
+              "./service-worker.js?v=5"
             )
             .catch(
               function(erro) {
