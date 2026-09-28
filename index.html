@@ -6,7 +6,9 @@
 
   <title>Identidade Confraria</title>
 
-  <link rel="manifest" href="./manifest.json?v=7">
+  <!-- MANTER O MANIFEST EXISTENTE -->
+  <link rel="manifest" href="./manifest.json?v=5">
+
   <meta name="theme-color" content="#111111">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -74,10 +76,8 @@
       inset: 0;
       width: 100%;
       height: 100%;
-
       border-radius: 18px;
       overflow: hidden;
-
       backface-visibility: hidden;
 
       background: #F5F1E8;
@@ -93,9 +93,8 @@
       transform: rotateY(180deg);
     }
 
-
     /* =========================================================
-       FAIXAS DECORATIVAS
+       FAIXAS
        ========================================================= */
 
     .corner {
@@ -168,9 +167,8 @@
       transform-origin: right center;
     }
 
-
     /* =========================================================
-       CABEÇALHO DA FRENTE
+       CABEÇALHO
        ========================================================= */
 
     .front-header {
@@ -196,17 +194,11 @@
 
     .front-title {
       font-size: clamp(18px, 2.05vw, 27px);
-
       font-weight: 700;
-
       letter-spacing: 1.2px;
-
       line-height: 1;
-
       white-space: nowrap;
-
       color: #123A2F;
-
       text-align: center;
     }
 
@@ -222,9 +214,8 @@
       text-transform: uppercase;
     }
 
-
     /* =========================================================
-       CONTEÚDO DA FRENTE
+       FRENTE — 3 BLOCOS
        ========================================================= */
 
     .front-content {
@@ -248,12 +239,11 @@
       align-items: stretch;
 
       padding:
-        34px
-        48px
-        34px
-        54px;
+        30px
+        46px
+        32px
+        52px;
     }
-
 
     /* =========================================================
        FOTO
@@ -261,23 +251,22 @@
 
     .photo-area {
       display: flex;
-
       justify-content: center;
       align-items: center;
 
       padding:
         8px
-        10px
+        8px
         8px
         4px;
     }
 
     .photo-frame {
-      width: 200px;
-      height: 225px;
+      width: 195px;
+      height: 220px;
 
       max-width: 90%;
-      max-height: 82%;
+      max-height: 84%;
 
       border-radius: 15px;
 
@@ -295,15 +284,12 @@
     .photo-frame img {
       width: 100%;
       height: 100%;
-
       display: block;
-
       object-fit: cover;
     }
 
-
     /* =========================================================
-       IDENTIFICAÇÃO CENTRAL
+       IDENTIFICAÇÃO
        ========================================================= */
 
     .identity {
@@ -318,14 +304,14 @@
       text-align: center;
 
       padding:
-        10px
-        28px
-        10px
-        20px;
+        8px
+        24px
+        8px
+        18px;
     }
 
     .member-name {
-      font-size: clamp(30px, 3.15vw, 41px);
+      font-size: clamp(30px, 3.05vw, 40px);
 
       line-height: 1.05;
 
@@ -339,7 +325,7 @@
     }
 
     .member-role {
-      font-size: clamp(16px, 1.3vw, 20px);
+      font-size: clamp(16px, 1.28vw, 20px);
 
       color: #111111;
 
@@ -351,7 +337,7 @@
 
       color: #6B4A2B;
 
-      margin-bottom: 15px;
+      margin-bottom: 14px;
     }
 
     .status {
@@ -373,34 +359,33 @@
 
       letter-spacing: 1.2px;
 
-      margin-bottom: 16px;
+      margin-bottom: 15px;
     }
 
     .motto {
-      font-size: clamp(11px, 0.95vw, 14px);
+      font-size: clamp(11px, 0.92vw, 14px);
 
-      letter-spacing: 1.8px;
+      letter-spacing: 1.7px;
 
       color: #B58A2C;
 
       text-transform: uppercase;
 
-      margin-bottom: 15px;
+      margin-bottom: 14px;
 
       white-space: nowrap;
     }
 
     .front-logo {
-      width: 160px;
+      width: 155px;
       max-width: 78%;
 
-      height: 78px;
+      height: 76px;
 
       object-fit: contain;
 
       display: block;
     }
-
 
     /* =========================================================
        BLOCO DIREITO
@@ -412,12 +397,10 @@
       border-left:
         1px solid rgba(107, 74, 43, 0.30);
 
-      padding-left: 30px;
+      padding-left: 28px;
 
       display: flex;
-
       flex-direction: column;
-
       justify-content: center;
 
       min-width: 0;
@@ -426,13 +409,13 @@
     .details-title {
       font-size: 10px;
 
-      letter-spacing: 1.8px;
+      letter-spacing: 1.7px;
 
       color: #B58A2C;
 
       text-transform: uppercase;
 
-      margin-bottom: 12px;
+      margin-bottom: 9px;
     }
 
     .detail-row {
@@ -441,12 +424,11 @@
       display: flex;
 
       justify-content: space-between;
-
       align-items: center;
 
-      min-height: 39px;
+      min-height: 40px;
 
-      padding: 7px 0;
+      padding: 8px 0;
 
       border-bottom:
         1px solid rgba(107, 74, 43, 0.18);
@@ -472,7 +454,6 @@
       white-space: nowrap;
     }
 
-
     /* =========================================================
        QR
        ========================================================= */
@@ -486,14 +467,14 @@
 
       justify-content: center;
 
-      margin-top: 20px;
+      margin-top: 18px;
 
       padding-top: 2px;
     }
 
     .qr-area img {
-      width: 118px;
-      height: 118px;
+      width: 112px;
+      height: 112px;
 
       object-fit: contain;
 
@@ -509,11 +490,11 @@
     }
 
     .qr-caption {
-      margin-top: 8px;
+      margin-top: 7px;
 
       font-size: 8px;
 
-      letter-spacing: 0.8px;
+      letter-spacing: 0.7px;
 
       color: #6B4A2B;
 
@@ -521,7 +502,6 @@
 
       white-space: nowrap;
     }
-
 
     /* =========================================================
        VERSO
@@ -569,9 +549,8 @@
       text-transform: uppercase;
     }
 
-
     /* =========================================================
-       CONTROLES
+       BOTÕES
        ========================================================= */
 
     .controls {
@@ -602,8 +581,7 @@
 
       color: #F5F1E8;
 
-      transition:
-        all 0.2s ease;
+      transition: all 0.2s ease;
     }
 
     button:hover {
@@ -630,9 +608,8 @@
       opacity: 0.85;
     }
 
-
     /* =========================================================
-       CARREGANDO / ERRO
+       CARREGANDO
        ========================================================= */
 
     .loading {
@@ -682,9 +659,8 @@
       font-size: 13px;
     }
 
-
     /* =========================================================
-       RESPONSIVO — TABLET
+       TABLET
        ========================================================= */
 
     @media (max-width: 900px) {
@@ -699,13 +675,11 @@
 
       .front-title {
         font-size: 17px;
-
         letter-spacing: 0.8px;
       }
 
       .front-subtitle {
         font-size: 8px;
-
         letter-spacing: 1.4px;
       }
 
@@ -751,7 +725,6 @@
 
       .detail-row {
         min-height: 32px;
-
         font-size: 10px;
       }
 
@@ -770,14 +743,12 @@
 
       .back-logo {
         max-width: 48%;
-
         height: 180px;
       }
     }
 
-
     /* =========================================================
-       RESPONSIVO — CELULAR
+       CELULAR
        ========================================================= */
 
     @media (max-width: 650px) {
@@ -788,7 +759,6 @@
 
       .wallet {
         min-height: 700px;
-
         aspect-ratio: auto;
       }
 
@@ -808,7 +778,6 @@
 
       .front-subtitle {
         font-size: 7px;
-
         margin-top: 5px;
       }
 
@@ -859,13 +828,11 @@
 
       .motto {
         font-size: 9px;
-
         letter-spacing: 1.2px;
       }
 
       .front-logo {
         width: 110px;
-
         height: 55px;
       }
 
@@ -905,7 +872,6 @@
 
       .corner.top-left::after {
         width: 100px;
-
         top: 58px;
       }
 
@@ -916,21 +882,17 @@
 
       .corner.bottom-right::after {
         width: 105px;
-
         bottom: 56px;
       }
 
       .back-logo {
         width: 270px;
-
         max-width: 65%;
-
         height: 150px;
       }
 
       .back-motto {
         font-size: 9px;
-
         letter-spacing: 1.4px;
       }
     }
@@ -951,7 +913,6 @@
 
 
 <script>
-
 
   /* =========================================================
      CONFIGURAÇÃO
@@ -1010,21 +971,12 @@
 
 
   /* =========================================================
-     TRATAMENTO DO MEMBRO
+     TRATAMENTO
      ========================================================= */
 
   function obterTratamento(membro) {
 
-    /*
-      O campo tratamento da planilha pode conter
-      Masculino/Feminino.
-
-      A carteira deve exibir:
-      Masculino -> Confrade
-      Feminino  -> Confreira
-    */
-
-    const tratamento =
+    const valor =
       String(
         membro.tratamento || ""
       )
@@ -1033,8 +985,8 @@
 
 
     if (
-      tratamento === "feminino" ||
-      tratamento === "confreira"
+      valor === "feminino" ||
+      valor === "confreira"
     ) {
 
       return "Confreira";
@@ -1042,29 +994,13 @@
     }
 
 
-    if (
-      tratamento === "masculino" ||
-      tratamento === "confrade"
-    ) {
-
-      return "Confrade";
-
-    }
-
-
-    /*
-      Caso o banco já tenha Confrade/Confreira,
-      preserva o valor.
-    */
-
-    return membro.tratamento ||
-      "Confrade";
+    return "Confrade";
 
   }
 
 
   /* =========================================================
-     API JSONP
+     BUSCAR MEMBRO
      ========================================================= */
 
   function buscarMembro(numero) {
@@ -1092,9 +1028,11 @@
 
         const timeout =
           setTimeout(
-            () => {
+            function() {
 
-              if (finalizado) return;
+              if (finalizado) {
+                return;
+              }
 
               finalizado = true;
 
@@ -1102,7 +1040,7 @@
 
               reject(
                 new Error(
-                  "Tempo limite excedido ao consultar a carteira."
+                  "Não foi possível consultar a carteira."
                 )
               );
 
@@ -1149,7 +1087,9 @@
           callbackName
         ] = function(data) {
 
-          if (finalizado) return;
+          if (finalizado) {
+            return;
+          }
 
           finalizado = true;
 
@@ -1163,7 +1103,9 @@
         script.onerror =
           function() {
 
-            if (finalizado) return;
+            if (finalizado) {
+              return;
+            }
 
             finalizado = true;
 
@@ -1177,6 +1119,11 @@
 
           };
 
+
+        /*
+          ESTA É A MESMA ESTRUTURA DA CONSULTA
+          QUE JÁ ESTAVA FUNCIONANDO.
+        */
 
         const url =
           API_URL +
@@ -1267,9 +1214,9 @@
         <div class="wallet-inner">
 
 
-          <!-- =================================================
+          <!-- =========================
                FRENTE
-               ================================================= -->
+               ========================= -->
 
           <section class="face front">
 
@@ -1323,6 +1270,7 @@
 
               <div class="identity">
 
+
                 <div class="member-name">
                   ${membro.nome || ""}
                 </div>
@@ -1334,25 +1282,17 @@
 
 
                 <div class="member-number">
-
-                  ${tratamento}
-                  nº
-                  ${membro.numero || ""}
-
+                  ${tratamento} nº ${membro.numero || ""}
                 </div>
 
 
                 <div class="status">
-
                   ${membro.status || "ATIVO"}
-
                 </div>
 
 
                 <div class="motto">
-
                   HONRA · TRADIÇÃO · PAIXÃO
-
                 </div>
 
 
@@ -1380,9 +1320,7 @@
 
 
                 <div class="details-title">
-
                   Dados da identidade
-
                 </div>
 
 
@@ -1447,9 +1385,7 @@
 
 
                   <div class="qr-caption">
-
                     VERIFIQUE A AUTENTICIDADE
-
                   </div>
 
                 </div>
@@ -1465,9 +1401,9 @@
 
 
 
-          <!-- =================================================
+          <!-- =========================
                VERSO
-               ================================================= -->
+               ========================= -->
 
           <section class="face back">
 
@@ -1496,9 +1432,7 @@
 
 
               <div class="back-motto">
-
                 HONRA · TRADIÇÃO · PAIXÃO
-
               </div>
 
 
@@ -1552,13 +1486,22 @@
     `;
 
 
-    document.getElementById(
-      "appContent"
-    ).outerHTML =
+    /*
+      Substitui apenas o conteúdo inicial.
+      Não cria um segundo .app.
+    */
+
+    const container =
+      document.getElementById(
+        "appContent"
+      );
+
+
+    container.outerHTML =
       `
         <div
-          class="app"
-          id="mainApp"
+          id="appContent"
+          style="width:100%;display:flex;flex-direction:column;align-items:center;"
         >
           ${html}
         </div>
@@ -1568,7 +1511,7 @@
 
 
   /* =========================================================
-     ALTERNAR FRENTE / VERSO
+     FRENTE / VERSO
      ========================================================= */
 
   function alternarLado() {
@@ -1585,7 +1528,9 @@
       );
 
 
-    if (!wallet) return;
+    if (!wallet) {
+      return;
+    }
 
 
     wallet.classList.toggle(
@@ -1684,9 +1629,13 @@
     mensagem
   ) {
 
-    document.getElementById(
-      "appContent"
-    ).outerHTML = `
+    const container =
+      document.getElementById(
+        "appContent"
+      );
+
+
+    container.innerHTML = `
 
       <div class="error-box">
 
@@ -1747,7 +1696,10 @@
 
     } catch(e) {
 
-      console.error(e);
+      console.error(
+        "Erro ao carregar carteira:",
+        e
+      );
 
 
       mostrarErro(
@@ -1764,6 +1716,11 @@
      SERVICE WORKER
      ========================================================= */
 
+  /*
+    MANTEMOS A VERSÃO QUE JÁ ESTAVA FUNCIONANDO.
+    NÃO ALTERAR O SERVICE WORKER AGORA.
+  */
+
   if (
     "serviceWorker" in navigator
   ) {
@@ -1774,7 +1731,7 @@
 
         navigator.serviceWorker
           .register(
-            "./service-worker.js?v=7"
+            "./service-worker.js?v=5"
           )
           .catch(
             function(error) {
@@ -1794,11 +1751,10 @@
 
 
   /* =========================================================
-     INICIAR APLICAÇÃO
+     INICIAR
      ========================================================= */
 
   iniciar();
-
 
 </script>
 
