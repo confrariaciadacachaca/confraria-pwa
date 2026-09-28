@@ -1,32 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="theme-color"
-    content="#111111"
-  >
-
-  <meta
-    name="description"
-    content="Carteira Digital da Confraria Companhia da Cachaça"
-  >
-
-  <link
-    rel="manifest"
-    href="./manifest.json?v=5"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Identidade Confraria</title>
 
+  <link rel="manifest" href="./manifest.json?v=6">
+  <meta name="theme-color" content="#111111">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Identidade Confraria">
 
   <style>
 
@@ -34,2048 +19,1079 @@
       box-sizing: border-box;
     }
 
-
     html,
     body {
       margin: 0;
       padding: 0;
       width: 100%;
       min-height: 100%;
+      background: #111111;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #123A2F;
     }
-
 
     body {
-
-      padding: 22px 15px;
-
-      background: #111111;
-
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-      color: #123A2F;
-
-      overflow-x: hidden;
-
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 18px;
     }
 
-
-    /* =====================================================
-       ÁREA PRINCIPAL
-       ===================================================== */
-
-    .area-carteira {
-
+    .app {
       width: 100%;
-
-      max-width: 1080px;
-
-      margin: 0 auto;
-
+      max-width: 1180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
+    /* =========================================================
+       CARTEIRA
+       ========================================================= */
 
-    .carteira {
-
+    .wallet {
       width: 100%;
-
       aspect-ratio: 1.586 / 1;
-
       position: relative;
-
+      perspective: 1600px;
     }
 
-
-    .cartao {
-
+    .wallet-inner {
       width: 100%;
-
       height: 100%;
-
       position: relative;
-
+      transform-style: preserve-3d;
+      transition: transform 0.7s ease;
     }
 
+    .wallet.flipped .wallet-inner {
+      transform: rotateY(180deg);
+    }
 
     .face {
-
       position: absolute;
-
       inset: 0;
-
       width: 100%;
-
       height: 100%;
-
-      background: #F5F1E8;
-
-      border: 1px solid #D4C9B6;
-
       border-radius: 18px;
-
-      box-shadow:
-        0 15px 35px rgba(0,0,0,0.32);
-
       overflow: hidden;
-
+      backface-visibility: hidden;
+      background: #F5F1E8;
+      border: 1px solid rgba(181, 138, 44, 0.65);
+      box-shadow:
+        0 20px 50px rgba(0,0,0,0.30),
+        inset 0 0 0 1px rgba(255,255,255,0.35);
     }
 
+    .back {
+      transform: rotateY(180deg);
+    }
 
-    /* =====================================================
+    /* =========================================================
+       FAIXAS DECORATIVAS
+       ========================================================= */
+
+    .corner {
+      position: absolute;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .corner.top-left {
+      top: 0;
+      left: 0;
+      width: 150px;
+      height: 115px;
+      background:
+        linear-gradient(
+          145deg,
+          #123A2F 0%,
+          #123A2F 68%,
+          transparent 68%
+        );
+    }
+
+    .corner.top-left::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 155px;
+      height: 7px;
+      background: #B58A2C;
+      transform: rotate(-35deg);
+      transform-origin: left center;
+      top: 85px;
+      left: 18px;
+    }
+
+    .corner.bottom-right {
+      right: 0;
+      bottom: 0;
+      width: 155px;
+      height: 120px;
+      background:
+        linear-gradient(
+          325deg,
+          #123A2F 0%,
+          #123A2F 68%,
+          transparent 68%
+        );
+    }
+
+    .corner.bottom-right::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 160px;
+      height: 7px;
+      background: #B58A2C;
+      transform: rotate(-35deg);
+      transform-origin: right center;
+      right: 16px;
+      bottom: 82px;
+    }
+
+    /* =========================================================
        FRENTE
-       ===================================================== */
+       ========================================================= */
 
-    .frente {
-
-      display: flex;
-
-      flex-direction: column;
-
-    }
-
-
-    /* =====================================================
-       CABEÇALHO
-       ===================================================== */
-
-    .cabecalho {
-
-      position: relative;
-
+    .front-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 74px;
       z-index: 5;
 
-      padding:
-        15px 24px 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
 
-      text-align: center;
+      border-bottom: 1px solid rgba(107, 74, 43, 0.20);
 
-      border-bottom:
-        1px solid #D8D0C2;
-
+      background: rgba(245, 241, 232, 0.97);
     }
 
-
-    .titulo {
-
-      font-size: 19px;
-
+    .front-title {
+      font-size: clamp(18px, 2.05vw, 27px);
       font-weight: 700;
-
-      letter-spacing: 1px;
-
-      color: #123A2F;
-
-      white-space: nowrap;
-
-      line-height: 1.15;
-
-    }
-
-
-    .subtitulo {
-
-      margin-top: 5px;
-
-      font-size: 9px;
-
-      letter-spacing: 1.35px;
-
-      color: #B58A2C;
-
+      letter-spacing: 1.2px;
       line-height: 1;
-
+      white-space: nowrap;
+      color: #123A2F;
+      text-align: center;
     }
 
+    .front-subtitle {
+      margin-top: 7px;
+      font-size: clamp(8px, 0.72vw, 11px);
+      letter-spacing: 2px;
+      color: #B58A2C;
+      text-transform: uppercase;
+    }
 
-    /* =====================================================
-       CORPO
-       ===================================================== */
+    .front-content {
+      position: absolute;
+      z-index: 4;
 
-    .corpo {
-
-      position: relative;
-
-      z-index: 2;
-
-      flex: 1;
+      top: 74px;
+      bottom: 0;
+      left: 0;
+      right: 0;
 
       display: grid;
 
       /*
-       * Os três blocos ficam mais próximos:
-       *
-       * FOTO | IDENTIFICAÇÃO | DADOS
-       */
-
-      grid-template-columns:
-        27%
-        43%
-        30%;
+        Foto | identificação | informações
+        A distribuição foi ampliada para ocupar melhor
+        a área útil da carteira.
+      */
+      grid-template-columns: 31% 39% 30%;
 
       align-items: center;
+      padding: 30px 48px 32px 58px;
+    }
 
-      padding:
-        13px
-        24px
-        17px;
+    /* =========================================================
+       FOTO
+       ========================================================= */
 
+    .photo-area {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 6px;
+    }
+
+    .photo-frame {
+      width: 190px;
+      height: 215px;
+
+      max-width: 88%;
+      max-height: 78%;
+
+      border-radius: 15px;
       overflow: hidden;
 
-    }
+      border: 2px solid #B58A2C;
 
-
-    /* =====================================================
-       FAIXAS GEOMÉTRICAS
-       ===================================================== */
-
-    .corpo::before,
-    .corpo::after {
-
-      content: "";
-
-      position: absolute;
-
-      pointer-events: none;
-
-      z-index: 0;
-
-    }
-
-
-    .corpo::before {
-
-      top: 0;
-
-      left: 0;
-
-      width: 140px;
-
-      height: 100px;
-
-      background: #123A2F;
-
-      clip-path: polygon(
-        0 0,
-        100% 0,
-        0 100%
-      );
-
-    }
-
-
-    .corpo::after {
-
-      right: 0;
-
-      bottom: 0;
-
-      width: 140px;
-
-      height: 100px;
-
-      background: #123A2F;
-
-      clip-path: polygon(
-        100% 100%,
-        0 100%,
-        100% 0
-      );
-
-    }
-
-
-    .corpo {
-
-      background:
-
-        linear-gradient(
-          146deg,
-          transparent 0%,
-          transparent 47%,
-          #B58A2C 47%,
-          #B58A2C 51%,
-          transparent 51%
-        )
-        top left / 140px 100px
-        no-repeat,
-
-        linear-gradient(
-          326deg,
-          transparent 0%,
-          transparent 47%,
-          #B58A2C 47%,
-          #B58A2C 51%,
-          transparent 51%
-        )
-        bottom right / 140px 100px
-        no-repeat;
-
-    }
-
-
-    .coluna-foto,
-    .coluna-central,
-    .coluna-direita {
-
-      position: relative;
-
-      z-index: 3;
-
-      min-width: 0;
-
-    }
-
-
-    /* =====================================================
-       FOTO
-       ===================================================== */
-
-    .coluna-foto {
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      padding-right: 2px;
-
-      transform:
-        translateX(8px);
-
-    }
-
-
-    .foto {
-
-      width: 170px;
-
-      height: 194px;
-
-      object-fit: cover;
-
-      object-position: center center;
-
-      border-radius: 11px;
-
-      border:
-        2px solid #B58A2C;
-
-      display: block;
-
-      max-width: 100%;
+      background: #ddd;
 
       box-shadow:
-        0 7px 17px rgba(0,0,0,0.18);
-
+        0 12px 25px rgba(0,0,0,0.16),
+        0 0 0 5px rgba(181,138,44,0.08);
     }
 
-
-    .foto.vertical {
-
-      object-position: center 20%;
-
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
     }
 
+    /* =========================================================
+       IDENTIFICAÇÃO CENTRAL
+       ========================================================= */
 
-    .foto.vertical-extrema {
-
-      object-position: center 15%;
-
-    }
-
-
-    .foto.horizontal {
-
-      object-position: center center;
-
-    }
-
-
-    .foto.quadrada {
-
-      object-position: center center;
-
-    }
-
-
-    .sem-foto {
-
-      width: 170px;
-
-      height: 194px;
-
-      border:
-        2px solid #B58A2C;
-
-      border-radius: 11px;
+    .identity {
+      height: 100%;
 
       display: flex;
-
+      flex-direction: column;
       align-items: center;
-
       justify-content: center;
-
-      color: #8A8377;
-
-      font-size: 13px;
-
-      background: #EFE8DA;
-
-    }
-
-
-    /* =====================================================
-       BLOCO CENTRAL
-       ===================================================== */
-
-    .coluna-central {
 
       text-align: center;
 
-      padding:
-        0 7px;
-
-      transform:
-        translateX(0)
-        translateY(-1px);
-
+      padding: 8px 15px 4px;
     }
 
-
-    .nome {
-
-      font-size: 30px;
-
-      font-weight: 700;
-
-      color: #123A2F;
-
-      letter-spacing: 0;
-
+    .member-name {
+      font-size: clamp(28px, 3vw, 39px);
       line-height: 1.05;
-
-      width: 100%;
-
+      font-weight: 700;
+      color: #123A2F;
+      margin-bottom: 7px;
       white-space: nowrap;
-
-      overflow: hidden;
-
-      text-overflow: clip;
-
-      margin: 0 auto;
-
     }
 
-
-    .cargo {
-
-      margin-top: 6px;
-
-      font-size: 16px;
-
-      color: #333333;
-
-      line-height: 1.15;
-
+    .member-role {
+      font-size: clamp(15px, 1.25vw, 19px);
+      color: #111111;
+      margin-bottom: 7px;
     }
 
-
-    .numero {
-
-      margin-top: 7px;
-
-      font-size: 13px;
-
-      color: #806C51;
-
-      line-height: 1.1;
-
+    .member-number {
+      font-size: clamp(12px, 1vw, 15px);
+      color: #6B4A2B;
+      margin-bottom: 12px;
     }
-
-
-    /* =====================================================
-       STATUS
-       ===================================================== */
 
     .status {
+      min-width: 82px;
+      padding: 6px 17px;
 
-      display: inline-flex;
+      border-radius: 30px;
 
-      align-items: center;
+      background: #DCEEE8;
+      color: #006B58;
 
-      justify-content: center;
-
-      margin-top: 10px;
-
-      padding:
-        6px 20px;
-
-      min-width: 72px;
-
-      border-radius: 20px;
-
-      background: #DCEEE6;
-
-      color: #12614D;
-
-      font-size: 10px;
-
+      font-size: 12px;
       font-weight: 700;
+      letter-spacing: 1.2px;
 
-      letter-spacing: 0.8px;
-
-      line-height: 1;
-
+      margin-bottom: 13px;
     }
 
-
-    /* =====================================================
-       LEMA
-       ===================================================== */
-
-    .lema {
-
-      margin-top: 11px;
-
-      font-size: 9px;
-
-      letter-spacing: 1px;
-
+    .motto {
+      font-size: clamp(11px, 0.9vw, 14px);
+      letter-spacing: 1.7px;
       color: #B58A2C;
-
+      text-transform: uppercase;
+      margin-bottom: 13px;
       white-space: nowrap;
-
     }
 
-
-    /* =====================================================
-       LOGO DA FRENTE
-       ===================================================== */
-
-    .logo-frente {
-
-      display: block;
-
-      width: auto;
-
-      height: auto;
-
-      max-width: 142px;
-
-      max-height: 66px;
+    .front-logo {
+      width: 150px;
+      max-width: 75%;
+      height: 72px;
 
       object-fit: contain;
-
-      margin:
-        10px auto 0;
-
+      display: block;
     }
 
+    /* =========================================================
+       INFORMAÇÕES / QR
+       ========================================================= */
 
-    .logo-frente.logo-oculta {
+    .details {
+      height: 100%;
 
-      display: none;
+      border-left: 1px solid rgba(107, 74, 43, 0.30);
 
-    }
-
-
-    /* =====================================================
-       COLUNA DIREITA
-       ===================================================== */
-
-    .coluna-direita {
-
-      border-left:
-        1px solid #D8D0C2;
-
-      padding-left: 18px;
-
-      padding-right: 2px;
+      padding-left: 28px;
 
       display: flex;
-
       flex-direction: column;
-
       justify-content: center;
-
-      align-items: stretch;
-
     }
 
-
-    .dados {
-
+    .detail-row {
       width: 100%;
 
-    }
-
-
-    .linha {
-
       display: flex;
-
       justify-content: space-between;
-
       align-items: center;
 
-      min-height: 35px;
+      padding: 9px 0;
 
-      border-bottom:
-        1px solid #E1DBD0;
+      border-bottom: 1px solid rgba(107, 74, 43, 0.18);
 
-      font-size: 11px;
-
-      gap: 10px;
-
+      font-size: 12px;
     }
 
-
-    .rotulo {
-
-      color: #806C51;
-
-      white-space: nowrap;
-
+    .detail-label {
+      color: #6B4A2B;
     }
 
-
-    .valor {
-
+    .detail-value {
       color: #123A2F;
-
       font-weight: 700;
-
       text-align: right;
-
-      white-space: nowrap;
-
     }
-
-
-    /* =====================================================
-       QR CODE
-       ===================================================== */
 
     .qr-area {
-
-      margin-top: 13px;
-
       display: flex;
-
       flex-direction: column;
-
       align-items: center;
-
       justify-content: center;
 
+      margin-top: 17px;
     }
 
-
-    .qr {
-
-      width: 94px;
-
-      height: 94px;
+    .qr-area img {
+      width: 110px;
+      height: 110px;
 
       object-fit: contain;
-
-      border:
-        1px solid #D8D0C2;
-
-      border-radius: 4px;
 
       background: #FFFFFF;
+      padding: 5px;
 
-      padding: 2px;
-
-      display: block;
-
+      border: 1px solid rgba(17,17,17,0.15);
     }
 
+    .qr-caption {
+      margin-top: 7px;
 
-    .qr-texto {
-
-      margin-top: 4px;
-
-      font-size: 7px;
-
-      letter-spacing: 0.45px;
-
-      color: #6F685D;
-
-      white-space: nowrap;
+      font-size: 8px;
+      letter-spacing: 0.7px;
+      color: #6B4A2B;
 
       text-align: center;
-
+      white-space: nowrap;
     }
 
-
-    /* =====================================================
+    /* =========================================================
        VERSO
-       ===================================================== */
+       ========================================================= */
 
-    .verso {
+    .back-content {
+      position: absolute;
+      inset: 0;
+      z-index: 4;
 
-      display: none;
-
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       align-items: center;
 
-      justify-content: center;
-
-      flex-direction: column;
-
-      text-align: center;
-
-      background: #F5F1E8;
-
+      padding: 40px;
     }
 
-
-    /* =====================================================
-       ELEMENTOS DO VERSO
-       ===================================================== */
-
-    .verso::before,
-    .verso::after {
-
-      content: "";
-
-      position: absolute;
-
-      pointer-events: none;
-
-    }
-
-
-    .verso::before {
-
-      top: -115px;
-
-      left: -90px;
-
-      width: 260px;
-
-      height: 225px;
-
-      background: #123A2F;
-
-      transform:
-        rotate(-34deg);
-
-      box-shadow:
-        24px 16px 0 #B58A2C;
-
-    }
-
-
-    .verso::after {
-
-      right: -95px;
-
-      bottom: -110px;
-
-      width: 260px;
-
-      height: 225px;
-
-      background: #123A2F;
-
-      transform:
-        rotate(-34deg);
-
-      box-shadow:
-        -24px -16px 0 #B58A2C;
-
-    }
-
-
-    /* =====================================================
-       LOGO DO VERSO
-       ===================================================== */
-
-    .logo-verso {
-
-      position: relative;
-
-      z-index: 3;
-
-      display: block;
-
-      width: auto;
-
-      height: auto;
-
-      max-width: 360px;
-
-      max-height: 190px;
+    .back-logo {
+      width: 390px;
+      max-width: 42%;
+      height: 210px;
 
       object-fit: contain;
 
-      margin:
-        -8px 0 0;
-
+      margin-top: -8px;
     }
 
+    .back-motto {
+      margin-top: -3px;
 
-    .lema-verso {
-
-      position: relative;
-
-      z-index: 3;
-
-      margin-top: 13px;
+      font-size: clamp(12px, 1vw, 15px);
+      letter-spacing: 2.1px;
 
       color: #B58A2C;
 
-      font-size: 13px;
-
-      letter-spacing: 1.8px;
-
-      line-height: 1.2;
-
+      text-transform: uppercase;
     }
 
-
-    /* =====================================================
+    /* =========================================================
        CONTROLES
-       ===================================================== */
+       ========================================================= */
 
-    .controles {
-
+    .controls {
       display: flex;
-
-      justify-content: center;
-
-      align-items: center;
-
       gap: 10px;
-
       margin-top: 14px;
-
     }
 
+    button {
+      border: 1px solid #B58A2C;
 
-    .botao {
+      border-radius: 30px;
 
-      display: block;
+      padding: 9px 22px;
 
-      padding:
-        8px 18px;
-
-      border:
-        1px solid #B58A2C;
-
-      border-radius: 20px;
-
-      background: transparent;
-
-      color: #F5F1E8;
-
-      font-size: 11px;
+      font-size: 12px;
+      font-weight: 600;
 
       cursor: pointer;
 
-      transition:
-        background 0.2s ease,
-        transform 0.2s ease;
+      background: transparent;
+      color: #F5F1E8;
 
+      transition: all 0.2s ease;
     }
 
-
-    .botao:hover {
-
-      background: #123A2F;
-
+    button:hover {
+      transform: translateY(-1px);
     }
 
-
-    .botao:active {
-
-      transform:
-        scale(0.97);
-
-    }
-
-
-    .botao-compartilhar {
-
+    .share-button {
       background: #B58A2C;
-
-      border-color: #B58A2C;
-
       color: #FFFFFF;
-
     }
 
-
-    .botao-compartilhar:hover {
-
-      background: #9D7725;
-
-    }
-
-
-    /* =====================================================
-       IDENTIFICAÇÃO DO APP
-       ===================================================== */
-
-    .identificacao-app {
-
-      margin-top: 8px;
+    .app-info {
+      margin-top: 9px;
 
       text-align: center;
 
-      color:
-        rgba(245,241,232,0.72);
+      font-size: 8px;
+      line-height: 1.45;
 
-      font-size: 9px;
-
-      line-height: 1.4;
-
+      color: #F5F1E8;
+      opacity: 0.85;
     }
 
-
-    .identificacao-app strong {
-
-      display: block;
-
-      color:
-        rgba(245,241,232,0.90);
-
-      font-weight: 500;
-
+    .portrait-warning {
+      display: none;
     }
 
+    /* =========================================================
+       CARREGANDO / ERRO
+       ========================================================= */
 
-    /* =====================================================
-       CARREGAMENTO
-       ===================================================== */
-
-    .carregando {
-
-      width: 100%;
-
-      min-height: 65vh;
+    .loading {
+      min-height: 300px;
 
       display: flex;
-
       align-items: center;
-
       justify-content: center;
 
-      flex-direction: column;
-
-      text-align: center;
-
       color: #F5F1E8;
-
-    }
-
-
-    .carregando-titulo {
-
-      font-size: 21px;
-
-      color: #B58A2C;
-
-      font-weight: 700;
-
-      margin-bottom: 10px;
-
-    }
-
-
-    .carregando-texto {
-
       font-size: 14px;
-
-      color: #F5F1E8;
-
-      opacity: 0.8;
-
     }
 
-
-    /* =====================================================
-       ERRO
-       ===================================================== */
-
-    .erro {
-
-      width: 100%;
-
-      max-width: 430px;
-
-      margin: 60px auto;
-
-      padding: 35px 25px;
-
+    .error-box {
       background: #F5F1E8;
-
-      border:
-        1px solid #D9D0BF;
-
-      border-radius: 18px;
-
-      text-align: center;
-
-      box-shadow:
-        0 10px 25px rgba(0,0,0,0.10);
-
-    }
-
-
-    .erro h2 {
-
-      margin:
-        0 0 12px;
-
       color: #123A2F;
 
-      font-size: 21px;
-
-    }
-
-
-    .erro p {
-
-      color: #666666;
-
-      font-size: 14px;
-
-      line-height: 1.5;
-
-    }
-
-
-    /* =====================================================
-       AVISO RETRATO
-       ===================================================== */
-
-    .aviso-retrato {
-
-      display: none;
-
-      position: fixed;
-
-      inset: 0;
-
-      z-index: 9999;
-
-      background: #111111;
-
-      color: #F5F1E8;
-
-      align-items: center;
-
-      justify-content: center;
-
-      text-align: center;
+      border-radius: 16px;
 
       padding: 30px;
 
+      max-width: 430px;
+
+      text-align: center;
+
+      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
     }
 
-
-    .aviso-retrato-conteudo {
-
-      max-width: 340px;
-
+    .error-box h2 {
+      margin: 0 0 12px;
+      font-size: 20px;
     }
 
-
-    .aviso-retrato-titulo {
-
-      color: #B58A2C;
-
-      font-size: 21px;
-
-      font-weight: 700;
-
-      margin-bottom: 12px;
-
+    .error-box p {
+      margin: 8px 0;
+      color: #6B4A2B;
+      font-size: 13px;
     }
 
-
-    .aviso-retrato-texto {
-
-      font-size: 14px;
-
-      line-height: 1.5;
-
-      opacity: 0.85;
-
-    }
-
-
-    /* =====================================================
+    /* =========================================================
        RESPONSIVO
-       ===================================================== */
+       ========================================================= */
+
+    @media (max-width: 900px) {
+
+      body {
+        padding: 10px;
+      }
+
+      .wallet {
+        aspect-ratio: auto;
+        height: auto;
+        min-height: 620px;
+      }
+
+      .front-header {
+        height: 78px;
+      }
+
+      .front-title {
+        font-size: 17px;
+        letter-spacing: 0.8px;
+      }
+
+      .front-subtitle {
+        font-size: 8px;
+        letter-spacing: 1.4px;
+      }
+
+      .front-content {
+        top: 78px;
+
+        display: grid;
+
+        grid-template-columns: 32% 38% 30%;
+
+        padding:
+          28px
+          28px
+          28px
+          32px;
+      }
+
+      .photo-frame {
+        width: 150px;
+        height: 180px;
+      }
+
+      .member-name {
+        font-size: 27px;
+      }
+
+      .member-role {
+        font-size: 14px;
+      }
+
+      .front-logo {
+        width: 125px;
+      }
+
+      .details {
+        padding-left: 17px;
+      }
+
+      .detail-row {
+        font-size: 10px;
+      }
+
+      .qr-area img {
+        width: 88px;
+        height: 88px;
+      }
+
+      .qr-caption {
+        font-size: 6px;
+      }
+
+      .back-logo {
+        max-width: 48%;
+        height: 180px;
+      }
+    }
 
     @media (max-width: 650px) {
 
       body {
-
-        padding:
-          20px 10px;
-
+        padding: 8px;
       }
 
-
-      .titulo {
-
-        font-size: 14px;
-
+      .wallet {
+        min-height: 700px;
       }
 
-
-      .subtitulo {
-
-        font-size: 8px;
-
-      }
-
-
-      .corpo {
-
-        grid-template-columns:
-          27% 44% 29%;
-
-        padding:
-          12px 11px;
-
-      }
-
-
-      .corpo::before,
-      .corpo::after {
-
-        width: 110px;
-
+      .front-header {
         height: 82px;
-
       }
 
-
-      .coluna-foto {
-
-        transform:
-          translateX(5px);
-
+      .front-title {
+        font-size: 14px;
+        white-space: normal;
+        max-width: 90%;
+        line-height: 1.15;
       }
 
-
-      .foto,
-      .sem-foto {
-
-        width: 88px;
-
-        height: 108px;
-
-      }
-
-
-      .coluna-central {
-
-        padding:
-          0 5px;
-
-      }
-
-
-      .nome {
-
-        font-size: 18px;
-
-      }
-
-
-      .cargo {
-
-        font-size: 12px;
-
-      }
-
-
-      .numero {
-
-        font-size: 9px;
-
-      }
-
-
-      .status {
-
-        font-size: 8px;
-
-        padding:
-          5px 12px;
-
-      }
-
-
-      .lema {
-
+      .front-subtitle {
         font-size: 7px;
-
-      }
-
-
-      .logo-frente {
-
-        max-width: 82px;
-
-        max-height: 38px;
-
-      }
-
-
-      .coluna-direita {
-
-        padding-left: 8px;
-
-      }
-
-
-      .linha {
-
-        min-height: 23px;
-
-        font-size: 7px;
-
-      }
-
-
-      .qr {
-
-        width: 64px;
-
-        height: 64px;
-
-      }
-
-
-      .qr-texto {
-
-        font-size: 6px;
-
-      }
-
-
-      .logo-verso {
-
-        max-width: 70%;
-
-        max-height: 125px;
-
-      }
-
-
-      .lema-verso {
-
-        font-size: 8px;
-
-      }
-
-    }
-
-
-    /* =====================================================
-       RETRATO NO CELULAR
-       ===================================================== */
-
-    @media
-      (max-width: 650px)
-      and (orientation: portrait) {
-
-      .aviso-retrato {
-
-        display: flex;
-
-      }
-
-    }
-
-
-    /* =====================================================
-       TELAS BAIXAS
-       ===================================================== */
-
-    @media (max-height: 600px) {
-
-      body {
-
-        padding-top: 10px;
-
-        padding-bottom: 10px;
-
-      }
-
-
-      .controles {
-
-        margin-top: 8px;
-
-      }
-
-
-      .identificacao-app {
-
         margin-top: 5px;
-
       }
 
+      .front-content {
+        top: 82px;
+        display: flex;
+        flex-direction: column;
+
+        justify-content: center;
+
+        gap: 18px;
+
+        padding: 30px 25px;
+      }
+
+      .photo-area {
+        flex: none;
+      }
+
+      .photo-frame {
+        width: 125px;
+        height: 150px;
+      }
+
+      .identity {
+        height: auto;
+        flex: none;
+      }
+
+      .member-name {
+        font-size: 25px;
+      }
+
+      .member-role {
+        font-size: 14px;
+      }
+
+      .member-number {
+        font-size: 11px;
+      }
+
+      .motto {
+        font-size: 9px;
+        letter-spacing: 1.2px;
+      }
+
+      .front-logo {
+        width: 110px;
+        height: 55px;
+      }
+
+      .details {
+        height: auto;
+        width: 90%;
+
+        border-left: none;
+        border-top: 1px solid rgba(107,74,43,0.30);
+
+        padding:
+          12px
+          0
+          0;
+      }
+
+      .detail-row {
+        padding: 6px 0;
+      }
+
+      .qr-area {
+        margin-top: 10px;
+      }
+
+      .qr-area img {
+        width: 82px;
+        height: 82px;
+      }
+
+      .corner.top-left {
+        width: 95px;
+        height: 75px;
+      }
+
+      .corner.top-left::after {
+        width: 100px;
+        top: 58px;
+      }
+
+      .corner.bottom-right {
+        width: 100px;
+        height: 78px;
+      }
+
+      .corner.bottom-right::after {
+        width: 105px;
+        bottom: 56px;
+      }
+
+      .back-logo {
+        width: 270px;
+        max-width: 65%;
+        height: 150px;
+      }
+
+      .back-motto {
+        font-size: 9px;
+        letter-spacing: 1.4px;
+      }
     }
 
   </style>
-
 </head>
-
 
 <body>
 
+  <div class="app">
 
-  <!-- =====================================================
-       AVISO PARA CELULAR EM RETRATO
-       ===================================================== -->
-
-  <div
-    class="aviso-retrato"
-    id="avisoRetrato"
-  >
-
-    <div class="aviso-retrato-conteudo">
-
-      <div class="aviso-retrato-titulo">
-        Identidade Confraria
-      </div>
-
-      <div class="aviso-retrato-texto">
-        Para visualizar sua carteira digital,
-        gire o celular para a posição horizontal.
-      </div>
-
+    <div id="appContent" class="loading">
+      Carregando carteira...
     </div>
 
   </div>
 
 
-  <!-- =====================================================
-       CONTEÚDO
-       ===================================================== -->
+<script>
 
-  <div id="conteudo">
+  /* =========================================================
+     CONFIGURAÇÃO
+     ========================================================= */
 
-    <div
-      class="carregando"
-      id="carregando"
-    >
-
-      <div class="carregando-titulo">
-        Identidade Confraria
-      </div>
-
-      <div class="carregando-texto">
-        Carregando carteira digital...
-      </div>
-
-    </div>
-
-  </div>
+  const API_URL =
+    "https://script.google.com/macros/s/AKfycbyBiHc666uXQ0npNWBHzyGGVQ79fFbtn93zKyCydZPRySbe7ie3_XpACkzO5zwe_4oO9Q/exec";
 
 
-  <script>
+  /* =========================================================
+     NÚMERO DO MEMBRO
+     ========================================================= */
 
+  function obterNumeroMembro() {
 
-    /* =====================================================
-       CONFIGURAÇÕES
-       ===================================================== */
+    const params = new URLSearchParams(window.location.search);
 
+    let numero = params.get("membro");
 
-    const APP_URL =
-      "https://script.google.com/macros/s/AKfycbyBiHc666uXQ0npNWBHzyGGVQ79fFbtn93zKyCydZPRySbe7ie3_XpACkzO5zwe_4oO9Q/exec";
-
-
-    const STORAGE_KEY =
-      "confraria_membro";
-
-
-    /* =====================================================
-       NÚMERO DO MEMBRO
-       ===================================================== */
-
-    function obterNumeroMembro() {
-
-      const parametros =
-        new URLSearchParams(
-          window.location.search
-        );
-
-
-      let numero =
-        parametros.get("membro");
-
-
-      if (!numero) {
-
-        numero =
-          localStorage.getItem(
-            STORAGE_KEY
-          );
-
-      }
-
-
-      if (!numero) {
-
-        numero = "0001";
-
-      }
-
-
-      numero =
-        String(numero)
-          .replace(/\D/g, "")
-          .padStart(4, "0");
-
-
-      localStorage.setItem(
-        STORAGE_KEY,
-        numero
-      );
-
-
-      return numero;
-
+    if (!numero) {
+      numero = localStorage.getItem("confraria_membro");
     }
 
+    if (!numero) {
+      numero = "0001";
+    }
 
-    /* =====================================================
-       CONSULTA JSONP
-       ===================================================== */
+    numero = String(numero).padStart(4, "0");
 
-    function buscarMembro(numero) {
+    localStorage.setItem("confraria_membro", numero);
 
-      return new Promise(
-        function(resolve, reject) {
-
-          const callbackName =
-            "confrariaCallback_" +
-            Date.now() +
-            "_" +
-            Math.floor(
-              Math.random() * 100000
-            );
+    return numero;
+  }
 
 
-          const script =
-            document.createElement(
-              "script"
-            );
+  /* =========================================================
+     API JSONP
+     ========================================================= */
+
+  function buscarMembro(numero) {
+
+    return new Promise((resolve, reject) => {
+
+      const callbackName =
+        "confrariaCallback_" +
+        Date.now() +
+        "_" +
+        Math.floor(Math.random() * 100000);
+
+      const script = document.createElement("script");
+
+      let finalizado = false;
+
+      const timeout = setTimeout(() => {
+
+        if (finalizado) return;
+
+        finalizado = true;
+
+        cleanup();
+
+        reject(
+          new Error("Tempo limite excedido ao consultar a carteira.")
+        );
+
+      }, 15000);
 
 
-          let finalizado =
-            false;
+      function cleanup() {
 
+        clearTimeout(timeout);
 
-          const timeout =
-            setTimeout(
-              function() {
-
-                if (finalizado) {
-                  return;
-                }
-
-
-                finalizado = true;
-
-                limpar();
-
-
-                reject(
-                  new Error(
-                    "Tempo limite excedido ao consultar a carteira."
-                  )
-                );
-
-              },
-              15000
-            );
-
-
-          function limpar() {
-
-            clearTimeout(timeout);
-
-
-            if (
-              script.parentNode
-            ) {
-
-              script.parentNode
-                .removeChild(script);
-
-            }
-
-
-            try {
-
-              delete window[
-                callbackName
-              ];
-
-            }
-
-            catch (erro) {
-
-              window[
-                callbackName
-              ] = undefined;
-
-            }
-
-          }
-
-
-          window[
-            callbackName
-          ] =
-            function(dados) {
-
-              if (finalizado) {
-                return;
-              }
-
-
-              finalizado = true;
-
-              limpar();
-
-              resolve(dados);
-
-            };
-
-
-          script.onerror =
-            function() {
-
-              if (finalizado) {
-                return;
-              }
-
-
-              finalizado = true;
-
-              limpar();
-
-
-              reject(
-                new Error(
-                  "Não foi possível consultar o servidor da Confraria."
-                )
-              );
-
-            };
-
-
-          script.src =
-            APP_URL +
-            "?api=1" +
-            "&membro=" +
-            encodeURIComponent(numero) +
-            "&callback=" +
-            encodeURIComponent(
-              callbackName
-            ) +
-            "&t=" +
-            Date.now();
-
-
-          document.body.appendChild(
-            script
-          );
-
+        try {
+          delete window[callbackName];
+        } catch(e) {
+          window[callbackName] = undefined;
         }
-      );
 
-    }
-
-
-    /* =====================================================
-       ESCAPE HTML
-       ===================================================== */
-
-    function escaparHTML(valor) {
-
-      if (
-        valor === null ||
-        valor === undefined
-      ) {
-
-        return "";
-
+        if (script.parentNode) {
+          script.parentNode.removeChild(script);
+        }
       }
 
 
-      return String(valor)
+      window[callbackName] = function(data) {
 
-        .replace(
-          /&/g,
-          "&amp;"
-        )
+        if (finalizado) return;
 
-        .replace(
-          /</g,
-          "&lt;"
-        )
+        finalizado = true;
 
-        .replace(
-          />/g,
-          "&gt;"
-        )
+        cleanup();
 
-        .replace(
-          /"/g,
-          "&quot;"
-        )
+        resolve(data);
+      };
 
-        .replace(
-          /'/g,
-          "&#039;"
+
+      script.onerror = function() {
+
+        if (finalizado) return;
+
+        finalizado = true;
+
+        cleanup();
+
+        reject(
+          new Error("Não foi possível consultar a carteira.")
         );
+      };
 
+
+      const url =
+        API_URL +
+        "?api=1" +
+        "&membro=" +
+        encodeURIComponent(numero) +
+        "&callback=" +
+        encodeURIComponent(callbackName);
+
+
+      script.src = url;
+
+      document.body.appendChild(script);
+
+    });
+
+  }
+
+
+  /* =========================================================
+     QR CODE
+     ========================================================= */
+
+  function obterQRCode(membro) {
+
+    if (membro.qr) {
+      return membro.qr;
     }
 
+    const numero =
+      membro.numero ||
+      obterNumeroMembro();
 
-    /* =====================================================
-       LOGO
-       ===================================================== */
+    const verificacao =
+      API_URL +
+      "?membro=" +
+      encodeURIComponent(numero);
 
-    function obterLogo(membro) {
+    return (
+      "https://quickchart.io/qr?size=300&margin=1&text=" +
+      encodeURIComponent(verificacao)
+    );
+  }
 
-      if (
-        membro &&
-        membro.logo
-      ) {
 
-        return membro.logo;
+  /* =========================================================
+     CONSTRUIR CARTEIRA
+     ========================================================= */
 
-      }
+  function construirCarteira(membro) {
 
+    const foto =
+      membro.foto ||
+      "";
 
-      return "";
+    const logo =
+      membro.logo ||
+      "";
 
-    }
+    const qr =
+      obterQRCode(membro);
 
 
-    /* =====================================================
-       QR
-       ===================================================== */
+    const html = `
 
-    function gerarQRCode(link) {
+      <div class="wallet" id="wallet">
 
-      if (!link) {
+        <div class="wallet-inner">
 
-        return "";
 
-      }
+          <!-- =================================================
+               FRENTE
+               ================================================= -->
 
+          <section class="face front">
 
-      return (
-        "https://quickchart.io/qr?text=" +
-        encodeURIComponent(link) +
-        "&size=300&margin=2&format=png"
-      );
 
-    }
+            <div class="corner top-left"></div>
+            <div class="corner bottom-right"></div>
 
 
-    /* =====================================================
-       CONSTRUIR CARTEIRA
-       ===================================================== */
+            <header class="front-header">
 
-    function construirCarteira(
-      membro
-    ) {
+              <div class="front-title">
+                CARTEIRA DE IDENTIFICAÇÃO DA CONFRARIA
+              </div>
 
-      const conteudo =
-        document.getElementById(
-          "conteudo"
-        );
+              <div class="front-subtitle">
+                CONFRARIA COMPANHIA DA CACHAÇA
+              </div>
 
+            </header>
 
-      const nome =
-        escaparHTML(
-          membro.nome || "—"
-        );
 
+            <div class="front-content">
 
-      const categoria =
-        escaparHTML(
-          membro.categoria ||
-          "Confrade"
-        );
 
+              <!-- FOTO -->
 
-      const condicao =
-        escaparHTML(
-          membro.condicao || ""
-        );
+              <div class="photo-area">
 
+                <div class="photo-frame">
 
-      const cargo =
-        escaparHTML(
-          membro.cargo || ""
-        );
-
-
-      const bienio =
-        escaparHTML(
-          membro.bienio || ""
-        );
-
-
-      const ingresso =
-        escaparHTML(
-          membro.ingresso || ""
-        );
-
-
-      const validade =
-        escaparHTML(
-          membro.validade || ""
-        );
-
-
-      const status =
-        escaparHTML(
-          membro.status || "ATIVO"
-        );
-
-
-      const numero =
-        escaparHTML(
-          membro.numero || ""
-        );
-
-
-      const foto =
-        membro.foto || "";
-
-
-      const qr =
-        membro.qr ||
-        (
-          membro.link
-            ? gerarQRCode(
-                membro.link
-              )
-            : ""
-        );
-
-
-      const logo =
-        obterLogo(membro);
-
-
-      conteudo.innerHTML = `
-
-        <div class="area-carteira">
-
-          <div class="carteira">
-
-            <div class="cartao">
-
-
-              <!-- =========================================
-                   FRENTE
-                   ========================================= -->
-
-              <div
-                class="face frente"
-                id="frente"
-              >
-
-
-                <div class="cabecalho">
-
-                  <div class="titulo">
-                    CARTEIRA DE IDENTIFICAÇÃO DA CONFRARIA
-                  </div>
-
-                  <div class="subtitulo">
-                    CONFRARIA COMPANHIA DA CACHAÇA
-                  </div>
-
-                </div>
-
-
-                <div class="corpo">
-
-
-                  <!-- FOTO -->
-
-                  <div class="coluna-foto">
-
-                    ${
-                      foto
-                        ?
-
-                        `
-                        <img
-                          class="foto"
-                          id="fotoMembro"
-                          src="${foto}"
-                          alt="Foto do confrade"
-                        >
-                        `
-
-                        :
-
-                        `
-                        <div class="sem-foto">
-                          FOTO
-                        </div>
-                        `
-                    }
-
-                  </div>
-
-
-                  <!-- CENTRO -->
-
-                  <div class="coluna-central">
-
-
-                    <div
-                      class="nome"
-                      id="nomeConfrade"
-                    >
-                      ${nome}
-                    </div>
-
-
-                    ${
-                      cargo
-                        ?
-
-                        `
-                        <div class="cargo">
-                          ${cargo}
-                        </div>
-                        `
-
-                        :
-                        ""
-                    }
-
-
-                    <div class="numero">
-                      ${categoria} nº ${numero}
-                    </div>
-
-
-                    <div class="status">
-                      ${status}
-                    </div>
-
-
-                    <div class="lema">
-                      HONRA • TRADIÇÃO • PAIXÃO
-                    </div>
-
-
-                    ${
-                      logo
-                        ?
-
-                        `
-                        <img
-                          class="logo-frente"
-                          id="logoFrente"
-                          src="${logo}"
-                          alt="Confraria Companhia da Cachaça"
-                        >
-                        `
-
-                        :
-                        ""
-                    }
-
-
-                  </div>
-
-
-                  <!-- DADOS -->
-
-                  <div class="coluna-direita">
-
-
-                    <div class="dados">
-
-
-                      ${
-                        condicao
-                          ?
-
-                          `
-                          <div class="linha">
-
-                            <span class="rotulo">
-                              Condição
-                            </span>
-
-                            <span class="valor">
-                              ${condicao}
-                            </span>
-
-                          </div>
-                          `
-
-                          :
-                          ""
-                      }
-
-
-                      ${
-                        bienio
-                          ?
-
-                          `
-                          <div class="linha">
-
-                            <span class="rotulo">
-                              Biênio
-                            </span>
-
-                            <span class="valor">
-                              ${bienio}
-                            </span>
-
-                          </div>
-                          `
-
-                          :
-                          ""
-                      }
-
-
-                      ${
-                        ingresso
-                          ?
-
-                          `
-                          <div class="linha">
-
-                            <span class="rotulo">
-                              Ingresso
-                            </span>
-
-                            <span class="valor">
-                              ${ingresso}
-                            </span>
-
-                          </div>
-                          `
-
-                          :
-                          ""
-                      }
-
-
-                      ${
-                        validade
-                          ?
-
-                          `
-                          <div class="linha">
-
-                            <span class="rotulo">
-                              Validade
-                            </span>
-
-                            <span class="valor">
-                              ${validade}
-                            </span>
-
-                          </div>
-                          `
-
-                          :
-                          ""
-                      }
-
-
-                    </div>
-
-
-                    ${
-                      qr
-                        ?
-
-                        `
-                        <div class="qr-area">
-
-                          <img
-                            class="qr"
-                            id="qrCode"
-                            src="${qr}"
-                            alt="QR Code de verificação"
-                          >
-
-                          <div class="qr-texto">
-                            VERIFIQUE A AUTENTICIDADE
-                          </div>
-
-                        </div>
-                        `
-
-                        :
-                        ""
-                    }
-
-
-                  </div>
-
+                  ${
+                    foto
+                    ?
+                    `<img src="${foto}" alt="Foto do membro">`
+                    :
+                    ""
+                  }
 
                 </div>
 
               </div>
 
 
-              <!-- =========================================
-                   VERSO
-                   ========================================= -->
+              <!-- IDENTIFICAÇÃO -->
 
-              <div
-                class="face verso"
-                id="verso"
-              >
+              <div class="identity">
 
+                <div class="member-name">
+                  ${membro.nome || ""}
+                </div>
+
+                <div class="member-role">
+                  ${membro.cargo || ""}
+                </div>
+
+                <div class="member-number">
+                  ${membro.tratamento || "Confrade"} nº ${membro.numero || ""}
+                </div>
+
+                <div class="status">
+                  ${membro.status || "ATIVO"}
+                </div>
+
+                <div class="motto">
+                  HONRA · TRADIÇÃO · PAIXÃO
+                </div>
 
                 ${
                   logo
-                    ?
-
-                    `
-                    <img
-                      class="logo-verso"
-                      id="logoVerso"
-                      src="${logo}"
-                      alt="Confraria Companhia da Cachaça"
-                    >
-                    `
-
-                    :
-                    ""
+                  ?
+                  `<img
+                    class="front-logo"
+                    src="${logo}"
+                    alt="Confraria Companhia da Cachaça"
+                  >`
+                  :
+                  ""
                 }
 
+              </div>
 
-                <div class="lema-verso">
-                  HONRA • TRADIÇÃO • PAIXÃO
+
+              <!-- INFORMAÇÕES -->
+
+              <div class="details">
+
+
+                <div class="detail-row">
+
+                  <span class="detail-label">
+                    Condição
+                  </span>
+
+                  <span class="detail-value">
+                    ${membro.condicao || ""}
+                  </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                  <span class="detail-label">
+                    Biênio
+                  </span>
+
+                  <span class="detail-value">
+                    ${membro.bienio || ""}
+                  </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                  <span class="detail-label">
+                    Ingresso
+                  </span>
+
+                  <span class="detail-value">
+                    ${membro.ingresso || ""}
+                  </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                  <span class="detail-label">
+                    Validade
+                  </span>
+
+                  <span class="detail-value">
+                    ${membro.validade || ""}
+                  </span>
+
+                </div>
+
+
+                <div class="qr-area">
+
+                  <img
+                    src="${qr}"
+                    alt="QR Code de autenticação"
+                  >
+
+                  <div class="qr-caption">
+                    VERIFIQUE A AUTENTICIDADE
+                  </div>
+
                 </div>
 
 
@@ -2084,565 +1100,276 @@
 
             </div>
 
-          </div>
+          </section>
 
 
-          <!-- =============================================
-               CONTROLES
-               ============================================= -->
 
-          <div class="controles">
+          <!-- =================================================
+               VERSO
+               ================================================= -->
 
-            <button
-              class="botao"
-              onclick="alternarLado()"
-              id="botaoLado"
-            >
-              Ver verso
-            </button>
+          <section class="face back">
 
 
-            <button
-              class="botao botao-compartilhar"
-              onclick="compartilharCarteira()"
-              id="botaoCompartilhar"
-            >
-              Compartilhar
-            </button>
-
-          </div>
+            <div class="corner top-left"></div>
+            <div class="corner bottom-right"></div>
 
 
-          <div class="identificacao-app">
+            <div class="back-content">
 
-            <strong>
-              Identidade Confraria
-            </strong>
+              ${
+                logo
+                ?
+                `<img
+                  class="back-logo"
+                  src="${logo}"
+                  alt="Confraria Companhia da Cachaça"
+                >`
+                :
+                ""
+              }
 
-            Confraria Companhia da Cachaça
+              <div class="back-motto">
+                HONRA · TRADIÇÃO · PAIXÃO
+              </div>
 
-          </div>
+            </div>
+
+
+          </section>
 
 
         </div>
 
-      `;
+      </div>
 
 
-      ajustarNome();
+      <div class="controls">
 
-      ajustarFoto();
+        <button
+          type="button"
+          onclick="alternarLado()"
+          id="flipButton"
+        >
+          Ver verso
+        </button>
 
-    }
+        <button
+          type="button"
+          class="share-button"
+          onclick="compartilharCarteira()"
+        >
+          Compartilhar
+        </button>
 
-
-    /* =====================================================
-       FOTO
-       ===================================================== */
-
-    function ajustarFoto() {
-
-      const foto =
-        document.getElementById(
-          "fotoMembro"
-        );
-
-
-      if (!foto) {
-        return;
-      }
+      </div>
 
 
-      function analisarFoto() {
+      <div class="app-info">
+        <strong>Identidade Confraria</strong><br>
+        Confraria Companhia da Cachaça
+      </div>
 
-        const largura =
-          foto.naturalWidth;
-
-
-        const altura =
-          foto.naturalHeight;
+    `;
 
 
-        if (
-          !largura ||
-          !altura
-        ) {
+    document.getElementById("appContent").outerHTML =
+      `<div class="app" id="mainApp">${html}</div>`;
 
-          return;
-
-        }
+  }
 
 
-        const proporcao =
-          largura / altura;
+  /* =========================================================
+     ALTERNAR FRENTE / VERSO
+     ========================================================= */
 
+  function alternarLado() {
 
-        foto.classList.remove(
-          "vertical",
-          "vertical-extrema",
-          "horizontal",
-          "quadrada"
-        );
+    const wallet =
+      document.getElementById("wallet");
 
+    const button =
+      document.getElementById("flipButton");
 
-        if (
-          proporcao < 0.62
-        ) {
+    if (!wallet) return;
 
-          foto.classList.add(
-            "vertical-extrema"
-          );
+    wallet.classList.toggle("flipped");
 
-        }
+    if (wallet.classList.contains("flipped")) {
 
-        else if (
-          proporcao < 0.90
-        ) {
+      button.textContent = "Ver frente";
 
-          foto.classList.add(
-            "vertical"
-          );
+    } else {
 
-        }
-
-        else if (
-          proporcao > 1.15
-        ) {
-
-          foto.classList.add(
-            "horizontal"
-          );
-
-        }
-
-        else {
-
-          foto.classList.add(
-            "quadrada"
-          );
-
-        }
-
-      }
-
-
-      if (
-        foto.complete
-      ) {
-
-        analisarFoto();
-
-      }
-
-
-      foto.addEventListener(
-        "load",
-        analisarFoto,
-        {
-          once: true
-        }
-      );
+      button.textContent = "Ver verso";
 
     }
 
+  }
 
-    /* =====================================================
-       AJUSTE DO NOME
-       ===================================================== */
 
-    function ajustarNome() {
+  /* =========================================================
+     COMPARTILHAR
+     ========================================================= */
 
-      const nome =
-        document.getElementById(
-          "nomeConfrade"
-        );
+  async function compartilharCarteira() {
 
+    const url =
+      window.location.href;
 
-      if (!nome) {
-        return;
-      }
+    const texto =
+      "Identidade Confraria — Confraria Companhia da Cachaça";
 
 
-      let tamanho = 30;
-
-
-      nome.style.fontSize =
-        tamanho + "px";
-
-
-      nome.style.whiteSpace =
-        "nowrap";
-
-
-      while (
-        nome.scrollWidth >
-        nome.clientWidth &&
-        tamanho > 21
-      ) {
-
-        tamanho--;
-
-        nome.style.fontSize =
-          tamanho + "px";
-
-      }
-
-
-      if (
-        nome.scrollWidth >
-        nome.clientWidth
-      ) {
-
-        nome.style.whiteSpace =
-          "normal";
-
-        nome.style.overflow =
-          "visible";
-
-        nome.style.lineHeight =
-          "1.08";
-
-      }
-
-    }
-
-
-    /* =====================================================
-       FRENTE / VERSO
-       ===================================================== */
-
-    function alternarLado() {
-
-      const frente =
-        document.getElementById(
-          "frente"
-        );
-
-
-      const verso =
-        document.getElementById(
-          "verso"
-        );
-
-
-      const botao =
-        document.getElementById(
-          "botaoLado"
-        );
-
-
-      if (
-        !frente ||
-        !verso ||
-        !botao
-      ) {
-
-        return;
-
-      }
-
-
-      if (
-        frente.style.display !==
-        "none"
-      ) {
-
-        frente.style.display =
-          "none";
-
-        verso.style.display =
-          "flex";
-
-        botao.textContent =
-          "Ver frente";
-
-      }
-
-      else {
-
-        frente.style.display =
-          "flex";
-
-        verso.style.display =
-          "none";
-
-        botao.textContent =
-          "Ver verso";
-
-        ajustarNome();
-
-        ajustarFoto();
-
-      }
-
-    }
-
-
-    /* =====================================================
-       COMPARTILHAR
-       ===================================================== */
-
-    async function compartilharCarteira() {
-
-      const url =
-        window.location.href;
-
-
-      if (
-        navigator.share
-      ) {
-
-        try {
-
-          await navigator.share({
-
-            title:
-              "Identidade Confraria",
-
-            text:
-              "Carteira Digital da Confraria Companhia da Cachaça",
-
-            url:
-              url
-
-          });
-
-          return;
-
-        }
-
-        catch (erro) {
-
-          /*
-           * Usuário cancelou.
-           */
-
-        }
-
-      }
-
-
-      if (
-        navigator.clipboard
-      ) {
-
-        try {
-
-          await navigator.clipboard
-            .writeText(url);
-
-
-          const botao =
-            document.getElementById(
-              "botaoCompartilhar"
-            );
-
-
-          const texto =
-            botao.textContent;
-
-
-          botao.textContent =
-            "Link copiado";
-
-
-          setTimeout(
-            function() {
-
-              botao.textContent =
-                texto;
-
-            },
-            1800
-          );
-
-
-          return;
-
-        }
-
-        catch (erro) {
-
-          /*
-           * Fallback abaixo.
-           */
-
-        }
-
-      }
-
-
-      alert(
-        "Copie o endereço desta página para compartilhar sua carteira."
-      );
-
-    }
-
-
-    /* =====================================================
-       ERRO
-       ===================================================== */
-
-    function mostrarErro(
-      mensagem
+    if (
+      navigator.share
     ) {
-
-      const conteudo =
-        document.getElementById(
-          "conteudo"
-        );
-
-
-      conteudo.innerHTML = `
-
-        <div class="erro">
-
-          <h2>
-            Carteira não encontrada
-          </h2>
-
-          <p>
-            ${
-              escaparHTML(
-                mensagem ||
-                "Não foi possível carregar os dados da carteira."
-              )
-            }
-          </p>
-
-          <p>
-            Verifique o número informado.
-          </p>
-
-        </div>
-
-      `;
-
-    }
-
-
-    /* =====================================================
-       INICIALIZAÇÃO
-       ===================================================== */
-
-    async function iniciar() {
 
       try {
 
-        const numero =
-          obterNumeroMembro();
+        await navigator.share({
+          title: "Identidade Confraria",
+          text: texto,
+          url: url
+        });
 
+        return;
 
-        const membro =
-          await buscarMembro(
-            numero
-          );
-
-
-        if (!membro) {
-
-          throw new Error(
-            "Não foi possível obter os dados do membro."
-          );
-
-        }
-
-
-        if (
-          membro.encontrado === false
-        ) {
-
-          throw new Error(
-            "O membro nº " +
-            numero +
-            " não foi encontrado."
-          );
-
-        }
-
-
-        construirCarteira(
-          membro
-        );
-
-      }
-
-      catch (erro) {
-
-        console.error(
-          "Erro ao carregar carteira:",
-          erro
-        );
-
-
-        mostrarErro(
-          erro.message
-        );
-
-      }
+      } catch(e) {}
 
     }
 
 
-    /* =====================================================
-       SERVICE WORKER
-       ===================================================== */
+    try {
 
-    if (
-      "serviceWorker" in navigator
-    ) {
+      await navigator.clipboard.writeText(url);
 
-      window.addEventListener(
-        "load",
-        function() {
+      alert(
+        "Link da carteira copiado para a área de transferência."
+      );
 
-          navigator.serviceWorker
-            .register(
-              "./service-worker.js?v=5"
-            )
-            .catch(
-              function(erro) {
+    } catch(e) {
 
-                console.warn(
-                  "Service Worker não registrado:",
-                  erro
-                );
-
-              }
-            );
-
-        }
+      prompt(
+        "Copie o link da carteira:",
+        url
       );
 
     }
 
+  }
 
-    /* =====================================================
-       REDIMENSIONAMENTO
-       ===================================================== */
+
+  /* =========================================================
+     ERRO
+     ========================================================= */
+
+  function mostrarErro(mensagem) {
+
+    document.getElementById("appContent").outerHTML = `
+
+      <div class="error-box">
+
+        <h2>
+          Carteira não encontrada
+        </h2>
+
+        <p>
+          ${mensagem}
+        </p>
+
+        <p>
+          Verifique o número informado.
+        </p>
+
+      </div>
+
+    `;
+
+  }
+
+
+  /* =========================================================
+     INICIAR
+     ========================================================= */
+
+  async function iniciar() {
+
+    const numero =
+      obterNumeroMembro();
+
+    try {
+
+      const membro =
+        await buscarMembro(numero);
+
+
+      if (
+        !membro ||
+        membro.erro
+      ) {
+
+        throw new Error(
+          membro?.mensagem ||
+          "Carteira não encontrada."
+        );
+
+      }
+
+
+      construirCarteira(membro);
+
+
+    } catch(e) {
+
+      console.error(e);
+
+      mostrarErro(
+        e.message ||
+        "Não foi possível consultar a carteira."
+      );
+
+    }
+
+  }
+
+
+  /* =========================================================
+     SERVICE WORKER
+     ========================================================= */
+
+  if (
+    "serviceWorker" in navigator
+  ) {
 
     window.addEventListener(
-      "resize",
+      "load",
       function() {
 
-        ajustarNome();
+        navigator.serviceWorker.register(
+          "./service-worker.js?v=6"
+        ).catch(function(error) {
 
-        ajustarFoto();
+          console.log(
+            "Service Worker:",
+            error
+          );
+
+        });
 
       }
     );
 
-
-    /* =====================================================
-       INICIAR
-       ===================================================== */
-
-    iniciar();
+  }
 
 
-  </script>
+  /* =========================================================
+     INICIAR APLICAÇÃO
+     ========================================================= */
 
+  iniciar();
+
+</script>
 
 </body>
-
 </html>
