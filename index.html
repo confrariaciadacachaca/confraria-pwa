@@ -6,7 +6,7 @@
 
   <title>Identidade Confraria</title>
 
-  <link rel="manifest" href="./manifest.json?v=6">
+  <link rel="manifest" href="./manifest.json?v=7">
   <meta name="theme-color" content="#111111">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -74,11 +74,16 @@
       inset: 0;
       width: 100%;
       height: 100%;
+
       border-radius: 18px;
       overflow: hidden;
+
       backface-visibility: hidden;
+
       background: #F5F1E8;
+
       border: 1px solid rgba(181, 138, 44, 0.65);
+
       box-shadow:
         0 20px 50px rgba(0,0,0,0.30),
         inset 0 0 0 1px rgba(255,255,255,0.35);
@@ -87,6 +92,7 @@
     .back {
       transform: rotateY(180deg);
     }
+
 
     /* =========================================================
        FAIXAS DECORATIVAS
@@ -103,6 +109,7 @@
       left: 0;
       width: 150px;
       height: 115px;
+
       background:
         linear-gradient(
           145deg,
@@ -114,16 +121,19 @@
 
     .corner.top-left::after {
       content: "";
+
       position: absolute;
-      left: 0;
-      top: 0;
+
+      left: 18px;
+      top: 85px;
+
       width: 155px;
       height: 7px;
+
       background: #B58A2C;
+
       transform: rotate(-35deg);
       transform-origin: left center;
-      top: 85px;
-      left: 18px;
     }
 
     .corner.bottom-right {
@@ -131,6 +141,7 @@
       bottom: 0;
       width: 155px;
       height: 120px;
+
       background:
         linear-gradient(
           325deg,
@@ -142,28 +153,35 @@
 
     .corner.bottom-right::after {
       content: "";
+
       position: absolute;
-      right: 0;
-      bottom: 0;
-      width: 160px;
-      height: 7px;
-      background: #B58A2C;
-      transform: rotate(-35deg);
-      transform-origin: right center;
+
       right: 16px;
       bottom: 82px;
+
+      width: 160px;
+      height: 7px;
+
+      background: #B58A2C;
+
+      transform: rotate(-35deg);
+      transform-origin: right center;
     }
 
+
     /* =========================================================
-       FRENTE
+       CABEÇALHO DA FRENTE
        ========================================================= */
 
     .front-header {
       position: absolute;
+
       top: 0;
       left: 0;
       right: 0;
+
       height: 74px;
+
       z-index: 5;
 
       display: flex;
@@ -178,24 +196,40 @@
 
     .front-title {
       font-size: clamp(18px, 2.05vw, 27px);
+
       font-weight: 700;
+
       letter-spacing: 1.2px;
+
       line-height: 1;
+
       white-space: nowrap;
+
       color: #123A2F;
+
       text-align: center;
     }
 
     .front-subtitle {
       margin-top: 7px;
+
       font-size: clamp(8px, 0.72vw, 11px);
+
       letter-spacing: 2px;
+
       color: #B58A2C;
+
       text-transform: uppercase;
     }
 
+
+    /* =========================================================
+       CONTEÚDO DA FRENTE
+       ========================================================= */
+
     .front-content {
       position: absolute;
+
       z-index: 4;
 
       top: 74px;
@@ -206,15 +240,20 @@
       display: grid;
 
       /*
-        Foto | identificação | informações
-        A distribuição foi ampliada para ocupar melhor
-        a área útil da carteira.
+        FOTO | IDENTIFICAÇÃO | DADOS
       */
-      grid-template-columns: 31% 39% 30%;
 
-      align-items: center;
-      padding: 30px 48px 32px 58px;
+      grid-template-columns: 29% 41% 30%;
+
+      align-items: stretch;
+
+      padding:
+        34px
+        48px
+        34px
+        54px;
     }
+
 
     /* =========================================================
        FOTO
@@ -222,19 +261,26 @@
 
     .photo-area {
       display: flex;
+
       justify-content: center;
       align-items: center;
-      padding-top: 6px;
+
+      padding:
+        8px
+        10px
+        8px
+        4px;
     }
 
     .photo-frame {
-      width: 190px;
-      height: 215px;
+      width: 200px;
+      height: 225px;
 
-      max-width: 88%;
-      max-height: 78%;
+      max-width: 90%;
+      max-height: 82%;
 
       border-radius: 15px;
+
       overflow: hidden;
 
       border: 2px solid #B58A2C;
@@ -249,9 +295,12 @@
     .photo-frame img {
       width: 100%;
       height: 100%;
+
       display: block;
+
       object-fit: cover;
     }
+
 
     /* =========================================================
        IDENTIFICAÇÃO CENTRAL
@@ -262,140 +311,217 @@
 
       display: flex;
       flex-direction: column;
+
       align-items: center;
       justify-content: center;
 
       text-align: center;
 
-      padding: 8px 15px 4px;
+      padding:
+        10px
+        28px
+        10px
+        20px;
     }
 
     .member-name {
-      font-size: clamp(28px, 3vw, 39px);
+      font-size: clamp(30px, 3.15vw, 41px);
+
       line-height: 1.05;
+
       font-weight: 700;
+
       color: #123A2F;
-      margin-bottom: 7px;
+
+      margin-bottom: 9px;
+
       white-space: nowrap;
     }
 
     .member-role {
-      font-size: clamp(15px, 1.25vw, 19px);
+      font-size: clamp(16px, 1.3vw, 20px);
+
       color: #111111;
-      margin-bottom: 7px;
+
+      margin-bottom: 8px;
     }
 
     .member-number {
-      font-size: clamp(12px, 1vw, 15px);
+      font-size: clamp(13px, 1vw, 15px);
+
       color: #6B4A2B;
-      margin-bottom: 12px;
+
+      margin-bottom: 15px;
     }
 
     .status {
-      min-width: 82px;
-      padding: 6px 17px;
+      min-width: 88px;
+
+      padding:
+        7px
+        18px;
 
       border-radius: 30px;
 
       background: #DCEEE8;
+
       color: #006B58;
 
       font-size: 12px;
+
       font-weight: 700;
+
       letter-spacing: 1.2px;
 
-      margin-bottom: 13px;
+      margin-bottom: 16px;
     }
 
     .motto {
-      font-size: clamp(11px, 0.9vw, 14px);
-      letter-spacing: 1.7px;
+      font-size: clamp(11px, 0.95vw, 14px);
+
+      letter-spacing: 1.8px;
+
       color: #B58A2C;
+
       text-transform: uppercase;
-      margin-bottom: 13px;
+
+      margin-bottom: 15px;
+
       white-space: nowrap;
     }
 
     .front-logo {
-      width: 150px;
-      max-width: 75%;
-      height: 72px;
+      width: 160px;
+      max-width: 78%;
+
+      height: 78px;
 
       object-fit: contain;
+
       display: block;
     }
 
+
     /* =========================================================
-       INFORMAÇÕES / QR
+       BLOCO DIREITO
        ========================================================= */
 
     .details {
       height: 100%;
 
-      border-left: 1px solid rgba(107, 74, 43, 0.30);
+      border-left:
+        1px solid rgba(107, 74, 43, 0.30);
 
-      padding-left: 28px;
+      padding-left: 30px;
 
       display: flex;
+
       flex-direction: column;
+
       justify-content: center;
+
+      min-width: 0;
+    }
+
+    .details-title {
+      font-size: 10px;
+
+      letter-spacing: 1.8px;
+
+      color: #B58A2C;
+
+      text-transform: uppercase;
+
+      margin-bottom: 12px;
     }
 
     .detail-row {
       width: 100%;
 
       display: flex;
+
       justify-content: space-between;
+
       align-items: center;
 
-      padding: 9px 0;
+      min-height: 39px;
 
-      border-bottom: 1px solid rgba(107, 74, 43, 0.18);
+      padding: 7px 0;
 
-      font-size: 12px;
+      border-bottom:
+        1px solid rgba(107, 74, 43, 0.18);
+
+      font-size: 13px;
+
+      gap: 15px;
     }
 
     .detail-label {
       color: #6B4A2B;
+
+      white-space: nowrap;
     }
 
     .detail-value {
       color: #123A2F;
+
       font-weight: 700;
+
       text-align: right;
+
+      white-space: nowrap;
     }
+
+
+    /* =========================================================
+       QR
+       ========================================================= */
 
     .qr-area {
       display: flex;
+
       flex-direction: column;
+
       align-items: center;
+
       justify-content: center;
 
-      margin-top: 17px;
+      margin-top: 20px;
+
+      padding-top: 2px;
     }
 
     .qr-area img {
-      width: 110px;
-      height: 110px;
+      width: 118px;
+      height: 118px;
 
       object-fit: contain;
 
       background: #FFFFFF;
+
       padding: 5px;
 
-      border: 1px solid rgba(17,17,17,0.15);
+      border:
+        1px solid rgba(17,17,17,0.15);
+
+      box-shadow:
+        0 5px 12px rgba(0,0,0,0.08);
     }
 
     .qr-caption {
-      margin-top: 7px;
+      margin-top: 8px;
 
       font-size: 8px;
-      letter-spacing: 0.7px;
+
+      letter-spacing: 0.8px;
+
       color: #6B4A2B;
 
       text-align: center;
+
       white-space: nowrap;
     }
+
 
     /* =========================================================
        VERSO
@@ -403,12 +529,17 @@
 
     .back-content {
       position: absolute;
+
       inset: 0;
+
       z-index: 4;
 
       display: flex;
+
       flex-direction: column;
+
       justify-content: center;
+
       align-items: center;
 
       padding: 40px;
@@ -416,7 +547,9 @@
 
     .back-logo {
       width: 390px;
+
       max-width: 42%;
+
       height: 210px;
 
       object-fit: contain;
@@ -428,6 +561,7 @@
       margin-top: -3px;
 
       font-size: clamp(12px, 1vw, 15px);
+
       letter-spacing: 2.1px;
 
       color: #B58A2C;
@@ -435,32 +569,41 @@
       text-transform: uppercase;
     }
 
+
     /* =========================================================
        CONTROLES
        ========================================================= */
 
     .controls {
       display: flex;
+
       gap: 10px;
+
       margin-top: 14px;
     }
 
     button {
-      border: 1px solid #B58A2C;
+      border:
+        1px solid #B58A2C;
 
       border-radius: 30px;
 
-      padding: 9px 22px;
+      padding:
+        9px
+        22px;
 
       font-size: 12px;
+
       font-weight: 600;
 
       cursor: pointer;
 
       background: transparent;
+
       color: #F5F1E8;
 
-      transition: all 0.2s ease;
+      transition:
+        all 0.2s ease;
     }
 
     button:hover {
@@ -469,6 +612,7 @@
 
     .share-button {
       background: #B58A2C;
+
       color: #FFFFFF;
     }
 
@@ -478,15 +622,14 @@
       text-align: center;
 
       font-size: 8px;
+
       line-height: 1.45;
 
       color: #F5F1E8;
+
       opacity: 0.85;
     }
 
-    .portrait-warning {
-      display: none;
-    }
 
     /* =========================================================
        CARREGANDO / ERRO
@@ -496,15 +639,18 @@
       min-height: 300px;
 
       display: flex;
+
       align-items: center;
       justify-content: center;
 
       color: #F5F1E8;
+
       font-size: 14px;
     }
 
     .error-box {
       background: #F5F1E8;
+
       color: #123A2F;
 
       border-radius: 16px;
@@ -515,22 +661,30 @@
 
       text-align: center;
 
-      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+      box-shadow:
+        0 15px 40px rgba(0,0,0,0.25);
     }
 
     .error-box h2 {
-      margin: 0 0 12px;
+      margin:
+        0
+        0
+        12px;
+
       font-size: 20px;
     }
 
     .error-box p {
       margin: 8px 0;
+
       color: #6B4A2B;
+
       font-size: 13px;
     }
 
+
     /* =========================================================
-       RESPONSIVO
+       RESPONSIVO — TABLET
        ========================================================= */
 
     @media (max-width: 900px) {
@@ -539,32 +693,29 @@
         padding: 10px;
       }
 
-      .wallet {
-        aspect-ratio: auto;
-        height: auto;
-        min-height: 620px;
-      }
-
       .front-header {
         height: 78px;
       }
 
       .front-title {
         font-size: 17px;
+
         letter-spacing: 0.8px;
       }
 
       .front-subtitle {
         font-size: 8px;
+
         letter-spacing: 1.4px;
       }
 
       .front-content {
         top: 78px;
 
-        display: grid;
-
-        grid-template-columns: 32% 38% 30%;
+        grid-template-columns:
+          29%
+          41%
+          30%;
 
         padding:
           28px
@@ -574,12 +725,12 @@
       }
 
       .photo-frame {
-        width: 150px;
-        height: 180px;
+        width: 155px;
+        height: 185px;
       }
 
       .member-name {
-        font-size: 27px;
+        font-size: 28px;
       }
 
       .member-role {
@@ -587,20 +738,30 @@
       }
 
       .front-logo {
-        width: 125px;
+        width: 130px;
       }
 
       .details {
-        padding-left: 17px;
+        padding-left: 18px;
+      }
+
+      .details-title {
+        font-size: 8px;
       }
 
       .detail-row {
+        min-height: 32px;
+
         font-size: 10px;
       }
 
+      .qr-area {
+        margin-top: 12px;
+      }
+
       .qr-area img {
-        width: 88px;
-        height: 88px;
+        width: 92px;
+        height: 92px;
       }
 
       .qr-caption {
@@ -609,9 +770,15 @@
 
       .back-logo {
         max-width: 48%;
+
         height: 180px;
       }
     }
+
+
+    /* =========================================================
+       RESPONSIVO — CELULAR
+       ========================================================= */
 
     @media (max-width: 650px) {
 
@@ -621,6 +788,8 @@
 
       .wallet {
         min-height: 700px;
+
+        aspect-ratio: auto;
       }
 
       .front-header {
@@ -629,26 +798,34 @@
 
       .front-title {
         font-size: 14px;
+
         white-space: normal;
+
         max-width: 90%;
+
         line-height: 1.15;
       }
 
       .front-subtitle {
         font-size: 7px;
+
         margin-top: 5px;
       }
 
       .front-content {
         top: 82px;
+
         display: flex;
+
         flex-direction: column;
 
         justify-content: center;
 
         gap: 18px;
 
-        padding: 30px 25px;
+        padding:
+          30px
+          25px;
       }
 
       .photo-area {
@@ -662,7 +839,10 @@
 
       .identity {
         height: auto;
+
         flex: none;
+
+        padding: 0;
       }
 
       .member-name {
@@ -679,20 +859,25 @@
 
       .motto {
         font-size: 9px;
+
         letter-spacing: 1.2px;
       }
 
       .front-logo {
         width: 110px;
+
         height: 55px;
       }
 
       .details {
         height: auto;
+
         width: 90%;
 
         border-left: none;
-        border-top: 1px solid rgba(107,74,43,0.30);
+
+        border-top:
+          1px solid rgba(107,74,43,0.30);
 
         padding:
           12px
@@ -720,6 +905,7 @@
 
       .corner.top-left::after {
         width: 100px;
+
         top: 58px;
       }
 
@@ -730,23 +916,28 @@
 
       .corner.bottom-right::after {
         width: 105px;
+
         bottom: 56px;
       }
 
       .back-logo {
         width: 270px;
+
         max-width: 65%;
+
         height: 150px;
       }
 
       .back-motto {
         font-size: 9px;
+
         letter-spacing: 1.4px;
       }
     }
 
   </style>
 </head>
+
 
 <body>
 
@@ -761,12 +952,13 @@
 
 <script>
 
+
   /* =========================================================
      CONFIGURAÇÃO
      ========================================================= */
 
   const API_URL =
-    "https://script.google.com/macros/s/AKfycbyBiHc666uXQ0npNWBHzyGGVQ79fFbtn93zKyCydZPRySbe7ie3_XpACkzO5zwe_4oO9Q/exec";
+    "https://script.google.com/macros/s/AKfycbyBiHc666uX0npNWBHzyGGVQ79fFbtn93zKyCydZPRySbe7ie3_XpACkzO5zwe_4oO9Q/exec";
 
 
   /* =========================================================
@@ -775,23 +967,99 @@
 
   function obterNumeroMembro() {
 
-    const params = new URLSearchParams(window.location.search);
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
 
-    let numero = params.get("membro");
+    let numero =
+      params.get("membro");
+
 
     if (!numero) {
-      numero = localStorage.getItem("confraria_membro");
+
+      numero =
+        localStorage.getItem(
+          "confraria_membro"
+        );
+
     }
 
+
     if (!numero) {
+
       numero = "0001";
+
     }
 
-    numero = String(numero).padStart(4, "0");
 
-    localStorage.setItem("confraria_membro", numero);
+    numero =
+      String(numero)
+        .padStart(4, "0");
+
+
+    localStorage.setItem(
+      "confraria_membro",
+      numero
+    );
+
 
     return numero;
+
+  }
+
+
+  /* =========================================================
+     TRATAMENTO DO MEMBRO
+     ========================================================= */
+
+  function obterTratamento(membro) {
+
+    /*
+      O campo tratamento da planilha pode conter
+      Masculino/Feminino.
+
+      A carteira deve exibir:
+      Masculino -> Confrade
+      Feminino  -> Confreira
+    */
+
+    const tratamento =
+      String(
+        membro.tratamento || ""
+      )
+      .trim()
+      .toLowerCase();
+
+
+    if (
+      tratamento === "feminino" ||
+      tratamento === "confreira"
+    ) {
+
+      return "Confreira";
+
+    }
+
+
+    if (
+      tratamento === "masculino" ||
+      tratamento === "confrade"
+    ) {
+
+      return "Confrade";
+
+    }
+
+
+    /*
+      Caso o banco já tenha Confrade/Confreira,
+      preserva o valor.
+    */
+
+    return membro.tratamento ||
+      "Confrade";
+
   }
 
 
@@ -801,89 +1069,135 @@
 
   function buscarMembro(numero) {
 
-    return new Promise((resolve, reject) => {
+    return new Promise(
+      (resolve, reject) => {
 
-      const callbackName =
-        "confrariaCallback_" +
-        Date.now() +
-        "_" +
-        Math.floor(Math.random() * 100000);
+        const callbackName =
+          "confrariaCallback_" +
+          Date.now() +
+          "_" +
+          Math.floor(
+            Math.random() * 100000
+          );
 
-      const script = document.createElement("script");
 
-      let finalizado = false;
+        const script =
+          document.createElement(
+            "script"
+          );
 
-      const timeout = setTimeout(() => {
 
-        if (finalizado) return;
+        let finalizado = false;
 
-        finalizado = true;
 
-        cleanup();
+        const timeout =
+          setTimeout(
+            () => {
 
-        reject(
-          new Error("Tempo limite excedido ao consultar a carteira.")
+              if (finalizado) return;
+
+              finalizado = true;
+
+              cleanup();
+
+              reject(
+                new Error(
+                  "Tempo limite excedido ao consultar a carteira."
+                )
+              );
+
+            },
+            15000
+          );
+
+
+        function cleanup() {
+
+          clearTimeout(timeout);
+
+
+          try {
+
+            delete window[
+              callbackName
+            ];
+
+          } catch(e) {
+
+            window[
+              callbackName
+            ] = undefined;
+
+          }
+
+
+          if (
+            script.parentNode
+          ) {
+
+            script.parentNode
+              .removeChild(
+                script
+              );
+
+          }
+
+        }
+
+
+        window[
+          callbackName
+        ] = function(data) {
+
+          if (finalizado) return;
+
+          finalizado = true;
+
+          cleanup();
+
+          resolve(data);
+
+        };
+
+
+        script.onerror =
+          function() {
+
+            if (finalizado) return;
+
+            finalizado = true;
+
+            cleanup();
+
+            reject(
+              new Error(
+                "Não foi possível consultar a carteira."
+              )
+            );
+
+          };
+
+
+        const url =
+          API_URL +
+          "?api=1" +
+          "&membro=" +
+          encodeURIComponent(numero) +
+          "&callback=" +
+          encodeURIComponent(
+            callbackName
+          );
+
+
+        script.src = url;
+
+
+        document.body.appendChild(
+          script
         );
 
-      }, 15000);
-
-
-      function cleanup() {
-
-        clearTimeout(timeout);
-
-        try {
-          delete window[callbackName];
-        } catch(e) {
-          window[callbackName] = undefined;
-        }
-
-        if (script.parentNode) {
-          script.parentNode.removeChild(script);
-        }
       }
-
-
-      window[callbackName] = function(data) {
-
-        if (finalizado) return;
-
-        finalizado = true;
-
-        cleanup();
-
-        resolve(data);
-      };
-
-
-      script.onerror = function() {
-
-        if (finalizado) return;
-
-        finalizado = true;
-
-        cleanup();
-
-        reject(
-          new Error("Não foi possível consultar a carteira.")
-        );
-      };
-
-
-      const url =
-        API_URL +
-        "?api=1" +
-        "&membro=" +
-        encodeURIComponent(numero) +
-        "&callback=" +
-        encodeURIComponent(callbackName);
-
-
-      script.src = url;
-
-      document.body.appendChild(script);
-
-    });
+    );
 
   }
 
@@ -895,22 +1209,32 @@
   function obterQRCode(membro) {
 
     if (membro.qr) {
+
       return membro.qr;
+
     }
+
 
     const numero =
       membro.numero ||
       obterNumeroMembro();
 
+
     const verificacao =
       API_URL +
       "?membro=" +
-      encodeURIComponent(numero);
+      encodeURIComponent(
+        numero
+      );
+
 
     return (
       "https://quickchart.io/qr?size=300&margin=1&text=" +
-      encodeURIComponent(verificacao)
+      encodeURIComponent(
+        verificacao
+      )
     );
+
   }
 
 
@@ -921,15 +1245,19 @@
   function construirCarteira(membro) {
 
     const foto =
-      membro.foto ||
-      "";
+      membro.foto || "";
+
 
     const logo =
-      membro.logo ||
-      "";
+      membro.logo || "";
+
 
     const qr =
       obterQRCode(membro);
+
+
+    const tratamento =
+      obterTratamento(membro);
 
 
     const html = `
@@ -947,6 +1275,7 @@
 
 
             <div class="corner top-left"></div>
+
             <div class="corner bottom-right"></div>
 
 
@@ -975,7 +1304,12 @@
                   ${
                     foto
                     ?
-                    `<img src="${foto}" alt="Foto do membro">`
+                    `
+                      <img
+                        src="${foto}"
+                        alt="Foto do membro"
+                      >
+                    `
                     :
                     ""
                   }
@@ -993,40 +1327,63 @@
                   ${membro.nome || ""}
                 </div>
 
+
                 <div class="member-role">
                   ${membro.cargo || ""}
                 </div>
 
+
                 <div class="member-number">
-                  ${membro.tratamento || "Confrade"} nº ${membro.numero || ""}
+
+                  ${tratamento}
+                  nº
+                  ${membro.numero || ""}
+
                 </div>
+
 
                 <div class="status">
+
                   ${membro.status || "ATIVO"}
+
                 </div>
 
+
                 <div class="motto">
+
                   HONRA · TRADIÇÃO · PAIXÃO
+
                 </div>
+
 
                 ${
                   logo
                   ?
-                  `<img
-                    class="front-logo"
-                    src="${logo}"
-                    alt="Confraria Companhia da Cachaça"
-                  >`
+                  `
+                    <img
+                      class="front-logo"
+                      src="${logo}"
+                      alt="Confraria Companhia da Cachaça"
+                    >
+                  `
                   :
                   ""
                 }
 
+
               </div>
 
 
-              <!-- INFORMAÇÕES -->
+              <!-- DADOS -->
 
               <div class="details">
+
+
+                <div class="details-title">
+
+                  Dados da identidade
+
+                </div>
 
 
                 <div class="detail-row">
@@ -1088,8 +1445,11 @@
                     alt="QR Code de autenticação"
                   >
 
+
                   <div class="qr-caption">
+
                     VERIFIQUE A AUTENTICIDADE
+
                   </div>
 
                 </div>
@@ -1099,6 +1459,7 @@
 
 
             </div>
+
 
           </section>
 
@@ -1112,26 +1473,34 @@
 
 
             <div class="corner top-left"></div>
+
             <div class="corner bottom-right"></div>
 
 
             <div class="back-content">
 
+
               ${
                 logo
                 ?
-                `<img
-                  class="back-logo"
-                  src="${logo}"
-                  alt="Confraria Companhia da Cachaça"
-                >`
+                `
+                  <img
+                    class="back-logo"
+                    src="${logo}"
+                    alt="Confraria Companhia da Cachaça"
+                  >
+                `
                 :
                 ""
               }
 
+
               <div class="back-motto">
+
                 HONRA · TRADIÇÃO · PAIXÃO
+
               </div>
+
 
             </div>
 
@@ -1146,6 +1515,7 @@
 
       <div class="controls">
 
+
         <button
           type="button"
           onclick="alternarLado()"
@@ -1153,6 +1523,7 @@
         >
           Ver verso
         </button>
+
 
         <button
           type="button"
@@ -1162,19 +1533,36 @@
           Compartilhar
         </button>
 
+
       </div>
 
 
       <div class="app-info">
-        <strong>Identidade Confraria</strong><br>
+
+        <strong>
+          Identidade Confraria
+        </strong>
+
+        <br>
+
         Confraria Companhia da Cachaça
+
       </div>
 
     `;
 
 
-    document.getElementById("appContent").outerHTML =
-      `<div class="app" id="mainApp">${html}</div>`;
+    document.getElementById(
+      "appContent"
+    ).outerHTML =
+      `
+        <div
+          class="app"
+          id="mainApp"
+        >
+          ${html}
+        </div>
+      `;
 
   }
 
@@ -1186,22 +1574,38 @@
   function alternarLado() {
 
     const wallet =
-      document.getElementById("wallet");
+      document.getElementById(
+        "wallet"
+      );
+
 
     const button =
-      document.getElementById("flipButton");
+      document.getElementById(
+        "flipButton"
+      );
+
 
     if (!wallet) return;
 
-    wallet.classList.toggle("flipped");
 
-    if (wallet.classList.contains("flipped")) {
+    wallet.classList.toggle(
+      "flipped"
+    );
 
-      button.textContent = "Ver frente";
+
+    if (
+      wallet.classList.contains(
+        "flipped"
+      )
+    ) {
+
+      button.textContent =
+        "Ver frente";
 
     } else {
 
-      button.textContent = "Ver verso";
+      button.textContent =
+        "Ver verso";
 
     }
 
@@ -1217,6 +1621,7 @@
     const url =
       window.location.href;
 
+
     const texto =
       "Identidade Confraria — Confraria Companhia da Cachaça";
 
@@ -1228,10 +1633,18 @@
       try {
 
         await navigator.share({
-          title: "Identidade Confraria",
-          text: texto,
-          url: url
+
+          title:
+            "Identidade Confraria",
+
+          text:
+            texto,
+
+          url:
+            url
+
         });
+
 
         return;
 
@@ -1242,11 +1655,14 @@
 
     try {
 
-      await navigator.clipboard.writeText(url);
+      await navigator.clipboard
+        .writeText(url);
+
 
       alert(
         "Link da carteira copiado para a área de transferência."
       );
+
 
     } catch(e) {
 
@@ -1264,9 +1680,13 @@
      ERRO
      ========================================================= */
 
-  function mostrarErro(mensagem) {
+  function mostrarErro(
+    mensagem
+  ) {
 
-    document.getElementById("appContent").outerHTML = `
+    document.getElementById(
+      "appContent"
+    ).outerHTML = `
 
       <div class="error-box">
 
@@ -1298,10 +1718,13 @@
     const numero =
       obterNumeroMembro();
 
+
     try {
 
       const membro =
-        await buscarMembro(numero);
+        await buscarMembro(
+          numero
+        );
 
 
       if (
@@ -1317,12 +1740,15 @@
       }
 
 
-      construirCarteira(membro);
+      construirCarteira(
+        membro
+      );
 
 
     } catch(e) {
 
       console.error(e);
+
 
       mostrarErro(
         e.message ||
@@ -1346,16 +1772,20 @@
       "load",
       function() {
 
-        navigator.serviceWorker.register(
-          "./service-worker.js?v=6"
-        ).catch(function(error) {
+        navigator.serviceWorker
+          .register(
+            "./service-worker.js?v=7"
+          )
+          .catch(
+            function(error) {
 
-          console.log(
-            "Service Worker:",
-            error
+              console.log(
+                "Service Worker:",
+                error
+              );
+
+            }
           );
-
-        });
 
       }
     );
@@ -1368,6 +1798,7 @@
      ========================================================= */
 
   iniciar();
+
 
 </script>
 
