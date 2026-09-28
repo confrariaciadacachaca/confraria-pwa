@@ -46,9 +46,7 @@
 
     body {
 
-      margin: 0;
-
-      padding: 30px 15px;
+      padding: 24px 15px;
 
       background: #111111;
 
@@ -72,7 +70,7 @@
 
       width: 100%;
 
-      max-width: 1100px;
+      max-width: 1080px;
 
       margin: 0 auto;
 
@@ -118,7 +116,7 @@
       border-radius: 18px;
 
       box-shadow:
-        0 12px 30px rgba(0,0,0,0.30);
+        0 14px 32px rgba(0,0,0,0.30);
 
       overflow: hidden;
 
@@ -126,7 +124,7 @@
 
 
     /* =====================================================
-       FRENTE — MODELO F / GEOMÉTRICA E SOFISTICADA
+       FRENTE
        ===================================================== */
 
     .frente {
@@ -148,7 +146,7 @@
 
       z-index: 2;
 
-      padding: 18px 25px 13px;
+      padding: 16px 25px 11px;
 
       text-align: center;
 
@@ -159,28 +157,32 @@
 
     .titulo {
 
-      font-size: 19px;
+      font-size: 18px;
 
       font-weight: 700;
 
-      letter-spacing: 1.15px;
+      letter-spacing: 1.05px;
 
       color: #123A2F;
 
       white-space: nowrap;
+
+      line-height: 1.15;
 
     }
 
 
     .subtitulo {
 
-      margin-top: 6px;
+      margin-top: 5px;
 
-      font-size: 10px;
+      font-size: 9px;
 
-      letter-spacing: 1.3px;
+      letter-spacing: 1.25px;
 
       color: #B58A2C;
+
+      line-height: 1;
 
     }
 
@@ -199,43 +201,25 @@
 
       display: grid;
 
-      grid-template-columns: 31% 41% 28%;
+      grid-template-columns:
+        29%
+        44%
+        27%;
 
       align-items: center;
 
-      padding: 18px 25px 25px;
+      padding:
+        16px
+        25px
+        20px;
 
       overflow: hidden;
-
-      background:
-
-        linear-gradient(
-          146deg,
-          transparent 0%,
-          transparent 47%,
-          #B58A2C 47%,
-          #B58A2C 52%,
-          transparent 52%
-        )
-        top left / 145px 105px
-        no-repeat,
-
-        linear-gradient(
-          326deg,
-          transparent 0%,
-          transparent 47%,
-          #B58A2C 47%,
-          #B58A2C 52%,
-          transparent 52%
-        )
-        bottom right / 145px 105px
-        no-repeat;
 
     }
 
 
     /* =====================================================
-       FAIXAS GEOMÉTRICAS — REDUZIDAS
+       FAIXAS GEOMÉTRICAS
        ===================================================== */
 
     .corpo::before,
@@ -245,9 +229,9 @@
 
       position: absolute;
 
-      width: 145px;
+      width: 140px;
 
-      height: 105px;
+      height: 100px;
 
       pointer-events: none;
 
@@ -290,6 +274,35 @@
     }
 
 
+    .corpo {
+
+      background:
+
+        linear-gradient(
+          146deg,
+          transparent 0%,
+          transparent 47%,
+          #B58A2C 47%,
+          #B58A2C 51%,
+          transparent 51%
+        )
+        top left / 140px 100px
+        no-repeat,
+
+        linear-gradient(
+          326deg,
+          transparent 0%,
+          transparent 47%,
+          #B58A2C 47%,
+          #B58A2C 51%,
+          transparent 51%
+        )
+        bottom right / 140px 100px
+        no-repeat;
+
+    }
+
+
     .coluna-foto,
     .coluna-central,
     .coluna-direita {
@@ -297,6 +310,8 @@
       position: relative;
 
       z-index: 1;
+
+      min-width: 0;
 
     }
 
@@ -313,18 +328,19 @@
 
       justify-content: center;
 
-      min-width: 0;
+      padding-right: 8px;
 
-      transform: translateX(18px);
+      transform:
+        translateX(10px);
 
     }
 
 
     .foto {
 
-      width: 180px;
+      width: 166px;
 
-      height: 205px;
+      height: 190px;
 
       object-fit: cover;
 
@@ -374,9 +390,9 @@
 
     .sem-foto {
 
-      width: 180px;
+      width: 166px;
 
-      height: 205px;
+      height: 190px;
 
       border: 2px solid #B58A2C;
 
@@ -392,8 +408,6 @@
 
       font-size: 13px;
 
-      max-width: 100%;
-
       background: #EFE8DA;
 
     }
@@ -407,11 +421,11 @@
 
       text-align: center;
 
-      padding: 0 18px;
+      padding:
+        0 15px;
 
-      transform: translateY(-2px);
-
-      min-width: 0;
+      transform:
+        translateY(-1px);
 
       overflow: hidden;
 
@@ -420,19 +434,17 @@
 
     .nome {
 
-      font-size: 29px;
+      font-size: 28px;
 
       font-weight: 700;
 
       color: #123A2F;
 
-      letter-spacing: 0.25px;
+      letter-spacing: 0.15px;
 
-      line-height: 1.12;
+      line-height: 1.08;
 
       width: 100%;
-
-      max-width: 100%;
 
       white-space: nowrap;
 
@@ -447,35 +459,42 @@
 
     .cargo {
 
-      margin-top: 8px;
+      margin-top: 6px;
 
-      font-size: 18px;
+      font-size: 16px;
 
       color: #333333;
 
-      line-height: 1.2;
+      line-height: 1.15;
 
     }
 
 
     .numero {
 
-      margin-top: 10px;
+      margin-top: 7px;
 
-      font-size: 14px;
+      font-size: 13px;
 
       color: #806C51;
 
+      line-height: 1.1;
+
     }
 
+
+    /* =====================================================
+       STATUS ATIVO
+       ===================================================== */
 
     .status {
 
       display: inline-block;
 
-      margin-top: 15px;
+      margin-top: 11px;
 
-      padding: 7px 20px;
+      padding:
+        6px 19px;
 
       border-radius: 20px;
 
@@ -483,30 +502,38 @@
 
       color: #12614D;
 
-      font-size: 11px;
+      font-size: 10px;
 
       font-weight: 700;
 
-      letter-spacing: 0.6px;
+      letter-spacing: 0.7px;
 
-    }
-
-
-    .lema {
-
-      margin-top: 15px;
-
-      font-size: 10px;
-
-      letter-spacing: 1.05px;
-
-      color: #B58A2C;
+      line-height: 1;
 
     }
 
 
     /* =====================================================
-       LOGO OFICIAL DA FRENTE
+       LEMA
+       ===================================================== */
+
+    .lema {
+
+      margin-top: 12px;
+
+      font-size: 9px;
+
+      letter-spacing: 1px;
+
+      color: #B58A2C;
+
+      white-space: nowrap;
+
+    }
+
+
+    /* =====================================================
+       LOGO DA FRENTE
        ===================================================== */
 
     .logo-frente {
@@ -517,13 +544,21 @@
 
       height: auto;
 
-      max-width: 145px;
+      max-width: 125px;
 
-      max-height: 68px;
+      max-height: 58px;
 
       object-fit: contain;
 
-      margin: 17px auto 0;
+      margin:
+        12px auto 0;
+
+    }
+
+
+    .logo-frente.logo-oculta {
+
+      display: none;
 
     }
 
@@ -534,9 +569,10 @@
 
     .coluna-direita {
 
-      border-left: 1px solid #D9D0BF;
+      border-left:
+        1px solid #D9D0BF;
 
-      padding-left: 22px;
+      padding-left: 19px;
 
       display: flex;
 
@@ -544,7 +580,7 @@
 
       justify-content: center;
 
-      min-width: 0;
+      align-items: stretch;
 
     }
 
@@ -564,11 +600,12 @@
 
       align-items: center;
 
-      min-height: 37px;
+      min-height: 34px;
 
-      border-bottom: 1px solid #E3DDD2;
+      border-bottom:
+        1px solid #E3DDD2;
 
-      font-size: 12px;
+      font-size: 11px;
 
       gap: 10px;
 
@@ -603,7 +640,7 @@
 
     .qr-area {
 
-      margin-top: 18px;
+      margin-top: 14px;
 
       display: flex;
 
@@ -618,15 +655,16 @@
 
     .qr {
 
-      width: 90px;
+      width: 86px;
 
-      height: 90px;
+      height: 86px;
 
       object-fit: contain;
 
-      border: 1px solid #D9D0BF;
+      border:
+        1px solid #D9D0BF;
 
-      border-radius: 3px;
+      border-radius: 4px;
 
       background: #FFFFFF;
 
@@ -637,21 +675,19 @@
     }
 
 
-    /* =====================================================
-       TEXTO DE AUTENTICIDADE
-       ===================================================== */
-
     .qr-texto {
 
-      margin-top: 3px;
+      margin-top: 4px;
 
       font-size: 7px;
 
-      letter-spacing: 0.45px;
+      letter-spacing: 0.42px;
 
       color: #6F685D;
 
       white-space: nowrap;
+
+      text-align: center;
 
     }
 
@@ -677,6 +713,10 @@
     }
 
 
+    /* =====================================================
+       ELEMENTOS GEOMÉTRICOS DO VERSO
+       ===================================================== */
+
     .verso::before,
     .verso::after {
 
@@ -701,7 +741,8 @@
 
       background: #123A2F;
 
-      transform: rotate(-34deg);
+      transform:
+        rotate(-34deg);
 
       box-shadow:
         24px 16px 0 #B58A2C;
@@ -721,7 +762,8 @@
 
       background: #123A2F;
 
-      transform: rotate(-34deg);
+      transform:
+        rotate(-34deg);
 
       box-shadow:
         -24px -16px 0 #B58A2C;
@@ -730,7 +772,7 @@
 
 
     /* =====================================================
-       LOGO OFICIAL DO VERSO — GRANDE E SEM DISTORÇÃO
+       LOGO DO VERSO
        ===================================================== */
 
     .logo-verso {
@@ -745,11 +787,13 @@
 
       height: auto;
 
-      max-width: 320px;
+      max-width: 330px;
 
-      max-height: 180px;
+      max-height: 175px;
 
       object-fit: contain;
+
+      margin: 0;
 
     }
 
@@ -760,19 +804,21 @@
 
       z-index: 2;
 
-      margin-top: 18px;
+      margin-top: 15px;
 
       color: #B58A2C;
 
       font-size: 13px;
 
-      letter-spacing: 2px;
+      letter-spacing: 1.8px;
+
+      line-height: 1.2;
 
     }
 
 
     /* =====================================================
-       BOTÕES
+       CONTROLES
        ===================================================== */
 
     .controles {
@@ -785,7 +831,7 @@
 
       gap: 10px;
 
-      margin-top: 16px;
+      margin-top: 15px;
 
     }
 
@@ -794,9 +840,11 @@
 
       display: block;
 
-      padding: 8px 18px;
+      padding:
+        8px 18px;
 
-      border: 1px solid #B58A2C;
+      border:
+        1px solid #B58A2C;
 
       border-radius: 20px;
 
@@ -824,7 +872,8 @@
 
     .botao:active {
 
-      transform: scale(0.97);
+      transform:
+        scale(0.97);
 
     }
 
@@ -853,15 +902,16 @@
 
     .identificacao-app {
 
-      margin-top: 10px;
+      margin-top: 9px;
 
       text-align: center;
 
-      color: rgba(245,241,232,0.75);
+      color:
+        rgba(245,241,232,0.72);
 
       font-size: 9px;
 
-      line-height: 1.45;
+      line-height: 1.4;
 
     }
 
@@ -870,7 +920,8 @@
 
       display: block;
 
-      color: rgba(245,241,232,0.90);
+      color:
+        rgba(245,241,232,0.90);
 
       font-weight: 500;
 
@@ -878,14 +929,14 @@
 
 
     /* =====================================================
-       CARREGANDO
+       CARREGAMENTO
        ===================================================== */
 
     .carregando {
 
       width: 100%;
 
-      min-height: 60vh;
+      min-height: 65vh;
 
       display: flex;
 
@@ -942,7 +993,8 @@
 
       background: #F5F1E8;
 
-      border: 1px solid #D9D0BF;
+      border:
+        1px solid #D9D0BF;
 
       border-radius: 18px;
 
@@ -956,7 +1008,8 @@
 
     .erro h2 {
 
-      margin: 0 0 12px;
+      margin:
+        0 0 12px;
 
       color: #123A2F;
 
@@ -1044,14 +1097,8 @@
 
       body {
 
-        padding: 20px 10px;
-
-      }
-
-
-      .area-carteira {
-
-        max-width: 100%;
+        padding:
+          20px 10px;
 
       }
 
@@ -1075,7 +1122,8 @@
         grid-template-columns:
           27% 45% 28%;
 
-        padding: 13px 12px;
+        padding:
+          13px 12px;
 
         background:
 
@@ -1084,8 +1132,8 @@
             transparent 0%,
             transparent 47%,
             #B58A2C 47%,
-            #B58A2C 52%,
-            transparent 52%
+            #B58A2C 51%,
+            transparent 51%
           )
           top left / 110px 82px
           no-repeat,
@@ -1095,8 +1143,8 @@
             transparent 0%,
             transparent 47%,
             #B58A2C 47%,
-            #B58A2C 52%,
-            transparent 52%
+            #B58A2C 51%,
+            transparent 51%
           )
           bottom right / 110px 82px
           no-repeat;
@@ -1116,7 +1164,10 @@
 
       .coluna-foto {
 
-        transform: translateX(8px);
+        transform:
+          translateX(7px);
+
+        padding-right: 4px;
 
       }
 
@@ -1133,7 +1184,8 @@
 
       .coluna-central {
 
-        padding: 0 7px;
+        padding:
+          0 6px;
 
       }
 
@@ -1156,7 +1208,7 @@
 
         font-size: 9px;
 
-        margin-top: 6px;
+        margin-top: 5px;
 
       }
 
@@ -1165,7 +1217,10 @@
 
         font-size: 8px;
 
-        padding: 5px 11px;
+        padding:
+          5px 11px;
+
+        margin-top: 8px;
 
       }
 
@@ -1174,7 +1229,7 @@
 
         font-size: 7px;
 
-        margin-top: 10px;
+        margin-top: 8px;
 
       }
 
@@ -1185,7 +1240,7 @@
 
         max-height: 34px;
 
-        margin-top: 10px;
+        margin-top: 8px;
 
       }
 
@@ -1218,8 +1273,6 @@
       .qr-texto {
 
         font-size: 6px;
-
-        color: #6F685D;
 
       }
 
@@ -1260,16 +1313,16 @@
 
 
     /* =====================================================
-       TELAS MUITO BAIXAS
+       TELAS BAIXAS
        ===================================================== */
 
     @media (max-height: 600px) {
 
       body {
 
-        padding-top: 12px;
+        padding-top: 10px;
 
-        padding-bottom: 12px;
+        padding-bottom: 10px;
 
       }
 
@@ -1323,15 +1376,10 @@
 
 
   <!-- =====================================================
-       CONTEÚDO PRINCIPAL
+       CONTEÚDO
        ===================================================== -->
 
   <div id="conteudo">
-
-
-    <!-- ===================================================
-         CARREGAMENTO
-         =================================================== -->
 
     <div
       class="carregando"
@@ -1347,7 +1395,6 @@
       </div>
 
     </div>
-
 
   </div>
 
@@ -1369,18 +1416,19 @@
 
 
     /*
-     * Arquivo oficial da logo da Confraria.
+     * Logo oficial.
      *
-     * É utilizado como fallback caso a API ainda
-     * não envie a logo junto com os dados do membro.
+     * Primeiro utilizamos a logo que venha da API.
+     * Como fallback, utilizamos o arquivo oficial
+     * armazenado no Google Drive.
      */
 
     const LOGO_FALLBACK =
-      "https://drive.google.com/uc?export=view&id=1ypjxSnlqRoRJqsdUkM-YVoVUcobYvNDo";
+      "https://drive.google.com/thumbnail?id=1ypjxSnlqRoRJqsdUkM-YVoVUcobYvNDo&sz=w1000";
 
 
     /* =====================================================
-       OBTÉM O NÚMERO DO MEMBRO
+       NÚMERO DO MEMBRO
        ===================================================== */
 
 
@@ -1431,7 +1479,7 @@
 
 
     /* =====================================================
-       CONSULTA JSONP
+       JSONP
        ===================================================== */
 
 
@@ -1470,7 +1518,6 @@
 
                 finalizado = true;
 
-
                 limpar();
 
 
@@ -1506,7 +1553,9 @@
                 callbackName
               ];
 
-            } catch (erro) {
+            }
+
+            catch (erro) {
 
               window[
                 callbackName
@@ -1529,9 +1578,7 @@
 
               finalizado = true;
 
-
               limpar();
-
 
               resolve(dados);
 
@@ -1548,7 +1595,6 @@
 
               finalizado = true;
 
-
               limpar();
 
 
@@ -1561,7 +1607,7 @@
             };
 
 
-          const url =
+          script.src =
             APP_URL +
             "?api=1" +
             "&membro=" +
@@ -1572,10 +1618,6 @@
             ) +
             "&t=" +
             Date.now();
-
-
-          script.src =
-            url;
 
 
           document.body.appendChild(
@@ -1589,7 +1631,7 @@
 
 
     /* =====================================================
-       ESCAPE DE HTML
+       ESCAPE HTML
        ===================================================== */
 
 
@@ -1606,22 +1648,27 @@
 
 
       return String(valor)
+
         .replace(
           /&/g,
           "&amp;"
         )
+
         .replace(
           /</g,
           "&lt;"
         )
+
         .replace(
           />/g,
           "&gt;"
         )
+
         .replace(
           /"/g,
           "&quot;"
         )
+
         .replace(
           /'/g,
           "&#039;"
@@ -1653,7 +1700,30 @@
 
 
     /* =====================================================
-       CONSTRÓI A CARTEIRA
+       QR CODE
+       ===================================================== */
+
+
+    function gerarQRCode(link) {
+
+      if (!link) {
+
+        return "";
+
+      }
+
+
+      return (
+        "https://quickchart.io/qr?text=" +
+        encodeURIComponent(link) +
+        "&size=300&margin=2&format=png"
+      );
+
+    }
+
+
+    /* =====================================================
+       CONSTRUIR CARTEIRA
        ===================================================== */
 
 
@@ -1675,7 +1745,8 @@
 
       const categoria =
         escaparHTML(
-          membro.categoria || "Confrade"
+          membro.categoria ||
+          "Confrade"
         );
 
 
@@ -1711,7 +1782,7 @@
 
       const status =
         escaparHTML(
-          membro.status || ""
+          membro.status || "ATIVO"
         );
 
 
@@ -1722,21 +1793,18 @@
 
 
       const foto =
-        membro.foto
-          ? membro.foto
-          : "";
+        membro.foto || "";
 
 
       const qr =
-        membro.qr
-          ? membro.qr
-          : (
-              membro.link
-                ? gerarQRCode(
-                    membro.link
-                  )
-                : ""
-            );
+        membro.qr ||
+        (
+          membro.link
+            ? gerarQRCode(
+                membro.link
+              )
+            : ""
+        );
 
 
       const logo =
@@ -1762,8 +1830,6 @@
               >
 
 
-                <!-- CABEÇALHO -->
-
                 <div class="cabecalho">
 
                   <div class="titulo">
@@ -1777,8 +1843,6 @@
                 </div>
 
 
-                <!-- CORPO -->
-
                 <div class="corpo">
 
 
@@ -1788,30 +1852,30 @@
 
                     ${
                       foto
-                      ?
+                        ?
 
-                      `
-                      <img
-                        class="foto"
-                        id="fotoMembro"
-                        src="${foto}"
-                        alt="Foto do confrade"
-                      >
-                      `
+                        `
+                        <img
+                          class="foto"
+                          id="fotoMembro"
+                          src="${foto}"
+                          alt="Foto do confrade"
+                        >
+                        `
 
-                      :
+                        :
 
-                      `
-                      <div class="sem-foto">
-                        FOTO
-                      </div>
-                      `
+                        `
+                        <div class="sem-foto">
+                          FOTO
+                        </div>
+                        `
                     }
 
                   </div>
 
 
-                  <!-- DADOS CENTRAIS -->
+                  <!-- CENTRO -->
 
                   <div class="coluna-central">
 
@@ -1826,17 +1890,16 @@
 
                     ${
                       cargo
-                      ?
+                        ?
 
-                      `
-                      <div class="cargo">
-                        ${cargo}
-                      </div>
-                      `
+                        `
+                        <div class="cargo">
+                          ${cargo}
+                        </div>
+                        `
 
-                      :
-
-                      ""
+                        :
+                        ""
                     }
 
 
@@ -1845,40 +1908,33 @@
                     </div>
 
 
-                    ${
-                      status
-                      ?
+                    <!-- STATUS -->
 
-                      `
-                      <div class="status">
-                        ${status}
-                      </div>
-                      `
+                    <div class="status">
+                      ${status}
+                    </div>
 
-                      :
 
-                      ""
-                    }
-
+                    <!-- LEMA -->
 
                     <div class="lema">
                       HONRA • TRADIÇÃO • PAIXÃO
                     </div>
 
 
-                    <!-- LOGO OFICIAL -->
+                    <!-- LOGO -->
 
                     <img
                       class="logo-frente"
-                      src="${logo}"
-                      alt="Confraria Companhia da Cachaça"
                       id="logoFrente"
+                      src="${logo}"
+                      alt=""
                     >
 
                   </div>
 
 
-                  <!-- DADOS DIREITA + QR -->
+                  <!-- DIREITA -->
 
                   <div class="coluna-direita">
 
@@ -1888,129 +1944,122 @@
 
                       ${
                         condicao
-                        ?
+                          ?
 
-                        `
-                        <div class="linha">
+                          `
+                          <div class="linha">
 
-                          <span class="rotulo">
-                            Condição
-                          </span>
+                            <span class="rotulo">
+                              Condição
+                            </span>
 
-                          <span class="valor">
-                            ${condicao}
-                          </span>
+                            <span class="valor">
+                              ${condicao}
+                            </span>
 
-                        </div>
-                        `
+                          </div>
+                          `
 
-                        :
-
-                        ""
+                          :
+                          ""
                       }
 
 
                       ${
                         bienio
-                        ?
+                          ?
 
-                        `
-                        <div class="linha">
+                          `
+                          <div class="linha">
 
-                          <span class="rotulo">
-                            Biênio
-                          </span>
+                            <span class="rotulo">
+                              Biênio
+                            </span>
 
-                          <span class="valor">
-                            ${bienio}
-                          </span>
+                            <span class="valor">
+                              ${bienio}
+                            </span>
 
-                        </div>
-                        `
+                          </div>
+                          `
 
-                        :
-
-                        ""
+                          :
+                          ""
                       }
 
 
                       ${
                         ingresso
-                        ?
+                          ?
 
-                        `
-                        <div class="linha">
+                          `
+                          <div class="linha">
 
-                          <span class="rotulo">
-                            Ingresso
-                          </span>
+                            <span class="rotulo">
+                              Ingresso
+                            </span>
 
-                          <span class="valor">
-                            ${ingresso}
-                          </span>
+                            <span class="valor">
+                              ${ingresso}
+                            </span>
 
-                        </div>
-                        `
+                          </div>
+                          `
 
-                        :
-
-                        ""
+                          :
+                          ""
                       }
 
 
                       ${
                         validade
-                        ?
+                          ?
 
-                        `
-                        <div class="linha">
+                          `
+                          <div class="linha">
 
-                          <span class="rotulo">
-                            Validade
-                          </span>
+                            <span class="rotulo">
+                              Validade
+                            </span>
 
-                          <span class="valor">
-                            ${validade}
-                          </span>
+                            <span class="valor">
+                              ${validade}
+                            </span>
 
-                        </div>
-                        `
+                          </div>
+                          `
 
-                        :
-
-                        ""
+                          :
+                          ""
                       }
 
 
                     </div>
 
 
-                    <!-- QR CODE -->
-
                     ${
                       qr
-                      ?
+                        ?
 
-                      `
-                      <div class="qr-area">
+                        `
+                        <div class="qr-area">
 
-                        <img
-                          class="qr"
-                          src="${qr}"
-                          alt="QR Code de verificação"
-                          id="qrCode"
-                        >
+                          <img
+                            class="qr"
+                            id="qrCode"
+                            src="${qr}"
+                            alt="QR Code de verificação"
+                          >
 
-                        <div class="qr-texto">
-                          VERIFIQUE A AUTENTICIDADE
+                          <div class="qr-texto">
+                            VERIFIQUE A AUTENTICIDADE
+                          </div>
+
                         </div>
+                        `
 
-                      </div>
-                      `
-
-                      :
-
-                      ""
+                        :
+                        ""
                     }
 
 
@@ -2032,13 +2081,11 @@
               >
 
 
-                <!-- LOGO OFICIAL -->
-
                 <img
                   class="logo-verso"
-                  src="${logo}"
-                  alt="Confraria Companhia da Cachaça"
                   id="logoVerso"
+                  src="${logo}"
+                  alt=""
                 >
 
 
@@ -2056,11 +2103,10 @@
 
 
           <!-- =============================================
-               BOTÕES
+               CONTROLES
                ============================================= -->
 
           <div class="controles">
-
 
             <button
               class="botao"
@@ -2079,13 +2125,8 @@
               Compartilhar
             </button>
 
-
           </div>
 
-
-          <!-- =============================================
-               IDENTIFICAÇÃO DO APP
-               ============================================= -->
 
           <div class="identificacao-app">
 
@@ -2103,25 +2144,15 @@
       `;
 
 
-      /* -----------------------------------------------
-         Ajustes depois de inserir o HTML
-         ----------------------------------------------- */
-
-
       ajustarNome();
 
       ajustarFoto();
 
-
-      /* -----------------------------------------------
-         Fallback da logo
-         ----------------------------------------------- */
-
-      configurarFallbackLogo(
+      configurarLogo(
         "logoFrente"
       );
 
-      configurarFallbackLogo(
+      configurarLogo(
         "logoVerso"
       );
 
@@ -2129,41 +2160,13 @@
 
 
     /* =====================================================
-       QR CODE
+       CONFIGURAR LOGO
        ===================================================== */
 
-
-    function gerarQRCode(
-      link
-    ) {
-
-      if (!link) {
-        return "";
-      }
-
-
-      return (
-        "https://quickchart.io/qr?text=" +
-        encodeURIComponent(link) +
-        "&size=300&margin=2&format=png"
-      );
-
-    }
-
-
-    /* =====================================================
-       FALLBACK DA LOGO
-       ===================================================== */
-
-
-    function configurarFallbackLogo(
-      id
-    ) {
+    function configurarLogo(id) {
 
       const logo =
-        document.getElementById(
-          id
-        );
+        document.getElementById(id);
 
 
       if (!logo) {
@@ -2176,18 +2179,31 @@
         function() {
 
           if (
-            logo.src !==
-            LOGO_FALLBACK
+            logo.dataset.fallback !==
+            "1"
           ) {
+
+            logo.dataset.fallback =
+              "1";
 
             logo.src =
               LOGO_FALLBACK;
 
           }
 
-        },
-        {
-          once: true
+          else {
+
+            /*
+             * Evita que apareça o texto
+             * alternativo da imagem quebrada.
+             */
+
+            logo.classList.add(
+              "logo-oculta"
+            );
+
+          }
+
         }
       );
 
@@ -2195,9 +2211,8 @@
 
 
     /* =====================================================
-       AJUSTE AUTOMÁTICO DA FOTO
+       AJUSTE DA FOTO
        ===================================================== */
-
 
     function ajustarFoto() {
 
@@ -2306,9 +2321,8 @@
 
 
     /* =====================================================
-       AJUSTE AUTOMÁTICO DO NOME
+       AJUSTE DO NOME
        ===================================================== */
-
 
     function ajustarNome() {
 
@@ -2323,8 +2337,7 @@
       }
 
 
-      let tamanho =
-        29;
+      let tamanho = 28;
 
 
       nome.style.fontSize =
@@ -2369,9 +2382,8 @@
 
 
     /* =====================================================
-       ALTERNAR FRENTE / VERSO
+       FRENTE / VERSO
        ===================================================== */
-
 
     function alternarLado() {
 
@@ -2412,10 +2424,8 @@
         frente.style.display =
           "none";
 
-
         verso.style.display =
           "flex";
-
 
         botao.textContent =
           "Ver frente";
@@ -2427,14 +2437,11 @@
         frente.style.display =
           "flex";
 
-
         verso.style.display =
           "none";
 
-
         botao.textContent =
           "Ver verso";
-
 
         ajustarNome();
 
@@ -2449,25 +2456,10 @@
        COMPARTILHAR
        ===================================================== */
 
-
     async function compartilharCarteira() {
 
       const url =
         window.location.href;
-
-
-      const dados = {
-
-        title:
-          "Identidade Confraria",
-
-        text:
-          "Carteira Digital da Confraria Companhia da Cachaça",
-
-        url:
-          url
-
-      };
 
 
       if (
@@ -2476,9 +2468,18 @@
 
         try {
 
-          await navigator.share(
-            dados
-          );
+          await navigator.share({
+
+            title:
+              "Identidade Confraria",
+
+            text:
+              "Carteira Digital da Confraria Companhia da Cachaça",
+
+            url:
+              url
+
+          });
 
           return;
 
@@ -2487,8 +2488,7 @@
         catch (erro) {
 
           /*
-           * O usuário pode ter cancelado
-           * o compartilhamento.
+           * Cancelamento pelo usuário.
            */
 
         }
@@ -2512,27 +2512,23 @@
             );
 
 
-          if (botao) {
-
-            const textoOriginal =
-              botao.textContent;
+          const texto =
+            botao.textContent;
 
 
-            botao.textContent =
-              "Link copiado";
+          botao.textContent =
+            "Link copiado";
 
 
-            setTimeout(
-              function() {
+          setTimeout(
+            function() {
 
-                botao.textContent =
-                  textoOriginal;
+              botao.textContent =
+                texto;
 
-              },
-              1800
-            );
-
-          }
+            },
+            1800
+          );
 
 
           return;
@@ -2542,8 +2538,7 @@
         catch (erro) {
 
           /*
-           * Continua para o fallback
-           * abaixo.
+           * Fallback abaixo.
            */
 
         }
@@ -2559,9 +2554,8 @@
 
 
     /* =====================================================
-       MOSTRA ERRO
+       ERRO
        ===================================================== */
-
 
     function mostrarErro(
       mensagem
@@ -2605,11 +2599,9 @@
        INICIALIZAÇÃO
        ===================================================== */
 
-
     async function iniciar() {
 
       try {
-
 
         const numero =
           obterNumeroMembro();
@@ -2621,9 +2613,7 @@
           );
 
 
-        if (
-          !membro
-        ) {
+        if (!membro) {
 
           throw new Error(
             "Não foi possível obter os dados do membro."
@@ -2649,7 +2639,6 @@
           membro
         );
 
-
       }
 
       catch (erro) {
@@ -2672,7 +2661,6 @@
     /* =====================================================
        SERVICE WORKER
        ===================================================== */
-
 
     if (
       "serviceWorker" in navigator
@@ -2707,7 +2695,6 @@
        REDIMENSIONAMENTO
        ===================================================== */
 
-
     window.addEventListener(
       "resize",
       function() {
@@ -2723,7 +2710,6 @@
     /* =====================================================
        INICIAR
        ===================================================== */
-
 
     iniciar();
 
