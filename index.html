@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
   <meta charset="UTF-8">
 
   <meta
@@ -10,760 +8,374 @@
     content="width=device-width, initial-scale=1.0, viewport-fit=cover"
   >
 
-  <meta
-    name="theme-color"
-    content="#000000"
-  >
+  <meta name="theme-color" content="#111111">
 
   <meta
-    name="mobile-web-app-capable"
-    content="yes"
+    name="description"
+    content="Carteira Digital da Confraria Companhia da Cachaça"
   >
 
-  <meta
-    name="apple-mobile-web-app-capable"
-    content="yes"
-  >
-
-  <meta
-    name="apple-mobile-web-app-status-bar-style"
-    content="black"
-  >
-
-  <meta
-    name="apple-mobile-web-app-title"
-    content="Identidade Confraria"
-  >
+  <link rel="manifest" href="./manifest.json?v=4">
 
   <title>Identidade Confraria</title>
 
-  <link
-    rel="manifest"
-    href="./manifest.json?v=4"
-  >
-
   <style>
-
     * {
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
-
 
     html,
     body {
-
       margin: 0;
-
       padding: 0;
-
       width: 100%;
-
       min-height: 100%;
-
       background: #111111;
-
       color: #111111;
-
       font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
         Arial,
-        Helvetica,
         sans-serif;
-
     }
-
 
     body {
-
       min-height: 100vh;
-
       overflow-x: hidden;
-
     }
 
-
-    #app {
-
+    .app {
+      min-height: 100vh;
       width: 100%;
-
-      min-height: 100vh;
-
-    }
-
-
-    /* ==================================================
-       TELA DE CARREGAMENTO
-       ================================================== */
-
-    .loading-screen {
-
-      min-height: 100vh;
+      background:
+        radial-gradient(
+          circle at center,
+          #202020 0%,
+          #151515 45%,
+          #0d0d0d 100%
+        );
 
       display: flex;
-
       flex-direction: column;
-
       align-items: center;
-
-      justify-content: center;
-
-      background: #111111;
-
-      color: #ffffff;
-
-      padding: 30px;
-
-      text-align: center;
-
-    }
-
-
-    .loading-logo {
-
-      width: 110px;
-
-      height: 110px;
-
-      object-fit: contain;
-
-      margin-bottom: 24px;
-
-      border-radius: 18px;
-
-    }
-
-
-    .loading-title {
-
-      font-size: 19px;
-
-      font-weight: 700;
-
-      letter-spacing: 0.5px;
-
-      margin-bottom: 8px;
-
-    }
-
-
-    .loading-text {
-
-      font-size: 13px;
-
-      opacity: 0.72;
-
-    }
-
-
-    .spinner {
-
-      width: 28px;
-
-      height: 28px;
-
-      margin-top: 22px;
-
-      border: 3px solid rgba(
-        255,
-        255,
-        255,
-        0.25
-      );
-
-      border-top-color: #B58A2C;
-
-      border-radius: 50%;
-
-      animation:
-        girar 0.8s linear infinite;
-
-    }
-
-
-    @keyframes girar {
-
-      to {
-        transform: rotate(360deg);
-      }
-
-    }
-
-
-    /* ==================================================
-       ERRO / MEMBRO NÃO ENCONTRADO
-       ================================================== */
-
-    .error-screen {
-
-      min-height: 100vh;
-
-      display: flex;
-
-      align-items: center;
-
       justify-content: center;
 
       padding: 24px;
+    }
+
+    /* =========================================================
+       AVISO RETRATO
+       ========================================================= */
+
+    .portrait-warning {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
 
       background: #111111;
-
-    }
-
-
-    .error-card {
-
-      width: 100%;
-
-      max-width: 420px;
-
-      background: #F5F1E8;
-
-      border-radius: 20px;
-
-      padding: 30px 24px;
-
-      text-align: center;
-
-      box-shadow:
-        0 18px 50px rgba(
-          0,
-          0,
-          0,
-          0.35
-        );
-
-    }
-
-
-    .error-card h1 {
-
-      margin: 0 0 12px;
-
-      color: #123A2F;
-
-      font-size: 21px;
-
-    }
-
-
-    .error-card p {
-
-      margin: 0;
-
-      color: #555555;
-
-      font-size: 14px;
-
-      line-height: 1.5;
-
-    }
-
-
-    /* ==================================================
-       ÁREA DA CARTEIRA
-       ================================================== */
-
-    .wallet-app {
-
-      min-height: 100vh;
-
-      display: flex;
-
-      flex-direction: column;
+      color: #f5f1e8;
 
       align-items: center;
-
       justify-content: center;
+      text-align: center;
 
-      padding:
-        22px
-        14px
-        34px;
-
-      background:
-        radial-gradient(
-          circle at top,
-          #2b2b2b 0%,
-          #111111 52%,
-          #080808 100%
-        );
-
+      padding: 35px;
     }
 
-
-    .wallet-stage {
-
-      width: 100%;
-
-      max-width: 940px;
-
+    .portrait-warning-content {
+      max-width: 360px;
     }
 
+    .portrait-warning-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #b58a2c;
+    }
 
-    /* ==================================================
-       CARD
-       ================================================== */
+    .portrait-warning-text {
+      font-size: 15px;
+      line-height: 1.5;
+      opacity: 0.9;
+    }
 
-    .card-container {
+    /* =========================================================
+       CARTEIRA
+       ========================================================= */
 
+    .wallet-area {
+      width: min(100%, 1100px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card-wrapper {
       width: 100%;
-
-      max-width: 920px;
-
-      margin: 0 auto;
-
       perspective: 1400px;
-
     }
-
 
     .card {
+      width: 100%;
+      aspect-ratio: 1.586 / 1;
 
       position: relative;
 
-      width: 100%;
-
-      aspect-ratio: 1.586 / 1;
-
       transform-style: preserve-3d;
+      transition: transform 0.65s ease;
 
-      transition:
-        transform 0.65s
-        cubic-bezier(
-          0.22,
-          0.61,
-          0.36,
-          1
-        );
+      filter:
+        drop-shadow(0 25px 40px rgba(0, 0, 0, 0.42));
 
+      cursor: default;
     }
 
-
-    .card.virado {
-
-      transform:
-        rotateY(180deg);
-
+    .card.flipped {
+      transform: rotateY(180deg);
     }
-
 
     .card-face {
-
       position: absolute;
-
       inset: 0;
 
       width: 100%;
-
       height: 100%;
 
-      border-radius: 22px;
+      background: #f5f1e8;
+
+      border: 1px solid rgba(181, 138, 44, 0.65);
+      border-radius: 20px;
 
       overflow: hidden;
 
       backface-visibility: hidden;
-
       -webkit-backface-visibility: hidden;
-
-      box-shadow:
-        0 22px 60px rgba(
-          0,
-          0,
-          0,
-          0.48
-        );
-
-      border: 1px solid rgba(
-        181,
-        138,
-        44,
-        0.32
-      );
-
     }
 
-
-    .card-front {
-
-      background: #F5F1E8;
-
-      transform:
-        rotateY(0deg);
-
-    }
-
-
-    .card-back {
-
-      background: #F5F1E8;
-
-      transform:
-        rotateY(180deg);
-
-    }
-
-
-    /* ==================================================
-       FAIXAS DECORATIVAS
-       ================================================== */
+    /* =========================================================
+       FAIXAS DOS CANTOS
+       ========================================================= */
 
     .corner {
-
       position: absolute;
-
       z-index: 1;
 
-      background: #123A2F;
-
+      background: #123a2f;
+      border-color: #b58a2c;
     }
 
-
-    .corner-top {
-
+    .corner.top-right {
       top: 0;
-
       right: 0;
 
-      width: 29%;
+      width: 24%;
+      height: 15%;
 
-      height: 12%;
+      clip-path: polygon(
+        28% 0,
+        100% 0,
+        100% 100%,
+        0 100%
+      );
 
-      clip-path:
-        polygon(
-          25% 0,
-          100% 0,
-          100% 100%,
-          0 100%
-        );
-
+      border-bottom: 2px solid #b58a2c;
     }
 
-
-    .corner-bottom {
-
+    .corner.bottom-left {
       bottom: 0;
-
       left: 0;
 
-      width: 27%;
+      width: 24%;
+      height: 15%;
 
-      height: 11%;
+      clip-path: polygon(
+        0 0,
+        100% 0,
+        72% 100%,
+        0 100%
+      );
 
-      clip-path:
-        polygon(
-          0 0,
-          100% 0,
-          72% 100%,
-          0 100%
-        );
-
+      border-top: 2px solid #b58a2c;
     }
 
-
-    .gold-line {
-
-      position: absolute;
-
-      z-index: 2;
-
-      background: #B58A2C;
-
-      opacity: 0.85;
-
-    }
-
-
-    .gold-line-top {
-
-      top: 12%;
-
-      right: 0;
-
-      width: 29%;
-
-      height: 2px;
-
-    }
-
-
-    .gold-line-bottom {
-
-      bottom: 11%;
-
-      left: 0;
-
-      width: 27%;
-
-      height: 2px;
-
-    }
-
-
-    /* ==================================================
+    /* =========================================================
        FRENTE
-       ================================================== */
+       ========================================================= */
+
+    .front {
+      transform: rotateY(0deg);
+    }
 
     .front-content {
-
-      position: relative;
-
-      z-index: 5;
-
-      width: 100%;
-
-      height: 100%;
+      position: absolute;
+      inset: 0;
+      z-index: 3;
 
       display: grid;
 
       grid-template-columns:
-        25%
-        47%
-        28%;
+        22%
+        1fr
+        22%;
 
-      padding: 7% 5% 6%;
+      grid-template-rows:
+        auto
+        1fr;
 
-    }
-
-
-    .photo-column {
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      padding-right: 7%;
-
-      min-width: 0;
-
-    }
-
-
-    .photo-frame {
-
-      width: 100%;
-
-      max-width: 170px;
-
-      aspect-ratio: 1 / 1.16;
-
-      border-radius: 13px;
-
-      overflow: hidden;
-
-      background: #ded8ca;
-
-      border: 4px solid #ffffff;
-
-      box-shadow:
-        0 7px 18px rgba(
-          0,
-          0,
-          0,
-          0.18
-        );
-
-    }
-
-
-    .photo-frame img {
-
-      display: block;
-
-      width: 100%;
-
-      height: 100%;
-
-      object-fit: cover;
-
-    }
-
-
-    .photo-placeholder {
-
-      width: 100%;
-
-      height: 100%;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      color: #777777;
-
-      font-size: 12px;
-
-      text-align: center;
-
-      padding: 10px;
-
-    }
-
-
-    .main-column {
-
-      display: flex;
-
-      flex-direction: column;
-
-      align-items: center;
-
-      justify-content: center;
-
-      min-width: 0;
+      column-gap: 3%;
 
       padding:
-        0 4%;
-
+        17%
+        7%
+        11%
+        7%;
     }
 
+    /* título */
 
     .card-title {
-
-      width: 100%;
+      grid-column: 1 / 4;
 
       text-align: center;
 
       white-space: nowrap;
 
-      font-size:
-        clamp(
-          10px,
-          1.65vw,
-          17px
-        );
+      font-size: clamp(13px, 1.75vw, 22px);
+      line-height: 1;
+
+      letter-spacing: 1.2px;
 
       font-weight: 800;
 
-      letter-spacing:
-        clamp(
-          0.3px,
-          0.12vw,
-          1.1px
-        );
+      color: #123a2f;
 
-      color: #123A2F;
-
-      margin-bottom: 6%;
-
+      margin-bottom: 3%;
     }
 
+    /* foto */
+
+    .photo-area {
+      grid-column: 1;
+      grid-row: 2;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding-top: 3%;
+    }
+
+    .member-photo {
+      width: 100%;
+      max-width: 180px;
+
+      aspect-ratio: 0.78 / 1;
+
+      object-fit: cover;
+
+      border-radius: 12px;
+
+      border: 3px solid #ffffff;
+
+      box-shadow:
+        0 5px 15px rgba(0, 0, 0, 0.20);
+
+      background: #ddd;
+    }
+
+    /* informações */
+
+    .member-info {
+      grid-column: 2;
+      grid-row: 2;
+
+      display: flex;
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+
+      min-width: 0;
+    }
 
     .member-name {
+      font-size: clamp(22px, 3vw, 38px);
 
-      width: 100%;
+      line-height: 1;
 
-      text-align: center;
+      font-weight: 800;
 
       color: #111111;
 
-      font-size:
-        clamp(
-          18px,
-          3vw,
-          31px
-        );
+      margin-bottom: 7px;
 
-      font-weight: 800;
-
-      line-height: 1.05;
-
-      margin-bottom: 3%;
-
-      overflow-wrap: anywhere;
-
+      text-align: center;
     }
 
-
     .member-number {
+      color: #b58a2c;
 
-      color: #B58A2C;
-
-      font-size:
-        clamp(
-          10px,
-          1.2vw,
-          13px
-        );
+      font-size: clamp(12px, 1.25vw, 17px);
 
       font-weight: 700;
 
-      letter-spacing: 1px;
-
-      margin-bottom: 6%;
-
+      margin-bottom: 18px;
     }
 
-
-    .data-list {
-
+    .info-grid {
       width: 100%;
 
       display: grid;
 
-      grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+      grid-template-columns: 1fr 1fr;
 
-      gap:
-        5px 10px;
-
+      column-gap: 25px;
+      row-gap: 12px;
     }
 
-
-    .data-item {
-
+    .info-item {
       min-width: 0;
-
-      padding-bottom: 4px;
-
     }
 
-
-    .data-label {
-
+    .info-label {
       display: block;
+
+      font-size: clamp(8px, 0.72vw, 11px);
+
+      line-height: 1;
 
       color: #777777;
 
-      font-size:
-        clamp(
-          7px,
-          0.9vw,
-          10px
-        );
+      letter-spacing: 0.6px;
 
-      text-transform: uppercase;
-
-      letter-spacing: 0.45px;
-
-      margin-bottom: 2px;
-
+      margin-bottom: 5px;
     }
 
-
-    .data-value {
-
+    .info-value {
       display: block;
 
-      color: #123A2F;
+      font-size: clamp(10px, 1vw, 14px);
 
-      font-size:
-        clamp(
-          9px,
-          1.15vw,
-          13px
-        );
+      line-height: 1.1;
 
       font-weight: 700;
 
-      overflow-wrap: anywhere;
+      color: #123a2f;
 
+      white-space: nowrap;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
+    /* QR */
 
-    .qr-column {
+    .qr-area {
+      grid-column: 3;
+      grid-row: 2;
 
       display: flex;
 
@@ -773,235 +385,140 @@
 
       justify-content: center;
 
-      min-width: 0;
-
-      padding-left: 5%;
-
+      padding-top: 3%;
     }
 
-
     .qr-box {
-
-      width:
-        min(
-          76%,
-          185px
-        );
+      width: min(100%, 180px);
 
       aspect-ratio: 1 / 1;
 
+      padding: 10px;
+
       background: #ffffff;
 
-      border-radius: 10px;
-
-      padding: 8px;
+      border-radius: 12px;
 
       box-shadow:
-        0 5px 16px rgba(
-          0,
-          0,
-          0,
-          0.12
-        );
+        0 5px 15px rgba(0, 0, 0, 0.14);
 
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-
-    .qr-box img {
-
-      display: block;
-
+    .qr-code {
       width: 100%;
-
       height: 100%;
 
       object-fit: contain;
 
+      display: block;
     }
 
-
     .qr-caption {
+      margin-top: 9px;
 
-      margin-top: 8px;
-
-      width: 100%;
-
-      text-align: center;
-
-      font-size:
-        clamp(
-          7px,
-          0.8vw,
-          9px
-        );
+      font-size: clamp(7px, 0.75vw, 10px);
 
       font-weight: 700;
 
-      letter-spacing: 0.45px;
+      color: #123a2f;
 
-      color: #123A2F;
+      letter-spacing: 0.3px;
 
-      line-height: 1.25;
+      text-align: center;
 
+      white-space: nowrap;
     }
 
-
-    /* ==================================================
-       LOGO DA FRENTE
-       ================================================== */
-
-    .front-logo {
-
-      position: absolute;
-
-      z-index: 6;
-
-      bottom: 7%;
-
-      left: 50%;
-
-      transform:
-        translateX(-50%);
-
-      width:
-        clamp(
-          65px,
-          9vw,
-          105px
-        );
-
-      max-height: 17%;
-
-      object-fit: contain;
-
-      object-position: center;
-
-    }
-
-
-    /* ==================================================
+    /* =========================================================
        VERSO
-       ================================================== */
+       ========================================================= */
+
+    .back {
+      transform: rotateY(180deg);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
     .back-content {
+      position: absolute;
+      inset: 0;
 
-      position: relative;
-
-      z-index: 5;
-
-      width: 100%;
-
-      height: 100%;
+      z-index: 3;
 
       display: flex;
 
       flex-direction: column;
 
       align-items: center;
-
       justify-content: center;
 
-      padding: 8% 10%;
+      text-align: center;
 
+      padding: 12%;
     }
 
-
     .back-logo {
+      width: min(52%, 420px);
 
-      width:
-        clamp(
-          130px,
-          24vw,
-          245px
-        );
-
-      max-width: 45%;
-
-      max-height: 50%;
+      max-height: 48%;
 
       object-fit: contain;
 
-      margin-bottom: 5%;
+      display: block;
 
+      margin-bottom: 22px;
+
+      filter: none;
     }
-
 
     .back-motto {
+      font-size: clamp(16px, 2vw, 28px);
 
-      color: #123A2F;
+      font-weight: 800;
 
-      font-size:
-        clamp(
-          11px,
-          1.5vw,
-          16px
-        );
+      letter-spacing: 1px;
 
-      font-weight: 700;
+      color: #123a2f;
 
-      letter-spacing: 1.2px;
-
-      text-align: center;
-
-      text-transform: uppercase;
-
+      margin-bottom: 10px;
     }
 
+    .back-name {
+      font-size: clamp(11px, 1.15vw, 16px);
 
-    .back-small {
+      color: #6b4a2b;
 
-      margin-top: 10px;
+      font-weight: 600;
 
-      color: #6B4A2B;
-
-      font-size:
-        clamp(
-          8px,
-          1vw,
-          11px
-        );
-
-      text-align: center;
-
-      letter-spacing: 0.5px;
-
+      letter-spacing: 0.3px;
     }
 
-
-    /* ==================================================
+    /* =========================================================
        BOTÕES
-       ================================================== */
+       ========================================================= */
 
-    .wallet-actions {
-
+    .controls {
       display: flex;
 
       justify-content: center;
-
       align-items: center;
 
-      gap: 10px;
+      gap: 12px;
 
       margin-top: 18px;
-
-      flex-wrap: wrap;
-
     }
 
-
-    .action-button {
-
+    .button {
       border: 0;
 
       border-radius: 999px;
 
-      padding:
-        11px
-        18px;
-
-      background: #123A2F;
-
-      color: #ffffff;
+      padding: 10px 20px;
 
       font-size: 13px;
 
@@ -1009,363 +526,267 @@
 
       cursor: pointer;
 
-      box-shadow:
-        0 5px 15px rgba(
-          0,
-          0,
-          0,
-          0.22
-        );
-
       transition:
-        transform 0.15s ease,
-        opacity 0.15s ease;
+        transform 0.2s ease,
+        opacity 0.2s ease;
 
+      color: #ffffff;
     }
 
-
-    .action-button:active {
-
-      transform:
-        scale(0.97);
-
+    .button:hover {
+      transform: translateY(-1px);
     }
 
-
-    .action-button.secondary {
-
-      background: #B58A2C;
-
+    .button:active {
+      transform: translateY(0);
     }
 
+    .button-green {
+      background: #123a2f;
+    }
 
-    .wallet-footer {
+    .button-gold {
+      background: #b58a2c;
+    }
 
-      margin-top: 18px;
+    /* =========================================================
+       IDENTIFICAÇÃO DO APP
+       ========================================================= */
+
+    .app-identification {
+      margin-top: 16px;
 
       text-align: center;
 
-      color: rgba(
-        255,
-        255,
-        255,
-        0.65
-      );
+      color: rgba(245, 241, 232, 0.75);
 
-      font-size: 10px;
+      font-size: 9px;
 
-      line-height: 1.4;
-
+      line-height: 1.45;
     }
 
+    .app-identification strong {
+      display: block;
 
-    /* ==================================================
-       ORIENTAÇÃO
-       ================================================== */
+      color: rgba(245, 241, 232, 0.9);
 
-    .portrait-warning {
+      font-weight: 500;
+    }
 
-      display: none;
+    /* =========================================================
+       CARREGANDO / ERRO
+       ========================================================= */
 
+    .loading {
       position: fixed;
-
       inset: 0;
 
-      z-index: 9999;
+      z-index: 1000;
 
       background: #111111;
 
-      color: #ffffff;
+      display: flex;
+
+      flex-direction: column;
 
       align-items: center;
+      justify-content: center;
 
+      color: #f5f1e8;
+
+      text-align: center;
+
+      padding: 30px;
+    }
+
+    .loading-title {
+      color: #b58a2c;
+
+      font-size: 20px;
+
+      font-weight: 700;
+
+      margin-bottom: 10px;
+    }
+
+    .loading-text {
+      font-size: 14px;
+
+      opacity: 0.8;
+    }
+
+    .error {
+      display: none;
+
+      position: fixed;
+      inset: 0;
+
+      z-index: 2000;
+
+      background: #111111;
+
+      color: #f5f1e8;
+
+      align-items: center;
       justify-content: center;
 
       text-align: center;
 
       padding: 30px;
-
     }
 
-
-    .portrait-warning-inner {
-
-      max-width: 300px;
-
+    .error-box {
+      max-width: 420px;
     }
 
+    .error-title {
+      color: #b58a2c;
 
-    .portrait-warning-title {
+      font-size: 22px;
 
-      font-size: 20px;
+      font-weight: 700;
 
-      font-weight: 800;
-
-      margin-bottom: 10px;
-
+      margin-bottom: 12px;
     }
 
-
-    .portrait-warning-text {
-
-      font-size: 13px;
+    .error-text {
+      font-size: 14px;
 
       line-height: 1.5;
 
-      opacity: 0.8;
-
+      opacity: 0.85;
     }
 
+    /* =========================================================
+       RESPONSIVIDADE
+       ========================================================= */
 
-    /* ==================================================
-       CELULAR
-       ================================================== */
+    @media (max-width: 800px) {
 
-    @media (
-      max-width: 700px
-    ) {
-
-      .wallet-app {
-
-        padding:
-          16px
-          8px
-          26px;
-
+      .app {
+        padding: 14px;
       }
 
-
-      .card-container {
-
-        max-width: 96vw;
-
+      .wallet-area {
+        width: 100%;
       }
-
-
-      .card {
-
-        aspect-ratio: 1.52 / 1;
-
-      }
-
-
-      .front-content {
-
-        grid-template-columns:
-          23%
-          50%
-          27%;
-
-        padding:
-          8%
-          4.5%
-          6%;
-
-      }
-
-
-      .photo-column {
-
-        padding-right: 5%;
-
-      }
-
-
-      .photo-frame {
-
-        max-width: 100%;
-
-        border-width: 3px;
-
-      }
-
-
-      .qr-column {
-
-        padding-left: 3%;
-
-      }
-
-
-      .qr-box {
-
-        width: 82%;
-
-        padding: 5px;
-
-      }
-
-
-      .front-logo {
-
-        bottom: 5%;
-
-      }
-
-    }
-
-
-    @media (
-      max-width: 430px
-    ) {
-
-      .wallet-app {
-
-        padding-top: 10px;
-
-      }
-
-
-      .card {
-
-        aspect-ratio: 1.46 / 1;
-
-      }
-
-
-      .card-face {
-
-        border-radius: 15px;
-
-      }
-
-
-      .front-content {
-
-        padding:
-          7%
-          3.5%
-          5%;
-
-      }
-
-
-      .data-list {
-
-        gap:
-          2px
-          5px;
-
-      }
-
-
-      .data-label {
-
-        font-size: 6px;
-
-      }
-
-
-      .data-value {
-
-        font-size: 8px;
-
-      }
-
 
       .card-title {
-
-        font-size: 8px;
-
+        font-size: 12px;
       }
-
 
       .member-name {
-
-        font-size: 15px;
-
+        font-size: 20px;
       }
-
 
       .member-number {
-
-        font-size: 8px;
-
+        margin-bottom: 10px;
       }
 
-
-      .qr-caption {
-
-        font-size: 6px;
-
+      .info-grid {
+        column-gap: 12px;
+        row-gap: 8px;
       }
 
+      .qr-box {
+        padding: 7px;
+      }
 
-      .wallet-actions {
-
+      .controls {
         margin-top: 12px;
-
       }
 
-
-      .action-button {
-
-        padding:
-          9px
-          14px;
-
-        font-size: 11px;
-
+      .button {
+        padding: 8px 15px;
+        font-size: 12px;
       }
-
     }
 
-
-    /* ==================================================
-       ORIENTAÇÃO PAISAGEM
-       ================================================== */
-
-    @media (
-      orientation: portrait
-    ) and (
-      max-width: 700px
-    ) {
+    @media (orientation: portrait) and (max-width: 900px) {
 
       .portrait-warning {
-
         display: flex;
-
       }
 
+      .app {
+        visibility: hidden;
+      }
     }
 
+    /* =========================================================
+       TELAS MUITO PEQUENAS
+       ========================================================= */
+
+    @media (max-height: 500px) {
+
+      .app {
+        padding: 8px;
+      }
+
+      .controls {
+        margin-top: 8px;
+      }
+
+      .app-identification {
+        margin-top: 5px;
+      }
+    }
   </style>
-
 </head>
-
 
 <body>
 
-  <div id="app">
-
-    <div class="loading-screen">
-
-      <div class="loading-title">
-        Identidade Confraria
-      </div>
-
-      <div class="loading-text">
-        Carregando sua carteira digital...
-      </div>
-
-      <div class="spinner"></div>
-
-    </div>
-
-  </div>
-
+  <!-- =========================================================
+       AVISO PARA GIRAR O CELULAR
+       ========================================================= -->
 
   <div class="portrait-warning">
-
-    <div class="portrait-warning-inner">
+    <div class="portrait-warning-content">
 
       <div class="portrait-warning-title">
-        Vire o celular
+        Identidade Confraria
       </div>
 
       <div class="portrait-warning-text">
         Para visualizar sua carteira digital,
-        utilize o celular na posição horizontal.
+        gire o celular para a posição horizontal.
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- =========================================================
+       CARREGAMENTO
+       ========================================================= -->
+
+  <div class="loading" id="loading">
+
+    <div class="loading-title">
+      Identidade Confraria
+    </div>
+
+    <div class="loading-text">
+      Carregando carteira digital...
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       ERRO
+       ========================================================= -->
+
+  <div class="error" id="error">
+
+    <div class="error-box">
+
+      <div class="error-title">
+        Carteira não encontrada
+      </div>
+
+      <div class="error-text" id="errorText">
+        Não foi possível carregar os dados desta carteira.
       </div>
 
     </div>
@@ -1373,86 +794,365 @@
   </div>
 
 
-<script>
+  <!-- =========================================================
+       APLICAÇÃO
+       ========================================================= -->
 
-  // ====================================================
-  // CONFIGURAÇÃO
-  // ====================================================
+  <main class="app" id="app">
 
-  const APP_URL =
-    'https://script.google.com/macros/s/AKfycbyBiHc666uXQ0npNWBHzyGGVQ79fFbtn93zKyCydZPRySbe7ie3_XpACkzO5zwe_4oO9Q/exec';
+    <div class="wallet-area">
 
+      <div class="card-wrapper">
 
-  const STORAGE_KEY =
-    'confraria_membro';
-
-
-  const VERSION =
-    '4';
+        <div class="card" id="card">
 
 
-  // ====================================================
-  // UTILITÁRIOS
-  // ====================================================
+          <!-- =================================================
+               FRENTE
+               ================================================= -->
 
-  function escaparHTML(valor) {
+          <section class="card-face front">
 
-    if (
-      valor === undefined ||
-      valor === null
-    ) {
-      return '';
-    }
+            <div class="corner top-right"></div>
+            <div class="corner bottom-left"></div>
 
-    return String(valor)
-      .replace(
-        /&/g,
-        '&amp;'
-      )
-      .replace(
-        /</g,
-        '&lt;'
-      )
-      .replace(
-        />/g,
-        '&gt;'
-      )
-      .replace(
-        /"/g,
-        '&quot;'
-      )
-      .replace(
-        /'/g,
-        '&#039;'
-      );
-
-  }
+            <div class="front-content">
 
 
-  function obterNumeroMembro() {
+              <!-- TÍTULO -->
 
-    const params =
-      new URLSearchParams(
-        window.location.search
-      );
-
-
-    const numeroURL =
-      params.get('membro');
+              <div class="card-title">
+                CARTEIRA DE IDENTIFICAÇÃO DA CONFRARIA
+              </div>
 
 
-    if (
-      numeroURL &&
-      /^\d{1,4}$/.test(
-        numeroURL
-      )
-    ) {
+              <!-- FOTO -->
 
-      const numero =
-        numeroURL.padStart(
-          4,
-          '0'
-        );
+              <div class="photo-area">
+
+                <img
+                  id="memberPhoto"
+                  class="member-photo"
+                  alt="Foto do confrade"
+                >
+
+              </div>
+
+
+              <!-- DADOS -->
+
+              <div class="member-info">
+
+                <div
+                  class="member-name"
+                  id="memberName"
+                >
+                  —
+                </div>
+
+                <div
+                  class="member-number"
+                  id="memberNumber"
+                >
+                  Nº ----
+                </div>
+
+
+                <div class="info-grid">
+
+
+                  <div class="info-item">
+
+                    <span class="info-label">
+                      CATEGORIA
+                    </span>
+
+                    <span
+                      class="info-value"
+                      id="categoria"
+                    >
+                      —
+                    </span>
+
+                  </div>
+
+
+                  <div class="info-item">
+
+                    <span class="info-label">
+                      CONDIÇÃO
+                    </span>
+
+                    <span
+                      class="info-value"
+                      id="condicao"
+                    >
+                      —
+                    </span>
+
+                  </div>
+
+
+                  <div class="info-item">
+
+                    <span class="info-label">
+                      CARGO
+                    </span>
+
+                    <span
+                      class="info-value"
+                      id="cargo"
+                    >
+                      —
+                    </span>
+
+                  </div>
+
+
+                  <div class="info-item">
+
+                    <span class="info-label">
+                      BIÊNIO
+                    </span>
+
+                    <span
+                      class="info-value"
+                      id="bienio"
+                    >
+                      —
+                    </span>
+
+                  </div>
+
+
+                  <div class="info-item">
+
+                    <span class="info-label">
+                      INGRESSO
+                    </span>
+
+                    <span
+                      class="info-value"
+                      id="ingresso"
+                    >
+                      —
+                    </span>
+
+                  </div>
+
+
+                  <div class="info-item">
+
+                    <span class="info-label">
+                      VALIDADE
+                    </span>
+
+                    <span
+                      class="info-value"
+                      id="validade"
+                    >
+                      —
+                    </span>
+
+                  </div>
+
+
+                </div>
+
+              </div>
+
+
+              <!-- QR CODE -->
+
+              <div class="qr-area">
+
+                <div class="qr-box">
+
+                  <img
+                    id="qrCode"
+                    class="qr-code"
+                    alt="QR Code para verificação"
+                  >
+
+                </div>
+
+                <div class="qr-caption">
+                  VERIFIQUE A AUTENTICIDADE
+                </div>
+
+              </div>
+
+
+            </div>
+
+          </section>
+
+
+          <!-- =================================================
+               VERSO
+               ================================================= -->
+
+          <section class="card-face back">
+
+            <div class="corner top-right"></div>
+            <div class="corner bottom-left"></div>
+
+
+            <div class="back-content">
+
+              <!-- LOGO OFICIAL -->
+
+              <img
+                id="backLogo"
+                class="back-logo"
+                alt="Confraria Companhia da Cachaça"
+              >
+
+
+              <div class="back-motto">
+                HONRA, TRADIÇÃO E PAIXÃO.
+              </div>
+
+
+              <div class="back-name">
+                Confraria Companhia da Cachaça
+              </div>
+
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =======================================================
+         CONTROLES
+         ======================================================= -->
+
+    <div class="controls">
+
+      <button
+        type="button"
+        class="button button-green"
+        id="flipButton"
+      >
+        Ver verso
+      </button>
+
+      <button
+        type="button"
+        class="button button-gold"
+        id="shareButton"
+      >
+        Compartilhar
+      </button>
+
+    </div>
+
+
+    <!-- =======================================================
+         IDENTIFICAÇÃO
+         ======================================================= -->
+
+    <div class="app-identification">
+
+      <strong>
+        Identidade Confraria
+      </strong>
+
+      Confraria Companhia da Cachaça
+
+    </div>
+
+  </main>
+
+
+  <script>
+
+    /* =========================================================
+       CONFIGURAÇÕES
+       ========================================================= */
+
+    const APP_URL =
+      "https://script.google.com/macros/s/AKfycbyBiHc666uXQ0npNWBHzyGGVQ79fFbtn93zKyCydZPRySbe7ie3_XpACkzO5zwe_4oO9Q/exec";
+
+
+    const STORAGE_KEY =
+      "confraria_membro";
+
+
+    /*
+     * Logo oficial da Confraria.
+     *
+     * O Apps Script continua sendo a fonte principal.
+     * Este endereço funciona como fallback para o caso
+     * de a API ainda não retornar o campo "logo".
+     */
+
+    const LOGO_FALLBACK =
+      "https://drive.google.com/uc?export=view&id=1ypjxSnlqRoRJqsdUkM-YVoVUcobYvNDo";
+
+
+    /* =========================================================
+       ELEMENTOS
+       ========================================================= */
+
+    const loading =
+      document.getElementById("loading");
+
+    const error =
+      document.getElementById("error");
+
+    const errorText =
+      document.getElementById("errorText");
+
+    const card =
+      document.getElementById("card");
+
+    const flipButton =
+      document.getElementById("flipButton");
+
+    const shareButton =
+      document.getElementById("shareButton");
+
+
+    /* =========================================================
+       PARÂMETRO DO MEMBRO
+       ========================================================= */
+
+    function obterNumeroMembro() {
+
+      const params =
+        new URLSearchParams(window.location.search);
+
+      let numero =
+        params.get("membro");
+
+
+      if (!numero) {
+
+        numero =
+          localStorage.getItem(STORAGE_KEY);
+
+      }
+
+
+      if (!numero) {
+
+        numero = "0001";
+
+      }
+
+
+      numero =
+        String(numero)
+          .replace(/\D/g, "")
+          .padStart(4, "0");
 
 
       localStorage.setItem(
@@ -1466,769 +1166,517 @@
     }
 
 
-    const salvo =
-      localStorage.getItem(
-        STORAGE_KEY
-      );
+    /* =========================================================
+       JSONP
+       ========================================================= */
+
+    function buscarMembro(numero) {
+
+      return new Promise(
+        function(resolve, reject) {
+
+          const callbackName =
+            "confrariaCallback_" +
+            Date.now() +
+            "_" +
+            Math.floor(
+              Math.random() * 100000
+            );
 
 
-    if (
-      salvo &&
-      /^\d{4}$/.test(
-        salvo
-      )
-    ) {
-
-      return salvo;
-
-    }
+          const script =
+            document.createElement("script");
 
 
-    return '';
+          const timeout =
+            setTimeout(
+              function() {
 
-  }
+                cleanup();
 
+                reject(
+                  new Error(
+                    "Tempo limite excedido ao consultar a carteira."
+                  )
+                );
 
-  // ====================================================
-  // CARREGAMENTO VIA JSONP
-  // ====================================================
-
-  function buscarMembro(numero) {
-
-    return new Promise(
-      function(resolve, reject) {
-
-        const callbackName =
-          'confrariaCallback_' +
-          Date.now() +
-          '_' +
-          Math.floor(
-            Math.random() * 100000
-          );
+              },
+              15000
+            );
 
 
-        const script =
-          document.createElement(
-            'script'
-          );
+          function cleanup() {
+
+            clearTimeout(timeout);
+
+            if (script.parentNode) {
+
+              script.parentNode.removeChild(script);
+
+            }
+
+            try {
+
+              delete window[callbackName];
+
+            } catch (e) {
+
+              window[callbackName] =
+                undefined;
+
+            }
+
+          }
 
 
-        let finalizado = false;
+          window[callbackName] =
+            function(data) {
+
+              cleanup();
+
+              resolve(data);
+
+            };
 
 
-        const timeout =
-          setTimeout(
+          script.onerror =
             function() {
-
-              if (finalizado) return;
-
-              finalizado = true;
 
               cleanup();
 
               reject(
                 new Error(
-                  'Tempo limite ao consultar a carteira.'
+                  "Não foi possível consultar o servidor da Confraria."
                 )
               );
 
-            },
-            20000
+            };
+
+
+          const url =
+            APP_URL +
+            "?api=1" +
+            "&membro=" +
+            encodeURIComponent(numero) +
+            "&callback=" +
+            encodeURIComponent(callbackName) +
+            "&t=" +
+            Date.now();
+
+
+          script.src = url;
+
+
+          document.body.appendChild(script);
+
+        }
+      );
+
+    }
+
+
+    /* =========================================================
+       IMAGEM
+       ========================================================= */
+
+    function definirImagem(
+      elemento,
+      fonte,
+      fallback
+    ) {
+
+      if (!elemento) {
+        return;
+      }
+
+
+      if (fonte) {
+
+        elemento.src = fonte;
+
+        elemento.onerror =
+          function() {
+
+            if (
+              fallback &&
+              elemento.src !== fallback
+            ) {
+
+              elemento.src = fallback;
+
+            }
+
+          };
+
+        return;
+
+      }
+
+
+      if (fallback) {
+
+        elemento.src = fallback;
+
+      }
+
+    }
+
+
+    /* =========================================================
+       PREENCHIMENTO DA CARTEIRA
+       ========================================================= */
+
+    function preencherCarteira(membro) {
+
+      document.getElementById("memberName")
+        .textContent =
+          membro.nome || "—";
+
+
+      document.getElementById("memberNumber")
+        .textContent =
+          "Nº " +
+          (
+            membro.numero ||
+            "----"
           );
 
 
-        function cleanup() {
+      document.getElementById("categoria")
+        .textContent =
+          membro.categoria || "—";
 
-          clearTimeout(
-            timeout
-          );
+
+      document.getElementById("condicao")
+        .textContent =
+          membro.condicao || "—";
+
+
+      document.getElementById("cargo")
+        .textContent =
+          membro.cargo || "—";
+
+
+      document.getElementById("bienio")
+        .textContent =
+          membro.bienio || "—";
+
+
+      document.getElementById("ingresso")
+        .textContent =
+          membro.ingresso || "—";
+
+
+      document.getElementById("validade")
+        .textContent =
+          membro.validade || "—";
+
+
+      /* FOTO */
+
+      const foto =
+        document.getElementById("memberPhoto");
+
+
+      if (membro.foto) {
+
+        definirImagem(
+          foto,
+          membro.foto,
+          null
+        );
+
+      } else {
+
+        foto.style.visibility =
+          "hidden";
+
+      }
+
+
+      /* QR CODE */
+
+      const qr =
+        document.getElementById("qrCode");
+
+
+      if (membro.qr) {
+
+        qr.src =
+          membro.qr;
+
+      } else if (membro.link) {
+
+        qr.src =
+          "https://quickchart.io/qr?text=" +
+          encodeURIComponent(membro.link) +
+          "&size=300&margin=2&format=png";
+
+      }
+
+
+      /* LOGO DO VERSO */
+
+      const logo =
+        document.getElementById("backLogo");
+
+
+      /*
+       * Primeiro tenta usar o campo "logo"
+       * retornado pela API.
+       *
+       * Caso o Código.gs atual ainda não retorne
+       * esse campo, utiliza a logo oficial como
+       * fallback.
+       */
+
+      definirImagem(
+        logo,
+        membro.logo,
+        LOGO_FALLBACK
+      );
+
+
+      /* Se a API já retornar uma logo, também
+         verificamos se ela realmente carregou. */
+
+      logo.onerror =
+        function() {
 
           if (
-            script.parentNode
+            LOGO_FALLBACK &&
+            logo.src !== LOGO_FALLBACK
           ) {
 
-            script.parentNode.removeChild(
-              script
-            );
+            logo.src =
+              LOGO_FALLBACK;
 
           }
 
-          try {
+        };
 
-            delete window[
-              callbackName
-            ];
+    }
 
-          } catch (erro) {
 
-            window[
-              callbackName
-            ] = undefined;
+    /* =========================================================
+       MOSTRAR ERRO
+       ========================================================= */
 
-          }
+    function mostrarErro(mensagem) {
+
+      loading.style.display =
+        "none";
+
+
+      error.style.display =
+        "flex";
+
+
+      errorText.textContent =
+        mensagem ||
+        "Não foi possível carregar os dados da carteira.";
+
+    }
+
+
+    /* =========================================================
+       INICIALIZAÇÃO
+       ========================================================= */
+
+    async function iniciar() {
+
+      try {
+
+        const numero =
+          obterNumeroMembro();
+
+
+        const membro =
+          await buscarMembro(numero);
+
+
+        if (
+          !membro ||
+          membro.encontrado === false
+        ) {
+
+          throw new Error(
+            "Membro " +
+            numero +
+            " não encontrado."
+          );
 
         }
 
 
-        window[
-          callbackName
-        ] =
-          function(dados) {
+        preencherCarteira(membro);
 
-            if (finalizado) return;
 
-            finalizado = true;
+        loading.style.display =
+          "none";
 
-            cleanup();
-
-            resolve(dados);
-
-          };
-
-
-        script.onerror =
-          function() {
-
-            if (finalizado) return;
-
-            finalizado = true;
-
-            cleanup();
-
-            reject(
-              new Error(
-                'Não foi possível consultar o servidor da Confraria.'
-              )
-            );
-
-          };
-
-
-        const url =
-          APP_URL +
-          '?api=1' +
-          '&membro=' +
-          encodeURIComponent(
-            numero
-          ) +
-          '&callback=' +
-          encodeURIComponent(
-            callbackName
-          ) +
-          '&pwa=' +
-          VERSION;
-
-
-        script.src =
-          url;
-
-
-        document
-          .head
-          .appendChild(
-            script
-          );
-
-      }
-    );
-
-  }
-
-
-  // ====================================================
-  // FOTO
-  // ====================================================
-
-  function criarFotoHTML(foto) {
-
-    if (!foto) {
-
-      return `
-        <div class="photo-frame">
-          <div class="photo-placeholder">
-            Foto não cadastrada
-          </div>
-        </div>
-      `;
-
-    }
-
-
-    return `
-      <div class="photo-frame">
-        <img
-          src="${foto}"
-          alt="Foto do confrade"
-        >
-      </div>
-    `;
-
-  }
-
-
-  // ====================================================
-  // DADOS
-  // ====================================================
-
-  function campo(
-    label,
-    valor
-  ) {
-
-    if (
-      valor === undefined ||
-      valor === null ||
-      String(valor).trim() === ''
-    ) {
-
-      return '';
-
-    }
-
-
-    return `
-      <div class="data-item">
-
-        <span class="data-label">
-          ${escaparHTML(label)}
-        </span>
-
-        <span class="data-value">
-          ${escaparHTML(valor)}
-        </span>
-
-      </div>
-    `;
-
-  }
-
-
-  // ====================================================
-  // CARTEIRA
-  // ====================================================
-
-  function renderizarCarteira(
-    membro
-  ) {
-
-    const app =
-      document.getElementById(
-        'app'
-      );
-
-
-    const logo =
-      membro.logo ||
-      '';
-
-
-    const foto =
-      membro.foto ||
-      '';
-
-
-    const qr =
-      membro.qr ||
-      '';
-
-
-    app.innerHTML = `
-
-      <main class="wallet-app">
-
-        <div class="wallet-stage">
-
-          <div class="card-container">
-
-            <div
-              class="card"
-              id="walletCard"
-            >
-
-
-              <!-- ==================================
-                   FRENTE
-                   ================================== -->
-
-              <section
-                class="card-face card-front"
-              >
-
-                <div class="corner corner-top"></div>
-
-                <div class="corner corner-bottom"></div>
-
-                <div class="gold-line gold-line-top"></div>
-
-                <div class="gold-line gold-line-bottom"></div>
-
-
-                <div class="front-content">
-
-
-                  <div class="photo-column">
-
-                    ${criarFotoHTML(foto)}
-
-                  </div>
-
-
-                  <div class="main-column">
-
-                    <div class="card-title">
-                      CARTEIRA DE IDENTIFICAÇÃO DA CONFRARIA
-                    </div>
-
-
-                    <div class="member-name">
-                      ${escaparHTML(
-                        membro.nome
-                      )}
-                    </div>
-
-
-                    <div class="member-number">
-                      Nº ${escaparHTML(
-                        membro.numero
-                      )}
-                    </div>
-
-
-                    <div class="data-list">
-
-                      ${campo(
-                        'Categoria',
-                        membro.categoria
-                      )}
-
-                      ${campo(
-                        'Condição',
-                        membro.condicao
-                      )}
-
-                      ${campo(
-                        'Cargo',
-                        membro.cargo
-                      )}
-
-                      ${campo(
-                        'Biênio',
-                        membro.bienio
-                      )}
-
-                      ${campo(
-                        'Ingresso',
-                        membro.ingresso
-                      )}
-
-                      ${campo(
-                        'Validade',
-                        membro.validade
-                      )}
-
-                    </div>
-
-                  </div>
-
-
-                  <div class="qr-column">
-
-                    ${
-                      qr
-                      ?
-                      `
-                        <div class="qr-box">
-
-                          <img
-                            src="${escaparHTML(qr)}"
-                            alt="QR Code de verificação"
-                          >
-
-                        </div>
-
-                        <div class="qr-caption">
-                          VERIFIQUE A AUTENTICIDADE
-                        </div>
-                      `
-                      :
-                      ''
-                    }
-
-                  </div>
-
-
-                </div>
-
-
-                ${
-                  logo
-                  ?
-                  `
-                    <img
-                      class="front-logo"
-                      src="${logo}"
-                      alt="Confraria Companhia da Cachaça"
-                    >
-                  `
-                  :
-                  ''
-                }
-
-              </section>
-
-
-              <!-- ==================================
-                   VERSO
-                   ================================== -->
-
-              <section
-                class="card-face card-back"
-              >
-
-                <div class="corner corner-top"></div>
-
-                <div class="corner corner-bottom"></div>
-
-                <div class="gold-line gold-line-top"></div>
-
-                <div class="gold-line gold-line-bottom"></div>
-
-
-                <div class="back-content">
-
-                  ${
-                    logo
-                    ?
-                    `
-                      <img
-                        class="back-logo"
-                        src="${logo}"
-                        alt="Confraria Companhia da Cachaça"
-                      >
-                    `
-                    :
-                    ''
-                  }
-
-
-                  <div class="back-motto">
-                    HONRA, TRADIÇÃO E PAIXÃO.
-                  </div>
-
-
-                  <div class="back-small">
-                    Confraria Companhia da Cachaça
-                  </div>
-
-                </div>
-
-              </section>
-
-
-            </div>
-
-          </div>
-
-
-          <div class="wallet-actions">
-
-            <button
-              class="action-button"
-              type="button"
-              onclick="virarCarteira()"
-              id="flipButton"
-            >
-              Ver verso
-            </button>
-
-
-            <button
-              class="action-button secondary"
-              type="button"
-              onclick="compartilharCarteira()"
-            >
-              Compartilhar
-            </button>
-
-          </div>
-
-
-          <div class="wallet-footer">
-
-            Identidade Confraria<br>
-
-            Confraria Companhia da Cachaça
-
-          </div>
-
-        </div>
-
-      </main>
-
-    `;
-
-  }
-
-
-  // ====================================================
-  // FRENTE / VERSO
-  // ====================================================
-
-  function virarCarteira() {
-
-    const card =
-      document.getElementById(
-        'walletCard'
-      );
-
-
-    const button =
-      document.getElementById(
-        'flipButton'
-      );
-
-
-    if (!card) return;
-
-
-    card.classList.toggle(
-      'virado'
-    );
-
-
-    if (
-      card.classList.contains(
-        'virado'
-      )
-    ) {
-
-      button.textContent =
-        'Ver frente';
-
-    } else {
-
-      button.textContent =
-        'Ver verso';
-
-    }
-
-  }
-
-
-  // ====================================================
-  // COMPARTILHAR
-  // ====================================================
-
-  async function compartilharCarteira() {
-
-    const url =
-      window.location.href;
-
-
-    if (
-      navigator.share
-    ) {
-
-      try {
-
-        await navigator.share({
-
-          title:
-            'Identidade Confraria',
-
-          text:
-            'Carteira Digital — Confraria Companhia da Cachaça',
-
-          url:
-            url
-
-        });
-
-        return;
 
       } catch (erro) {
 
-        // Cancelamento pelo usuário.
-        // Não fazemos nada.
-
-      }
-
-    }
-
-
-    try {
-
-      await navigator.clipboard.writeText(
-        url
-      );
-
-
-      alert(
-        'Link da carteira copiado.'
-      );
-
-    } catch (erro) {
-
-      prompt(
-        'Copie o link da carteira:',
-        url
-      );
-
-    }
-
-  }
-
-
-  // ====================================================
-  // INICIALIZAÇÃO
-  // ====================================================
-
-  async function iniciar() {
-
-    const numero =
-      obterNumeroMembro();
-
-
-    if (!numero) {
-
-      document.getElementById(
-        'app'
-      ).innerHTML = `
-
-        <div class="error-screen">
-
-          <div class="error-card">
-
-            <h1>
-              Identidade Confraria
-            </h1>
-
-            <p>
-              Não foi possível identificar
-              o número da carteira.
-            </p>
-
-          </div>
-
-        </div>
-
-      `;
-
-      return;
-
-    }
-
-
-    try {
-
-      const membro =
-        await buscarMembro(
-          numero
+        console.error(
+          "Erro ao carregar carteira:",
+          erro
         );
 
 
-      if (
-        !membro ||
-        !membro.encontrado
-      ) {
-
-        throw new Error(
-          membro &&
-          membro.mensagem
-            ?
-            membro.mensagem
-            :
-            'Carteira não encontrada.'
+        mostrarErro(
+          erro.message
         );
 
       }
 
-
-      renderizarCarteira(
-        membro
-      );
-
-
-    } catch (erro) {
-
-      console.error(
-        erro
-      );
-
-
-      document.getElementById(
-        'app'
-      ).innerHTML = `
-
-        <div class="error-screen">
-
-          <div class="error-card">
-
-            <h1>
-              Carteira não encontrada
-            </h1>
-
-            <p>
-              ${
-                escaparHTML(
-                  erro.message ||
-                  'Não foi possível carregar a carteira.'
-                )
-              }
-            </p>
-
-          </div>
-
-        </div>
-
-      `;
-
     }
 
-  }
 
+    /* =========================================================
+       FRENTE / VERSO
+       ========================================================= */
 
-  // ====================================================
-  // SERVICE WORKER
-  // ====================================================
-
-  if (
-    'serviceWorker' in navigator
-  ) {
-
-    window.addEventListener(
-      'load',
+    flipButton.addEventListener(
+      "click",
       function() {
 
-        navigator
-          .serviceWorker
-          .register(
-            './service-worker.js?v=4',
-            {
-              scope: './'
-            }
-          )
-          .catch(
-            function(erro) {
-
-              console.warn(
-                'Service Worker:',
-                erro
-              );
-
-            }
+        const virou =
+          card.classList.toggle(
+            "flipped"
           );
+
+
+        flipButton.textContent =
+          virou
+            ? "Ver frente"
+            : "Ver verso";
 
       }
     );
 
-  }
+
+    /* =========================================================
+       COMPARTILHAR
+       ========================================================= */
+
+    shareButton.addEventListener(
+      "click",
+      async function() {
+
+        const url =
+          window.location.href;
 
 
-  iniciar();
+        if (
+          navigator.share
+        ) {
 
-</script>
+          try {
+
+            await navigator.share({
+
+              title:
+                "Identidade Confraria",
+
+              text:
+                "Carteira Digital da Confraria Companhia da Cachaça",
+
+              url:
+                url
+
+            });
+
+          } catch (e) {
+
+            /* Cancelamento pelo usuário
+               não precisa gerar erro. */
+
+          }
+
+          return;
+
+        }
+
+
+        try {
+
+          await navigator.clipboard.writeText(
+            url
+          );
+
+
+          const textoOriginal =
+            shareButton.textContent;
+
+
+          shareButton.textContent =
+            "Link copiado";
+
+
+          setTimeout(
+            function() {
+
+              shareButton.textContent =
+                textoOriginal;
+
+            },
+            1800
+          );
+
+
+        } catch (e) {
+
+          alert(
+            "Copie o endereço desta página para compartilhar sua carteira."
+          );
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       SERVICE WORKER
+       ========================================================= */
+
+    if (
+      "serviceWorker" in navigator
+    ) {
+
+      window.addEventListener(
+        "load",
+        function() {
+
+          navigator.serviceWorker
+            .register(
+              "./service-worker.js?v=4"
+            )
+            .catch(
+              function(erro) {
+
+                console.warn(
+                  "Service Worker não registrado:",
+                  erro
+                );
+
+              }
+            );
+
+        }
+      );
+
+    }
+
+
+    /* =========================================================
+       INICIAR
+       ========================================================= */
+
+    iniciar();
+
+  </script>
 
 </body>
-
 </html>
