@@ -89,66 +89,79 @@
     }
 
     /* =========================================================
-       FAIXAS DECORATIVAS
+       CANTOS GEOMÉTRICOS — PADRÃO F
        ========================================================= */
 
     .corner {
       position: absolute;
       z-index: 1;
       pointer-events: none;
+      overflow: visible;
     }
 
     .corner.top-right {
       top: 0;
       right: 0;
-      width: 175px;
-      height: 105px;
-      background:
-        linear-gradient(
-          145deg,
-          transparent 0%,
-          transparent 43%,
-          #123A2F 43%,
-          #123A2F 100%
-        );
+      width: 150px;
+      height: 92px;
+      background: #123A2F;
+      clip-path: polygon(100% 0, 100% 100%, 67% 100%);
+    }
+
+    .corner.top-right::before {
+      content: "";
+      position: absolute;
+      width: 112px;
+      height: 4px;
+      right: -3px;
+      top: 25px;
+      background: #B58A2C;
+      transform: rotate(-39deg);
+      transform-origin: right center;
     }
 
     .corner.top-right::after {
       content: "";
       position: absolute;
-      right: 20px;
-      top: 0;
-      width: 135px;
-      height: 2px;
-      background: #B58A2C;
-      transform: rotate(-38deg);
+      width: 105px;
+      height: 1px;
+      right: 1px;
+      top: 31px;
+      background: rgba(245,241,232,0.85);
+      transform: rotate(-39deg);
       transform-origin: right center;
     }
 
     .corner.bottom-left {
       left: 0;
       bottom: 0;
-      width: 175px;
-      height: 105px;
-      background:
-        linear-gradient(
-          145deg,
-          #123A2F 0%,
-          #123A2F 57%,
-          transparent 57%,
-          transparent 100%
-        );
+      width: 150px;
+      height: 92px;
+      background: #123A2F;
+      clip-path: polygon(0 0, 33% 0, 0 100%);
+    }
+
+    .corner.bottom-left::before {
+      content: "";
+      position: absolute;
+      width: 112px;
+      height: 4px;
+      left: -3px;
+      bottom: 25px;
+      background: #B58A2C;
+      transform: rotate(-39deg);
+      transform-origin: left center;
     }
 
     .corner.bottom-left::after {
       content: "";
       position: absolute;
-      left: 20px;
-      bottom: 0;
-      width: 135px;
-      height: 2px;
-      background: #B58A2C;
-      transform: rotate(-38deg);
+      width: 105px;
+      height: 1px;
+      left: 1px;
+      bottom: 31px;
+      background: rgba(245,241,232,0.85);
+      transform: rotate(-39deg);
       transform-origin: left center;
     }
 
@@ -203,15 +216,18 @@
 
       display: grid;
 
-      /*
-        Foto | identificação | informações
-        A distribuição foi ampliada para ocupar melhor
-        a área útil da carteira.
-      */
-      grid-template-columns: 31% 39% 30%;
+      grid-template-columns:
+        31%
+        39%
+        30%;
 
       align-items: center;
-      padding: 30px 48px 32px 58px;
+
+      padding:
+        30px
+        48px
+        32px
+        58px;
     }
 
     /* =========================================================
@@ -265,61 +281,91 @@
 
       text-align: center;
 
-      padding: 8px 15px 4px;
+      padding:
+        8px
+        15px
+        4px;
     }
 
     .member-name {
-      font-size: clamp(28px, 3vw, 39px);
+      font-size:
+        clamp(28px, 3vw, 39px);
+
       line-height: 1.05;
+
       font-weight: 700;
+
       color: #123A2F;
+
       margin-bottom: 7px;
+
       white-space: nowrap;
     }
 
     .member-role {
-      font-size: clamp(15px, 1.25vw, 19px);
+      font-size:
+        clamp(15px, 1.25vw, 19px);
+
       color: #111111;
+
       margin-bottom: 7px;
     }
 
     .member-number {
-      font-size: clamp(12px, 1vw, 15px);
+      font-size:
+        clamp(12px, 1vw, 15px);
+
       color: #6B4A2B;
+
       margin-bottom: 12px;
     }
 
     .status {
       min-width: 82px;
-      padding: 6px 17px;
+
+      padding:
+        6px
+        17px;
 
       border-radius: 30px;
 
       background: #DCEEE8;
+
       color: #006B58;
 
       font-size: 12px;
+
       font-weight: 700;
+
       letter-spacing: 1.2px;
 
       margin-bottom: 13px;
     }
 
     .motto {
-      font-size: clamp(11px, 0.9vw, 14px);
+      font-size:
+        clamp(11px, 0.9vw, 14px);
+
       letter-spacing: 1.7px;
+
       color: #B58A2C;
+
       text-transform: uppercase;
+
       margin-bottom: 13px;
+
       white-space: nowrap;
     }
 
     .front-logo {
       width: 150px;
+
       max-width: 75%;
+
       height: 72px;
 
       object-fit: contain;
+
       display: block;
     }
 
@@ -330,12 +376,15 @@
     .details {
       height: 100%;
 
-      border-left: 1px solid rgba(107, 74, 43, 0.30);
+      border-left:
+        1px solid rgba(107, 74, 43, 0.30);
 
       padding-left: 28px;
 
       display: flex;
+
       flex-direction: column;
+
       justify-content: center;
     }
 
@@ -343,12 +392,16 @@
       width: 100%;
 
       display: flex;
+
       justify-content: space-between;
+
       align-items: center;
 
-      padding: 9px 0;
+      padding:
+        9px 0;
 
-      border-bottom: 1px solid rgba(107, 74, 43, 0.18);
+      border-bottom:
+        1px solid rgba(107, 74, 43, 0.18);
 
       font-size: 12px;
     }
@@ -359,14 +412,19 @@
 
     .detail-value {
       color: #123A2F;
+
       font-weight: 700;
+
       text-align: right;
     }
 
     .qr-area {
       display: flex;
+
       flex-direction: column;
+
       align-items: center;
+
       justify-content: center;
 
       margin-top: 17px;
@@ -374,24 +432,30 @@
 
     .qr-area img {
       width: 110px;
+
       height: 110px;
 
       object-fit: contain;
 
       background: #FFFFFF;
+
       padding: 5px;
 
-      border: 1px solid rgba(17,17,17,0.15);
+      border:
+        1px solid rgba(17,17,17,0.15);
     }
 
     .qr-caption {
       margin-top: 7px;
 
       font-size: 8px;
+
       letter-spacing: 0.7px;
+
       color: #6B4A2B;
 
       text-align: center;
+
       white-space: nowrap;
     }
 
@@ -401,12 +465,17 @@
 
     .back-content {
       position: absolute;
+
       inset: 0;
+
       z-index: 4;
 
       display: flex;
+
       flex-direction: column;
+
       justify-content: center;
+
       align-items: center;
 
       padding: 40px;
@@ -414,7 +483,9 @@
 
     .back-logo {
       width: 390px;
+
       max-width: 42%;
+
       height: 210px;
 
       object-fit: contain;
@@ -425,7 +496,9 @@
     .back-motto {
       margin-top: -3px;
 
-      font-size: clamp(12px, 1vw, 15px);
+      font-size:
+        clamp(12px, 1vw, 15px);
+
       letter-spacing: 2.1px;
 
       color: #B58A2C;
@@ -439,34 +512,44 @@
 
     .controls {
       display: flex;
+
       gap: 10px;
+
       margin-top: 14px;
     }
 
     button {
-      border: 1px solid #B58A2C;
+      border:
+        1px solid #B58A2C;
 
       border-radius: 30px;
 
-      padding: 9px 22px;
+      padding:
+        9px
+        22px;
 
       font-size: 12px;
+
       font-weight: 600;
 
       cursor: pointer;
 
       background: transparent;
+
       color: #F5F1E8;
 
-      transition: all 0.2s ease;
+      transition:
+        all 0.2s ease;
     }
 
     button:hover {
-      transform: translateY(-1px);
+      transform:
+        translateY(-1px);
     }
 
     .share-button {
       background: #B58A2C;
+
       color: #FFFFFF;
     }
 
@@ -476,14 +559,12 @@
       text-align: center;
 
       font-size: 8px;
+
       line-height: 1.45;
 
       color: #F5F1E8;
-      opacity: 0.85;
-    }
 
-    .portrait-warning {
-      display: none;
+      opacity: 0.85;
     }
 
     /* =========================================================
@@ -494,15 +575,19 @@
       min-height: 300px;
 
       display: flex;
+
       align-items: center;
+
       justify-content: center;
 
       color: #F5F1E8;
+
       font-size: 14px;
     }
 
     .error-box {
       background: #F5F1E8;
+
       color: #123A2F;
 
       border-radius: 16px;
@@ -513,22 +598,29 @@
 
       text-align: center;
 
-      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+      box-shadow:
+        0 15px 40px rgba(0,0,0,0.25);
     }
 
     .error-box h2 {
-      margin: 0 0 12px;
+      margin:
+        0
+        0
+        12px;
+
       font-size: 20px;
     }
 
     .error-box p {
       margin: 8px 0;
+
       color: #6B4A2B;
+
       font-size: 13px;
     }
 
     /* =========================================================
-       RESPONSIVO
+       TABLET
        ========================================================= */
 
     @media (max-width: 900px) {
@@ -539,7 +631,9 @@
 
       .wallet {
         aspect-ratio: auto;
+
         height: auto;
+
         min-height: 620px;
       }
 
@@ -549,11 +643,13 @@
 
       .front-title {
         font-size: 17px;
+
         letter-spacing: 0.8px;
       }
 
       .front-subtitle {
         font-size: 8px;
+
         letter-spacing: 1.4px;
       }
 
@@ -562,7 +658,10 @@
 
         display: grid;
 
-        grid-template-columns: 32% 38% 30%;
+        grid-template-columns:
+          32%
+          38%
+          30%;
 
         padding:
           28px
@@ -573,6 +672,7 @@
 
       .photo-frame {
         width: 150px;
+
         height: 180px;
       }
 
@@ -598,6 +698,7 @@
 
       .qr-area img {
         width: 88px;
+
         height: 88px;
       }
 
@@ -607,9 +708,16 @@
 
       .back-logo {
         max-width: 48%;
+
         height: 180px;
       }
+
     }
+
+
+    /* =========================================================
+       CELULAR
+       ========================================================= */
 
     @media (max-width: 650px) {
 
@@ -627,26 +735,34 @@
 
       .front-title {
         font-size: 14px;
+
         white-space: normal;
+
         max-width: 90%;
+
         line-height: 1.15;
       }
 
       .front-subtitle {
         font-size: 7px;
+
         margin-top: 5px;
       }
 
       .front-content {
         top: 82px;
+
         display: flex;
+
         flex-direction: column;
 
         justify-content: center;
 
         gap: 18px;
 
-        padding: 30px 25px;
+        padding:
+          30px
+          25px;
       }
 
       .photo-area {
@@ -655,11 +771,13 @@
 
       .photo-frame {
         width: 125px;
+
         height: 150px;
       }
 
       .identity {
         height: auto;
+
         flex: none;
       }
 
@@ -677,20 +795,25 @@
 
       .motto {
         font-size: 9px;
+
         letter-spacing: 1.2px;
       }
 
       .front-logo {
         width: 110px;
+
         height: 55px;
       }
 
       .details {
         height: auto;
+
         width: 90%;
 
         border-left: none;
-        border-top: 1px solid rgba(107,74,43,0.30);
+
+        border-top:
+          1px solid rgba(107,74,43,0.30);
 
         padding:
           12px
@@ -708,51 +831,90 @@
 
       .qr-area img {
         width: 82px;
+
         height: 82px;
       }
 
+
+      /* CANTOS NO CELULAR */
+
       .corner.top-right {
-        width: 110px;
-        height: 72px;
+        width: 105px;
+
+        height: 65px;
+      }
+
+      .corner.top-right::before {
+        width: 78px;
+
+        height: 3px;
+
+        right: -2px;
+
+        top: 18px;
       }
 
       .corner.top-right::after {
-        width: 88px;
-        height: 2px;
-        right: 12px;
+        width: 72px;
+
+        right: 0;
+
+        top: 22px;
       }
 
       .corner.bottom-left {
-        width: 110px;
-        height: 72px;
+        width: 105px;
+
+        height: 65px;
+      }
+
+      .corner.bottom-left::before {
+        width: 78px;
+
+        height: 3px;
+
+        left: -2px;
+
+        bottom: 18px;
       }
 
       .corner.bottom-left::after {
-        width: 88px;
-        height: 2px;
-        left: 12px;
+        width: 72px;
+
+        left: 0;
+
+        bottom: 22px;
       }
+
 
       .back-logo {
         width: 270px;
+
         max-width: 65%;
+
         height: 150px;
       }
 
       .back-motto {
         font-size: 9px;
+
         letter-spacing: 1.4px;
       }
+
     }
 
   </style>
 </head>
 
+
 <body>
 
   <div class="app">
 
-    <div id="appContent" class="loading">
+    <div
+      id="appContent"
+      class="loading"
+    >
       Carregando carteira...
     </div>
 
@@ -761,12 +923,13 @@
 
 <script>
 
+
   /* =========================================================
      CONFIGURAÇÃO
      ========================================================= */
 
   const API_URL =
-    "https://script.google.com/macros/s/AKfycbyBiHc666uXQ0npNWBHzyGGVQ79fFbtn93zKyCydZPRySbe7ie3_XpACkzO5zwe_4oO9Q/exec";
+    "https://script.google.com/macros/s/AKfycbyBiHc666uX0npNWBHzyGGVQ79fFbtn93zKyCydZPRySbe7ie3_XpACkzO5zwe_4oO9Q/exec";
 
 
   /* =========================================================
@@ -775,23 +938,69 @@
 
   function obterNumeroMembro() {
 
-    const params = new URLSearchParams(window.location.search);
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
 
-    let numero = params.get("membro");
+    let numero =
+      params.get("membro");
 
     if (!numero) {
-      numero = localStorage.getItem("confraria_membro");
+
+      numero =
+        localStorage.getItem(
+          "confraria_membro"
+        );
+
     }
 
     if (!numero) {
+
       numero = "0001";
+
     }
 
-    numero = String(numero).padStart(4, "0");
+    numero =
+      String(numero)
+        .padStart(4, "0");
 
-    localStorage.setItem("confraria_membro", numero);
+    localStorage.setItem(
+      "confraria_membro",
+      numero
+    );
 
     return numero;
+
+  }
+
+
+  /* =========================================================
+     TRATAMENTO
+     ========================================================= */
+
+  function obterTratamento(membro) {
+
+    const tratamento =
+      String(
+        membro.tratamento || ""
+      )
+      .trim()
+      .toLowerCase();
+
+
+    if (
+      tratamento === "feminino" ||
+      tratamento === "confreira"
+    ) {
+
+      return "Confreira";
+
+    }
+
+
+    return "Confrade";
+
   }
 
 
@@ -807,25 +1016,33 @@
         "confrariaCallback_" +
         Date.now() +
         "_" +
-        Math.floor(Math.random() * 100000);
+        Math.floor(
+          Math.random() * 100000
+        );
 
-      const script = document.createElement("script");
+      const script =
+        document.createElement(
+          "script"
+        );
 
       let finalizado = false;
 
-      const timeout = setTimeout(() => {
+      const timeout =
+        setTimeout(() => {
 
-        if (finalizado) return;
+          if (finalizado) return;
 
-        finalizado = true;
+          finalizado = true;
 
-        cleanup();
+          cleanup();
 
-        reject(
-          new Error("Tempo limite excedido ao consultar a carteira.")
-        );
+          reject(
+            new Error(
+              "Tempo limite excedido ao consultar a carteira."
+            )
+          );
 
-      }, 15000);
+        }, 15000);
 
 
       function cleanup() {
@@ -833,18 +1050,36 @@
         clearTimeout(timeout);
 
         try {
-          delete window[callbackName];
+
+          delete window[
+            callbackName
+          ];
+
         } catch(e) {
-          window[callbackName] = undefined;
+
+          window[
+            callbackName
+          ] = undefined;
+
         }
 
-        if (script.parentNode) {
-          script.parentNode.removeChild(script);
+        if (
+          script.parentNode
+        ) {
+
+          script.parentNode
+            .removeChild(
+              script
+            );
+
         }
+
       }
 
 
-      window[callbackName] = function(data) {
+      window[
+        callbackName
+      ] = function(data) {
 
         if (finalizado) return;
 
@@ -853,35 +1088,46 @@
         cleanup();
 
         resolve(data);
+
       };
 
 
-      script.onerror = function() {
+      script.onerror =
+        function() {
 
-        if (finalizado) return;
+          if (finalizado) return;
 
-        finalizado = true;
+          finalizado = true;
 
-        cleanup();
+          cleanup();
 
-        reject(
-          new Error("Não foi possível consultar a carteira.")
-        );
-      };
+          reject(
+            new Error(
+              "Não foi possível consultar a carteira."
+            )
+          );
+
+        };
 
 
       const url =
         API_URL +
         "?api=1" +
         "&membro=" +
-        encodeURIComponent(numero) +
+        encodeURIComponent(
+          numero
+        ) +
         "&callback=" +
-        encodeURIComponent(callbackName);
+        encodeURIComponent(
+          callbackName
+        );
 
 
       script.src = url;
 
-      document.body.appendChild(script);
+      document.body.appendChild(
+        script
+      );
 
     });
 
@@ -895,7 +1141,9 @@
   function obterQRCode(membro) {
 
     if (membro.qr) {
+
       return membro.qr;
+
     }
 
     const numero =
@@ -905,12 +1153,17 @@
     const verificacao =
       API_URL +
       "?membro=" +
-      encodeURIComponent(numero);
+      encodeURIComponent(
+        numero
+      );
 
     return (
       "https://quickchart.io/qr?size=300&margin=1&text=" +
-      encodeURIComponent(verificacao)
+      encodeURIComponent(
+        verificacao
+      )
     );
+
   }
 
 
@@ -931,10 +1184,16 @@
     const qr =
       obterQRCode(membro);
 
+    const tratamento =
+      obterTratamento(membro);
+
 
     const html = `
 
-      <div class="wallet" id="wallet">
+      <div
+        class="wallet"
+        id="wallet"
+      >
 
         <div class="wallet-inner">
 
@@ -947,6 +1206,7 @@
 
 
             <div class="corner top-right"></div>
+
             <div class="corner bottom-left"></div>
 
 
@@ -975,7 +1235,12 @@
                   ${
                     foto
                     ?
-                    `<img src="${foto}" alt="Foto do membro">`
+                    `
+                      <img
+                        src="${foto}"
+                        alt="Foto do membro"
+                      >
+                    `
                     :
                     ""
                   }
@@ -993,33 +1258,41 @@
                   ${membro.nome || ""}
                 </div>
 
+
                 <div class="member-role">
                   ${membro.cargo || ""}
                 </div>
 
+
                 <div class="member-number">
-                  ${membro.tratamento || "Confrade"} nº ${membro.numero || ""}
+                  ${tratamento} nº ${membro.numero || ""}
                 </div>
+
 
                 <div class="status">
                   ${membro.status || "ATIVO"}
                 </div>
 
+
                 <div class="motto">
                   HONRA · TRADIÇÃO · PAIXÃO
                 </div>
 
+
                 ${
                   logo
                   ?
-                  `<img
-                    class="front-logo"
-                    src="${logo}"
-                    alt="Confraria Companhia da Cachaça"
-                  >`
+                  `
+                    <img
+                      class="front-logo"
+                      src="${logo}"
+                      alt="Confraria Companhia da Cachaça"
+                    >
+                  `
                   :
                   ""
                 }
+
 
               </div>
 
@@ -1112,26 +1385,32 @@
 
 
             <div class="corner top-right"></div>
+
             <div class="corner bottom-left"></div>
 
 
             <div class="back-content">
 
+
               ${
                 logo
                 ?
-                `<img
-                  class="back-logo"
-                  src="${logo}"
-                  alt="Confraria Companhia da Cachaça"
-                >`
+                `
+                  <img
+                    class="back-logo"
+                    src="${logo}"
+                    alt="Confraria Companhia da Cachaça"
+                  >
+                `
                 :
                 ""
               }
 
+
               <div class="back-motto">
                 HONRA · TRADIÇÃO · PAIXÃO
               </div>
+
 
             </div>
 
@@ -1154,6 +1433,7 @@
           Ver verso
         </button>
 
+
         <button
           type="button"
           class="share-button"
@@ -1166,14 +1446,24 @@
 
 
       <div class="app-info">
-        <strong>Identidade Confraria</strong><br>
+
+        <strong>
+          Identidade Confraria
+        </strong>
+
+        <br>
+
         Confraria Companhia da Cachaça
+
       </div>
 
     `;
 
 
-    document.getElementById("appContent").outerHTML =
+    document.getElementById(
+      "appContent"
+    ).outerHTML =
+
       `<div class="app" id="mainApp">${html}</div>`;
 
   }
@@ -1186,22 +1476,35 @@
   function alternarLado() {
 
     const wallet =
-      document.getElementById("wallet");
+      document.getElementById(
+        "wallet"
+      );
 
     const button =
-      document.getElementById("flipButton");
+      document.getElementById(
+        "flipButton"
+      );
 
     if (!wallet) return;
 
-    wallet.classList.toggle("flipped");
+    wallet.classList.toggle(
+      "flipped"
+    );
 
-    if (wallet.classList.contains("flipped")) {
 
-      button.textContent = "Ver frente";
+    if (
+      wallet.classList.contains(
+        "flipped"
+      )
+    ) {
+
+      button.textContent =
+        "Ver frente";
 
     } else {
 
-      button.textContent = "Ver verso";
+      button.textContent =
+        "Ver verso";
 
     }
 
@@ -1228,9 +1531,16 @@
       try {
 
         await navigator.share({
-          title: "Identidade Confraria",
-          text: texto,
-          url: url
+
+          title:
+            "Identidade Confraria",
+
+          text:
+            texto,
+
+          url:
+            url
+
         });
 
         return;
@@ -1242,7 +1552,8 @@
 
     try {
 
-      await navigator.clipboard.writeText(url);
+      await navigator.clipboard
+        .writeText(url);
 
       alert(
         "Link da carteira copiado para a área de transferência."
@@ -1266,7 +1577,9 @@
 
   function mostrarErro(mensagem) {
 
-    document.getElementById("appContent").outerHTML = `
+    document.getElementById(
+      "appContent"
+    ).outerHTML = `
 
       <div class="error-box">
 
@@ -1301,7 +1614,9 @@
     try {
 
       const membro =
-        await buscarMembro(numero);
+        await buscarMembro(
+          numero
+        );
 
 
       if (
@@ -1317,7 +1632,9 @@
       }
 
 
-      construirCarteira(membro);
+      construirCarteira(
+        membro
+      );
 
 
     } catch(e) {
