@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Identidade Confraria</title>
 
-  <link rel="manifest" href="./manifest.json">
+  <link rel="manifest" href="./manifest.json?v=7">
   <meta name="theme-color" content="#111111">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Identidade Confraria">
 
   <style>
     * {
@@ -22,238 +25,324 @@
       height: 100%;
       overflow: hidden;
       background: #111111;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
-    iframe {
-      position: fixed;
-      inset: 0;
+    #app {
       width: 100%;
       height: 100%;
-      border: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
       background: #111111;
     }
 
-    #loading {
+    #walletFrame {
+      width: 100%;
+      height: 100%;
+      min-height: 100vh;
+      border: 0;
+      display: block;
+      background: #111111;
+    }
+
+    #loading,
+    #error {
       position: fixed;
       inset: 0;
-      z-index: 10;
-
       display: flex;
       align-items: center;
       justify-content: center;
-
-      background: #111111;
-      color: #F5F1E8;
-
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 15px;
-    }
-
-    #erro {
-      display: none;
-
-      position: fixed;
-      inset: 0;
-      z-index: 20;
-
-      align-items: center;
-      justify-content: center;
-
-      padding: 25px;
-
-      background: #111111;
-      color: #F5F1E8;
-
-      font-family: Arial, Helvetica, sans-serif;
+      padding: 24px;
       text-align: center;
+      color: #F5F1E8;
+      background: #111111;
+      z-index: 10;
     }
 
-    .erro-box {
-      max-width: 420px;
+    #error {
+      display: none;
+    }
 
-      padding: 30px;
-
+    .box {
+      max-width: 440px;
+      padding: 28px;
       border-radius: 16px;
-
       background: #F5F1E8;
       color: #123A2F;
-
-      box-shadow: 0 15px 40px rgba(0,0,0,.30);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
     }
 
-    .erro-box h2 {
-      margin: 0 0 12px;
+    .box h2 {
+      margin: 0 0 10px;
+      font-size: 20px;
     }
 
-    .erro-box p {
-      margin: 6px 0;
+    .box p {
+      margin: 7px 0;
       color: #6B4A2B;
       font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .box button {
+      margin-top: 12px;
+      border: 1px solid #B58A2C;
+      border-radius: 30px;
+      padding: 9px 20px;
+      background: #B58A2C;
+      color: #fff;
+      cursor: pointer;
     }
   </style>
 </head>
 
 <body>
 
-  <div id="loading">
-    Carregando carteira...
-  </div>
+  <main id="app">
 
-  <iframe
-    id="carteira"
-    title="Carteira de Identificação da Confraria"
-    allow="clipboard-write"
-    referrerpolicy="no-referrer"
-    style="display:none;">
-  </iframe>
-
-  <div id="erro">
-    <div class="erro-box">
-      <h2>Carteira não carregada</h2>
-      <p>
-        Não foi possível carregar a carteira da Confraria.
-      </p>
-      <p>
-        Tente atualizar a página.
-      </p>
+    <div id="loading">
+      Carregando carteira...
     </div>
-  </div>
+
+    <iframe
+      id="walletFrame"
+      title="Carteira de Identificação da Confraria"
+      allow="clipboard-write"
+      referrerpolicy="no-referrer"
+      style="display:none;">
+    </iframe>
+
+    <div id="error">
+      <div class="box">
+        <h2>Carteira não encontrada</h2>
+
+        <p>
+          Não foi possível carregar a carteira da Confraria.
+        </p>
+
+        <p>
+          Verifique o número informado e tente novamente.
+        </p>
+
+        <button
+          type="button"
+          onclick="window.location.reload()">
+          Tentar novamente
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+<script>
+
+  /*
+   * =========================================================
+   * IDENTIDADE CONFRARIA
+   * =========================================================
+   *
+   * O PWA permanece hospedado no GitHub Pages.
+   *
+   * A carteira é carregada diretamente pelo Web App
+   * do Google Apps Script.
+   *
+   * ESTE É O ENDEREÇO COMPROVADAMENTE FUNCIONAL.
+   *
+   * =========================================================
+   */
+
+  const WEB_APP_URL =
+    "https://script.google.com/macros/s/AKfycbyBiHc666uXQ0npNWBHzyGGVQ79fFbtn93zKyCydZPRySbe7ie3_XpACkzO5zwe_4oO9Q/exec";
 
 
-  <script>
+  /*
+   * =========================================================
+   * NÚMERO DO MEMBRO
+   * =========================================================
+   */
 
-    const WEB_APP =
-      "https://script.google.com/macros/s/AKfycbyBiHc666uX0npNWBHzyGGVQ79fFbtn93zKyCydZPRySbe7ie3_XpACkzO5zwe_4oO9Q/exec";
+  function obterNumeroMembro() {
+
+    const params =
+      new URLSearchParams(window.location.search);
+
+    let numero =
+      params.get("membro");
 
 
-    function obterMembro() {
+    if (!numero) {
 
-      const parametros =
-        new URLSearchParams(window.location.search);
+      numero =
+        localStorage.getItem(
+          "confraria_membro"
+        );
 
-      let membro =
-        parametros.get("membro");
+    }
 
-      if (!membro) {
 
-        membro =
-          localStorage.getItem(
-            "confraria_membro"
-          );
+    if (!numero) {
 
-      }
+      numero = "0001";
 
-      if (!membro) {
+    }
 
-        membro = "0001";
 
-      }
+    numero =
+      String(numero).padStart(4, "0");
 
-      membro =
-        String(membro).padStart(4, "0");
 
-      localStorage.setItem(
-        "confraria_membro",
-        membro
+    localStorage.setItem(
+      "confraria_membro",
+      numero
+    );
+
+
+    return numero;
+
+  }
+
+
+  /*
+   * =========================================================
+   * CARREGAR CARTEIRA
+   * =========================================================
+   */
+
+  function carregarCarteira() {
+
+    const numero =
+      obterNumeroMembro();
+
+
+    const iframe =
+      document.getElementById(
+        "walletFrame"
       );
 
-      return membro;
 
-    }
-
-
-    function carregar() {
-
-      const membro =
-        obterMembro();
+    const loading =
+      document.getElementById(
+        "loading"
+      );
 
 
-      const iframe =
-        document.getElementById(
-          "carteira"
-        );
-
-      const loading =
-        document.getElementById(
-          "loading"
-        );
-
-
-      const url =
-        WEB_APP +
-        "?membro=" +
-        encodeURIComponent(membro) +
-        "&pwa=3c";
-
-
-      iframe.src = url;
-
-
-      iframe.onload = function() {
-
-        loading.style.display =
-          "none";
-
-        iframe.style.display =
-          "block";
-
-      };
-
-
-      /*
-       * O iframe pode carregar através de
-       * redirecionamentos do Google.
-       *
-       * Não usamos API JSONP.
-       * Não usamos callback.
-       * Não usamos api=1.
-       */
-
-      setTimeout(function() {
-
-        loading.style.display =
-          "none";
-
-        iframe.style.display =
-          "block";
-
-      }, 5000);
-
-    }
+    const error =
+      document.getElementById(
+        "error"
+      );
 
 
     /*
-     * Service Worker
+     * Usa EXATAMENTE a rota que está funcionando.
      */
 
-    if ("serviceWorker" in navigator) {
-
-      window.addEventListener(
-        "load",
-        function() {
-
-          navigator.serviceWorker
-            .register(
-              "./service-worker.js"
-            )
-            .catch(function(erro) {
-
-              console.log(
-                "Service Worker:",
-                erro
-              );
-
-            });
-
-        }
-      );
-
-    }
+    const url =
+      WEB_APP_URL +
+      "?membro=" +
+      encodeURIComponent(numero) +
+      "&pwa=3c";
 
 
-    carregar();
+    let carregou = false;
 
-  </script>
+
+    iframe.onload = function() {
+
+      carregou = true;
+
+      loading.style.display =
+        "none";
+
+      error.style.display =
+        "none";
+
+      iframe.style.display =
+        "block";
+
+    };
+
+
+    iframe.onerror = function() {
+
+      loading.style.display =
+        "none";
+
+      iframe.style.display =
+        "none";
+
+      error.style.display =
+        "flex";
+
+    };
+
+
+    iframe.src = url;
+
+
+    /*
+     * Se o navegador não disparar o
+     * onload, ainda mantém o iframe visível.
+     */
+
+    setTimeout(function() {
+
+      if (!carregou) {
+
+        loading.style.display =
+          "none";
+
+        iframe.style.display =
+          "block";
+
+      }
+
+    }, 12000);
+
+  }
+
+
+  /*
+   * =========================================================
+   * SERVICE WORKER
+   * =========================================================
+   */
+
+  if ("serviceWorker" in navigator) {
+
+    window.addEventListener(
+      "load",
+      function() {
+
+        navigator.serviceWorker
+          .register(
+            "./service-worker.js?v=7"
+          )
+          .catch(function(error) {
+
+            console.log(
+              "Service Worker:",
+              error
+            );
+
+          });
+
+      }
+    );
+
+  }
+
+
+  /*
+   * =========================================================
+   * INICIAR
+   * =========================================================
+   */
+
+  carregarCarteira();
+
+</script>
 
 </body>
 </html>
