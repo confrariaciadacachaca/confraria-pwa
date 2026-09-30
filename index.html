@@ -3,10 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Identidade Confraria</title>
 
-  <link rel="manifest" href="./manifest.json?v=7">
+  <link rel="manifest" href="./manifest.json?v=8">
+
   <meta name="theme-color" content="#111111">
+
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -116,6 +119,7 @@
 
     <div id="error">
       <div class="box">
+
         <h2>Carteira não encontrada</h2>
 
         <p>
@@ -131,6 +135,7 @@
           onclick="window.location.reload()">
           Tentar novamente
         </button>
+
       </div>
     </div>
 
@@ -138,30 +143,9 @@
 
 <script>
 
-  /*
-   * =========================================================
-   * IDENTIDADE CONFRARIA
-   * =========================================================
-   *
-   * O PWA permanece hospedado no GitHub Pages.
-   *
-   * A carteira é carregada diretamente pelo Web App
-   * do Google Apps Script.
-   *
-   * ESTE É O ENDEREÇO COMPROVADAMENTE FUNCIONAL.
-   *
-   * =========================================================
-   */
-
   const WEB_APP_URL =
-    "https://script.google.com/macros/s/AKfycbyBiHc666uXQ0npNWBHzyGGVQ79fFbtn93zKyCydZPRySbe7ie3_XpACkzO5zwe_4oO9Q/exec";
+    "https://script.google.com/macros/s/AKfycbyBiHc666uX0npNWBHzyGGVQ79fFbtn93zKyCydZPRySbe7ie3_XpACkzO5zwe_4oO9Q/exec";
 
-
-  /*
-   * =========================================================
-   * NÚMERO DO MEMBRO
-   * =========================================================
-   */
 
   function obterNumeroMembro() {
 
@@ -170,7 +154,6 @@
 
     let numero =
       params.get("membro");
-
 
     if (!numero) {
 
@@ -181,69 +164,47 @@
 
     }
 
-
     if (!numero) {
-
       numero = "0001";
-
     }
-
 
     numero =
       String(numero).padStart(4, "0");
-
 
     localStorage.setItem(
       "confraria_membro",
       numero
     );
 
-
     return numero;
-
   }
 
-
-  /*
-   * =========================================================
-   * CARREGAR CARTEIRA
-   * =========================================================
-   */
 
   function carregarCarteira() {
 
     const numero =
       obterNumeroMembro();
 
-
     const iframe =
       document.getElementById(
         "walletFrame"
       );
-
 
     const loading =
       document.getElementById(
         "loading"
       );
 
-
     const error =
       document.getElementById(
         "error"
       );
 
-
-    /*
-     * Usa EXATAMENTE a rota que está funcionando.
-     */
-
     const url =
       WEB_APP_URL +
       "?membro=" +
       encodeURIComponent(numero) +
-      "&pwa=3c";
-
+      "&pwa=4";
 
     let carregou = false;
 
@@ -260,7 +221,6 @@
 
       iframe.style.display =
         "block";
-
     };
 
 
@@ -274,17 +234,11 @@
 
       error.style.display =
         "flex";
-
     };
 
 
     iframe.src = url;
 
-
-    /*
-     * Se o navegador não disparar o
-     * onload, ainda mantém o iframe visível.
-     */
 
     setTimeout(function() {
 
@@ -295,7 +249,6 @@
 
         iframe.style.display =
           "block";
-
       }
 
     }, 12000);
@@ -304,9 +257,7 @@
 
 
   /*
-   * =========================================================
-   * SERVICE WORKER
-   * =========================================================
+   * Registro do Service Worker
    */
 
   if ("serviceWorker" in navigator) {
@@ -317,7 +268,7 @@
 
         navigator.serviceWorker
           .register(
-            "./service-worker.js?v=7"
+            "./service-worker.js?v=8"
           )
           .catch(function(error) {
 
@@ -335,9 +286,7 @@
 
 
   /*
-   * =========================================================
-   * INICIAR
-   * =========================================================
+   * Inicia a carteira
    */
 
   carregarCarteira();
