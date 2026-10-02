@@ -1,296 +1,2109 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Identidade Confraria</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-  <link rel="manifest" href="./manifest.json?v=8">
+  <title>
+    Identidade Confraria
+  </title>
 
-  <meta name="theme-color" content="#111111">
+  <link
+    rel="manifest"
+    href="./manifest.json?v=9"
+  >
 
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Identidade Confraria">
+  <meta
+    name="theme-color"
+    content="#000000"
+  >
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+  <meta
+    name="mobile-web-app-capable"
+    content="yes"
+  >
 
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #111111;
-      font-family: Arial, Helvetica, sans-serif;
-    }
+  <meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+  >
 
-    #app {
-      width: 100%;
-      height: 100%;
-      min-height: 100vh;
-      display: flex;
-      align-items: stretch;
-      justify-content: center;
-      background: #111111;
-    }
+  <meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent"
+  >
 
-    #walletFrame {
-      width: 100%;
-      height: 100%;
-      min-height: 100vh;
-      border: 0;
-      display: block;
-      background: #111111;
-    }
-
-    #loading,
-    #error {
-      position: fixed;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      text-align: center;
-      color: #F5F1E8;
-      background: #111111;
-      z-index: 10;
-    }
-
-    #error {
-      display: none;
-    }
-
-    .box {
-      max-width: 440px;
-      padding: 28px;
-      border-radius: 16px;
-      background: #F5F1E8;
-      color: #123A2F;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
-    }
-
-    .box h2 {
-      margin: 0 0 10px;
-      font-size: 20px;
-    }
-
-    .box p {
-      margin: 7px 0;
-      color: #6B4A2B;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .box button {
-      margin-top: 12px;
-      border: 1px solid #B58A2C;
-      border-radius: 30px;
-      padding: 9px 20px;
-      background: #B58A2C;
-      color: #fff;
-      cursor: pointer;
-    }
-  </style>
-</head>
-
-<body>
-
-  <main id="app">
-
-    <div id="loading">
-      Carregando carteira...
-    </div>
-
-    <iframe
-      id="walletFrame"
-      title="Carteira de Identificação da Confraria"
-      allow="clipboard-write"
-      style="display:none;">
-    </iframe>
-
-    <div id="error">
-      <div class="box">
-
-        <h2>Carteira não encontrada</h2>
-
-        <p>
-          Não foi possível carregar a carteira da Confraria.
-        </p>
-
-        <p>
-          Verifique o número informado e tente novamente.
-        </p>
-
-        <button
-          type="button"
-          onclick="window.location.reload()">
-          Tentar novamente
-        </button>
-
-      </div>
-    </div>
-
-  </main>
-
-<script>
-
-  const WEB_APP_URL =
-    "https://script.google.com/macros/s/AKfycbyBiHc666uXQ0npNWBHzyGGVQ79fFbtn93zKyCydZPRySbe7ie3_XpACkzO5zwe_4oO9Q/exec";
+  <meta
+    name="apple-mobile-web-app-title"
+    content="Identidade Confraria"
+  >
 
 
-  function obterNumeroMembro() {
+<style>
 
-    const params =
-      new URLSearchParams(window.location.search);
+/* =====================================================
+   RESET
+   ===================================================== */
 
-    let numero =
-      params.get("membro");
+* {
+  box-sizing: border-box;
+}
 
-    if (!numero) {
 
-      numero =
-        localStorage.getItem(
-          "confraria_membro"
-        );
+html,
+body {
 
-    }
+  margin: 0;
+  padding: 0;
 
-    if (!numero) {
-      numero = "0001";
-    }
+  width: 100%;
+  min-height: 100%;
 
-    numero =
-      String(numero).padStart(4, "0");
+}
 
-    localStorage.setItem(
-      "confraria_membro",
-      numero
+
+body {
+
+  background: #F5F1E8;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  color: #123A2F;
+
+  overflow-x: hidden;
+
+}
+
+
+/* =====================================================
+   APP
+   ===================================================== */
+
+#app {
+
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: center;
+
+  padding: 30px 15px;
+
+}
+
+
+/* =====================================================
+   CARTEIRA
+   ===================================================== */
+
+.area-carteira {
+
+  width: 100%;
+
+  max-width: 760px;
+
+  margin: 0 auto;
+
+}
+
+
+.carteira {
+
+  width: 100%;
+
+  aspect-ratio: 1.586 / 1;
+
+  position: relative;
+
+  perspective: 1200px;
+
+}
+
+
+.cartao {
+
+  width: 100%;
+  height: 100%;
+
+  position: relative;
+
+}
+
+
+.face {
+
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: #F5F1E8;
+
+  border:
+    1px solid #D9D0BF;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.12);
+
+  overflow: hidden;
+
+  backface-visibility: hidden;
+
+}
+
+
+/* =====================================================
+   FRENTE
+   ===================================================== */
+
+.frente {
+
+  display: flex;
+
+  flex-direction: column;
+
+}
+
+
+/* =====================================================
+   CABEÇALHO
+   ===================================================== */
+
+.cabecalho {
+
+  position: relative;
+
+  z-index: 2;
+
+  padding:
+    18px 25px 13px;
+
+  text-align: center;
+
+  border-bottom:
+    1px solid #D9D0BF;
+
+}
+
+
+.titulo {
+
+  font-size: 19px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.15px;
+
+  color: #123A2F;
+
+  white-space: nowrap;
+
+}
+
+
+.subtitulo {
+
+  margin-top: 6px;
+
+  font-size: 10px;
+
+  letter-spacing: 1.3px;
+
+  color: #B58A2C;
+
+}
+
+
+/* =====================================================
+   CORPO
+   ===================================================== */
+
+.corpo {
+
+  position: relative;
+
+  z-index: 2;
+
+  flex: 1;
+
+  display: grid;
+
+  grid-template-columns:
+    31% 41% 28%;
+
+  align-items: center;
+
+  padding:
+    18px 25px 25px;
+
+  overflow: hidden;
+
+
+  background:
+
+    linear-gradient(
+      146deg,
+      transparent 0%,
+      transparent 47%,
+      #B58A2C 47%,
+      #B58A2C 52%,
+      transparent 52%
+    )
+    top left / 145px 105px no-repeat,
+
+
+    linear-gradient(
+      326deg,
+      transparent 0%,
+      transparent 47%,
+      #B58A2C 47%,
+      #B58A2C 52%,
+      transparent 52%
+    )
+    bottom right / 145px 105px no-repeat;
+
+}
+
+
+.corpo::before,
+.corpo::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 145px;
+  height: 105px;
+
+  pointer-events: none;
+
+  z-index: 0;
+
+}
+
+
+.corpo::before {
+
+  top: 0;
+  left: 0;
+
+  background: #123A2F;
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 0,
+      0 100%
     );
 
-    return numero;
+}
+
+
+.corpo::after {
+
+  right: 0;
+  bottom: 0;
+
+  background: #123A2F;
+
+  clip-path:
+    polygon(
+      100% 100%,
+      0 100%,
+      100% 0
+    );
+
+}
+
+
+.coluna-foto,
+.coluna-central,
+.coluna-direita {
+
+  position: relative;
+
+  z-index: 1;
+
+}
+
+
+/* =====================================================
+   FOTO
+   ===================================================== */
+
+.coluna-foto {
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+
+  transform:
+    translateX(18px);
+
+}
+
+
+.foto {
+
+  width: 180px;
+  height: 205px;
+
+  object-fit: cover;
+
+  object-position: center center;
+
+  border-radius: 11px;
+
+  border:
+    2px solid #B58A2C;
+
+  display: block;
+
+  max-width: 100%;
+
+  box-shadow:
+    0 6px 16px rgba(0,0,0,0.16);
+
+}
+
+
+.foto.vertical {
+
+  object-position:
+    center 20%;
+
+}
+
+
+.foto.vertical-extrema {
+
+  object-position:
+    center 15%;
+
+}
+
+
+.foto.horizontal {
+
+  object-position:
+    center center;
+
+}
+
+
+.foto.quadrada {
+
+  object-position:
+    center center;
+
+}
+
+
+.sem-foto {
+
+  width: 180px;
+  height: 205px;
+
+  border:
+    2px solid #B58A2C;
+
+  border-radius: 11px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #8A8377;
+
+  font-size: 13px;
+
+  max-width: 100%;
+
+  background: #EFE8DA;
+
+}
+
+
+/* =====================================================
+   COLUNA CENTRAL
+   ===================================================== */
+
+.coluna-central {
+
+  text-align: center;
+
+  padding:
+    0 18px;
+
+  transform:
+    translateY(-2px);
+
+  min-width: 0;
+
+  overflow: hidden;
+
+}
+
+
+.nome {
+
+  font-size: 29px;
+
+  font-weight: 700;
+
+  color: #123A2F;
+
+  letter-spacing:
+    0.25px;
+
+  line-height:
+    1.12;
+
+  width: 100%;
+
+  max-width: 100%;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: clip;
+
+  margin: 0 auto;
+
+}
+
+
+.cargo {
+
+  margin-top: 8px;
+
+  font-size: 18px;
+
+  color: #333333;
+
+  line-height: 1.2;
+
+}
+
+
+.numero {
+
+  margin-top: 10px;
+
+  font-size: 14px;
+
+  color: #806C51;
+
+}
+
+
+.status {
+
+  display: inline-block;
+
+  margin-top: 15px;
+
+  padding:
+    7px 20px;
+
+  border-radius: 20px;
+
+  background: #DCEEE6;
+
+  color: #12614D;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.6px;
+
+}
+
+
+.lema {
+
+  margin-top: 15px;
+
+  font-size: 10px;
+
+  letter-spacing: 1.05px;
+
+  color: #B58A2C;
+
+}
+
+
+/* =====================================================
+   ESPAÇO DA LOGO
+   ===================================================== */
+
+.logo-frente {
+
+  display: block;
+
+  width: auto;
+  height: auto;
+
+  max-width: 145px;
+  max-height: 68px;
+
+  object-fit: contain;
+
+  margin:
+    17px auto 0;
+
+}
+
+
+/* =====================================================
+   COLUNA DIREITA
+   ===================================================== */
+
+.coluna-direita {
+
+  border-left:
+    1px solid #D9D0BF;
+
+  padding-left: 22px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  min-width: 0;
+
+}
+
+
+.dados {
+
+  width: 100%;
+
+}
+
+
+.linha {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  min-height: 37px;
+
+  border-bottom:
+    1px solid #E3DDD2;
+
+  font-size: 12px;
+
+  gap: 10px;
+
+}
+
+
+.rotulo {
+
+  color: #806C51;
+
+  white-space: nowrap;
+
+}
+
+
+.valor {
+
+  color: #123A2F;
+
+  font-weight: 600;
+
+  text-align: right;
+
+  white-space: nowrap;
+
+}
+
+
+/* =====================================================
+   QR
+   ===================================================== */
+
+.qr-area {
+
+  margin-top: 18px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+}
+
+
+.qr {
+
+  width: 90px;
+  height: 90px;
+
+  object-fit: contain;
+
+  border:
+    1px solid #D9D0BF;
+
+  border-radius: 3px;
+
+  background: #FFFFFF;
+
+  padding: 2px;
+
+  display: block;
+
+}
+
+
+.qr-texto {
+
+  margin-top: 3px;
+
+  font-size: 7px;
+
+  letter-spacing: 0.45px;
+
+  color: #6F685D;
+
+  white-space: nowrap;
+
+}
+
+
+/* =====================================================
+   VERSO
+   ===================================================== */
+
+.verso {
+
+  display: none;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-direction: column;
+
+  text-align: center;
+
+  background: #F5F1E8;
+
+}
+
+
+.verso::before,
+.verso::after {
+
+  content: "";
+
+  position: absolute;
+
+  pointer-events: none;
+
+}
+
+
+.verso::before {
+
+  top: -115px;
+  left: -90px;
+
+  width: 260px;
+  height: 225px;
+
+  background: #123A2F;
+
+  transform:
+    rotate(-34deg);
+
+  box-shadow:
+    24px 16px 0 #B58A2C;
+
+}
+
+
+.verso::after {
+
+  right: -95px;
+  bottom: -110px;
+
+  width: 260px;
+  height: 225px;
+
+  background: #123A2F;
+
+  transform:
+    rotate(-34deg);
+
+  box-shadow:
+    -24px -16px 0 #B58A2C;
+
+}
+
+
+.logo-verso {
+
+  position: relative;
+
+  z-index: 2;
+
+  display: block;
+
+  width: auto;
+  height: auto;
+
+  max-width: 320px;
+  max-height: 180px;
+
+  object-fit: contain;
+
+}
+
+
+.lema-verso {
+
+  position: relative;
+
+  z-index: 2;
+
+  margin-top: 18px;
+
+  color: #B58A2C;
+
+  font-size: 13px;
+
+  letter-spacing: 2px;
+
+}
+
+
+/* =====================================================
+   BOTÃO
+   ===================================================== */
+
+.botao {
+
+  display: block;
+
+  margin:
+    16px auto 0;
+
+  padding:
+    8px 18px;
+
+  border:
+    1px solid #B58A2C;
+
+  border-radius: 20px;
+
+  background: transparent;
+
+  color: #806C51;
+
+  font-size: 11px;
+
+  cursor: pointer;
+
+}
+
+
+.botao:hover {
+
+  background:
+    #EFE8DA;
+
+}
+
+
+/* =====================================================
+   CARREGANDO
+   ===================================================== */
+
+#loading {
+
+  width: 100%;
+
+  max-width: 430px;
+
+  margin:
+    60px auto;
+
+  padding:
+    35px 25px;
+
+  background:
+    #F5F1E8;
+
+  border:
+    1px solid #D9D0BF;
+
+  border-radius:
+    18px;
+
+  text-align:
+    center;
+
+  color:
+    #123A2F;
+
+  box-shadow:
+    0 10px 25px
+    rgba(0,0,0,0.10);
+
+}
+
+
+/* =====================================================
+   ERRO
+   ===================================================== */
+
+.erro {
+
+  width: 100%;
+
+  max-width: 430px;
+
+  margin:
+    60px auto;
+
+  padding:
+    35px 25px;
+
+  background:
+    #F5F1E8;
+
+  border:
+    1px solid #D9D0BF;
+
+  border-radius:
+    18px;
+
+  text-align:
+    center;
+
+  box-shadow:
+    0 10px 25px
+    rgba(0,0,0,0.10);
+
+}
+
+
+.erro h2 {
+
+  margin:
+    0 0 12px;
+
+  color:
+    #123A2F;
+
+  font-size:
+    21px;
+
+}
+
+
+.erro p {
+
+  color:
+    #666666;
+
+  font-size:
+    14px;
+
+  line-height:
+    1.5;
+
+}
+
+
+/* =====================================================
+   CELULAR
+   ===================================================== */
+
+@media (max-width: 650px) {
+
+  #app {
+
+    padding:
+      20px 10px;
+
   }
 
 
-  function carregarCarteira() {
+  .area-carteira {
+
+    max-width:
+      100%;
+
+  }
+
+
+  .titulo {
+
+    font-size:
+      14px;
+
+  }
+
+
+  .subtitulo {
+
+    font-size:
+      8px;
+
+  }
+
+
+  .corpo {
+
+    grid-template-columns:
+      27% 45% 28%;
+
+    padding:
+      13px 12px;
+
+    background:
+
+      linear-gradient(
+        146deg,
+        transparent 0%,
+        transparent 47%,
+        #B58A2C 47%,
+        #B58A2C 52%,
+        transparent 52%
+      )
+      top left / 110px 82px no-repeat,
+
+
+      linear-gradient(
+        326deg,
+        transparent 0%,
+        transparent 47%,
+        #B58A2C 47%,
+        #B58A2C 52%,
+        transparent 52%
+      )
+      bottom right / 110px 82px no-repeat;
+
+  }
+
+
+  .corpo::before,
+  .corpo::after {
+
+    width:
+      110px;
+
+    height:
+      82px;
+
+  }
+
+
+  .coluna-foto {
+
+    transform:
+      translateX(8px);
+
+  }
+
+
+  .foto,
+  .sem-foto {
+
+    width:
+      82px;
+
+    height:
+      105px;
+
+  }
+
+
+  .coluna-central {
+
+    padding:
+      0 7px;
+
+  }
+
+
+  .nome {
+
+    font-size:
+      17px;
+
+  }
+
+
+  .cargo {
+
+    font-size:
+      12px;
+
+  }
+
+
+  .numero {
+
+    font-size:
+      9px;
+
+    margin-top:
+      6px;
+
+  }
+
+
+  .status {
+
+    font-size:
+      8px;
+
+    padding:
+      5px 11px;
+
+  }
+
+
+  .lema {
+
+    font-size:
+      7px;
+
+    margin-top:
+      10px;
+
+  }
+
+
+  .coluna-direita {
+
+    padding-left:
+      9px;
+
+  }
+
+
+  .linha {
+
+    min-height:
+      23px;
+
+    font-size:
+      7px;
+
+  }
+
+
+  .logo-frente {
+
+    max-width:
+      78px;
+
+    max-height:
+      34px;
+
+    margin-top:
+      10px;
+
+  }
+
+
+  .qr {
+
+    width:
+      62px;
+
+    height:
+      62px;
+
+  }
+
+
+  .qr-texto {
+
+    font-size:
+      6px;
+
+  }
+
+
+  .logo-verso {
+
+    max-width:
+      70%;
+
+    max-height:
+      120px;
+
+  }
+
+
+  .lema-verso {
+
+    font-size:
+      8px;
+
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div id="app">
+
+  <div id="loading">
+    Carregando carteira...
+  </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   CONFIGURAÇÃO
+   ===================================================== */
+
+const WEB_APP_URL =
+  "https://script.google.com/macros/s/AKfycbyBiHc666uXQ0npNWBHzyGGVQ79fFbtn93zKyCydZPRySbe7ie3_XpACkzO5zwe_4oO9Q/exec";
+
+
+/* =====================================================
+   OBTÉM NÚMERO DO MEMBRO
+   ===================================================== */
+
+function obterNumeroMembro() {
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+
+  let numero =
+    params.get("membro");
+
+
+  if (!numero) {
+
+    numero =
+      localStorage.getItem(
+        "confraria_membro"
+      );
+
+  }
+
+
+  if (!numero) {
+
+    numero =
+      "0001";
+
+  }
+
+
+  numero =
+    String(numero)
+      .trim()
+      .padStart(4, "0");
+
+
+  localStorage.setItem(
+    "confraria_membro",
+    numero
+  );
+
+
+  return numero;
+
+}
+
+
+/* =====================================================
+   BUSCA DADOS
+   ===================================================== */
+
+async function buscarDadosMembro(numero) {
+
+  const url =
+    WEB_APP_URL +
+    "?dados=" +
+    encodeURIComponent(numero) +
+    "&pwa=5";
+
+
+  const resposta =
+    await fetch(
+      url,
+      {
+        method: "GET",
+        cache: "no-store"
+      }
+    );
+
+
+  if (!resposta.ok) {
+
+    throw new Error(
+      "Não foi possível carregar os dados."
+    );
+
+  }
+
+
+  const dados =
+    await resposta.json();
+
+
+  if (
+    !dados ||
+    !dados.encontrado
+  ) {
+
+    throw new Error(
+      dados &&
+      dados.mensagem
+        ? dados.mensagem
+        : "Carteira não encontrada."
+    );
+
+  }
+
+
+  return dados;
+
+}
+
+
+/* =====================================================
+   CRIA A CARTEIRA
+   ===================================================== */
+
+function criarCarteira(membro) {
+
+  const app =
+    document.getElementById(
+      "app"
+    );
+
+
+  app.innerHTML = "";
+
+
+  const area =
+    document.createElement(
+      "div"
+    );
+
+  area.className =
+    "area-carteira";
+
+
+  area.innerHTML = `
+
+    <div class="carteira">
+
+      <div class="cartao">
+
+
+        <!-- =========================================
+             FRENTE
+             ========================================= -->
+
+        <div
+          class="face frente"
+          id="frente"
+        >
+
+
+          <div class="cabecalho">
+
+            <div class="titulo">
+              CARTEIRA DE IDENTIFICAÇÃO DA CONFRARIA
+            </div>
+
+            <div class="subtitulo">
+              CONFRARIA COMPANHIA DA CACHAÇA
+            </div>
+
+          </div>
+
+
+          <div class="corpo">
+
+
+            <!-- FOTO -->
+
+            <div class="coluna-foto">
+
+              ${
+                membro.foto
+
+                  ? `
+
+                    <img
+                      class="foto"
+                      id="fotoMembro"
+                      src="${membro.foto}"
+                      alt="Foto do associado"
+                    >
+
+                  `
+
+                  : `
+
+                    <div class="sem-foto">
+                      FOTO
+                    </div>
+
+                  `
+              }
+
+            </div>
+
+
+            <!-- CENTRAL -->
+
+            <div class="coluna-central">
+
+
+              <div
+                class="nome"
+                id="nomeConfrade"
+              >
+                ${escapeHtml(
+                  membro.nome || ""
+                )}
+              </div>
+
+
+              ${
+                membro.cargo
+
+                  ? `
+
+                    <div class="cargo">
+                      ${escapeHtml(
+                        membro.cargo
+                      )}
+                    </div>
+
+                  `
+
+                  : ""
+              }
+
+
+              <div class="numero">
+
+                ${escapeHtml(
+                  membro.categoria || ""
+                )}
+
+                nº
+
+                ${escapeHtml(
+                  membro.numero || ""
+                )}
+
+              </div>
+
+
+              ${
+                membro.status
+
+                  ? `
+
+                    <div class="status">
+
+                      ${escapeHtml(
+                        membro.status
+                      )}
+
+                    </div>
+
+                  `
+
+                  : ""
+              }
+
+
+              <div class="lema">
+                HONRA • TRADIÇÃO • PAIXÃO
+              </div>
+
+
+              <!--
+
+              A LOGO OFICIAL SERÁ INSERIDA
+              NA PRÓXIMA ETAPA.
+
+              NÃO ESTAMOS USANDO UMA LOGO
+              INVENTADA OU DIFERENTE.
+
+              -->
+
+            </div>
+
+
+            <!-- DIREITA -->
+
+            <div class="coluna-direita">
+
+
+              <div class="dados">
+
+
+                ${
+                  membro.condicao
+
+                    ? `
+
+                      <div class="linha">
+
+                        <span class="rotulo">
+                          Condição
+                        </span>
+
+                        <span class="valor">
+                          ${escapeHtml(
+                            membro.condicao
+                          )}
+                        </span>
+
+                      </div>
+
+                    `
+
+                    : ""
+                }
+
+
+                ${
+                  membro.bienio
+
+                    ? `
+
+                      <div class="linha">
+
+                        <span class="rotulo">
+                          Biênio
+                        </span>
+
+                        <span class="valor">
+                          ${escapeHtml(
+                            membro.bienio
+                          )}
+                        </span>
+
+                      </div>
+
+                    `
+
+                    : ""
+                }
+
+
+                ${
+                  membro.ingresso
+
+                    ? `
+
+                      <div class="linha">
+
+                        <span class="rotulo">
+                          Ingresso
+                        </span>
+
+                        <span class="valor">
+                          ${escapeHtml(
+                            membro.ingresso
+                          )}
+                        </span>
+
+                      </div>
+
+                    `
+
+                    : ""
+                }
+
+
+                ${
+                  membro.validade
+
+                    ? `
+
+                      <div class="linha">
+
+                        <span class="rotulo">
+                          Validade
+                        </span>
+
+                        <span class="valor">
+                          ${escapeHtml(
+                            membro.validade
+                          )}
+                        </span>
+
+                      </div>
+
+                    `
+
+                    : ""
+                }
+
+
+              </div>
+
+
+              ${
+                membro.qr
+
+                  ? `
+
+                    <div class="qr-area">
+
+                      <img
+                        class="qr"
+                        src="${membro.qr}"
+                        alt="QR Code de verificação"
+                      >
+
+                      <div class="qr-texto">
+                        VERIFIQUE A AUTENTICIDADE
+                      </div>
+
+                    </div>
+
+                  `
+
+                  : ""
+              }
+
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+
+        <!-- =========================================
+             VERSO
+             ========================================= -->
+
+        <div
+          class="face verso"
+          id="verso"
+        >
+
+          <div
+            class="lema-verso"
+          >
+            HONRA • TRADIÇÃO • PAIXÃO
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+    <button
+      class="botao"
+      id="botaoLado"
+      type="button"
+    >
+      Ver verso
+    </button>
+
+  `;
+
+
+  app.appendChild(
+    area
+  );
+
+
+  const botao =
+    document.getElementById(
+      "botaoLado"
+    );
+
+
+  botao.addEventListener(
+    "click",
+    alternarLado
+  );
+
+
+  ajustarNome();
+
+  ajustarFoto();
+
+}
+
+
+/* =====================================================
+   ESCAPA HTML
+   ===================================================== */
+
+function escapeHtml(valor) {
+
+  return String(
+    valor || ""
+  )
+
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+
+  .replace(
+    /</g,
+    "&lt;"
+  )
+
+  .replace(
+    />/g,
+    "&gt;"
+  )
+
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+/* =====================================================
+   AJUSTE DA FOTO
+   ===================================================== */
+
+function ajustarFoto() {
+
+  const foto =
+    document.getElementById(
+      "fotoMembro"
+    );
+
+
+  if (!foto) return;
+
+
+  function analisarFoto() {
+
+    const largura =
+      foto.naturalWidth;
+
+
+    const altura =
+      foto.naturalHeight;
+
+
+    if (
+      !largura ||
+      !altura
+    ) {
+
+      return;
+
+    }
+
+
+    const proporcao =
+      largura / altura;
+
+
+    foto.classList.remove(
+      "vertical",
+      "vertical-extrema",
+      "horizontal",
+      "quadrada"
+    );
+
+
+    if (
+      proporcao < 0.62
+    ) {
+
+      foto.classList.add(
+        "vertical-extrema"
+      );
+
+    }
+
+    else if (
+      proporcao < 0.90
+    ) {
+
+      foto.classList.add(
+        "vertical"
+      );
+
+    }
+
+    else if (
+      proporcao > 1.15
+    ) {
+
+      foto.classList.add(
+        "horizontal"
+      );
+
+    }
+
+    else {
+
+      foto.classList.add(
+        "quadrada"
+      );
+
+    }
+
+  }
+
+
+  if (
+    foto.complete
+  ) {
+
+    analisarFoto();
+
+  }
+
+
+  foto.addEventListener(
+    "load",
+    analisarFoto,
+    {
+      once: true
+    }
+  );
+
+}
+
+
+/* =====================================================
+   AJUSTE DO NOME
+   ===================================================== */
+
+function ajustarNome() {
+
+  const nome =
+    document.getElementById(
+      "nomeConfrade"
+    );
+
+
+  if (!nome) return;
+
+
+  let tamanho =
+    window.innerWidth <= 650
+      ? 17
+      : 29;
+
+
+  nome.style.fontSize =
+    tamanho + "px";
+
+
+  nome.style.whiteSpace =
+    "nowrap";
+
+
+  while (
+
+    nome.scrollWidth >
+    nome.clientWidth &&
+
+    tamanho >
+    12
+
+  ) {
+
+    tamanho--;
+
+    nome.style.fontSize =
+      tamanho + "px";
+
+  }
+
+
+  if (
+    nome.scrollWidth >
+    nome.clientWidth
+  ) {
+
+    nome.style.whiteSpace =
+      "normal";
+
+    nome.style.overflow =
+      "visible";
+
+    nome.style.lineHeight =
+      "1.08";
+
+  }
+
+}
+
+
+/* =====================================================
+   FRENTE / VERSO
+   ===================================================== */
+
+function alternarLado() {
+
+  const frente =
+    document.getElementById(
+      "frente"
+    );
+
+
+  const verso =
+    document.getElementById(
+      "verso"
+    );
+
+
+  const botao =
+    document.getElementById(
+      "botaoLado"
+    );
+
+
+  if (
+    frente.style.display !==
+    "none"
+  ) {
+
+    frente.style.display =
+      "none";
+
+
+    verso.style.display =
+      "flex";
+
+
+    botao.textContent =
+      "Ver frente";
+
+  }
+
+  else {
+
+    frente.style.display =
+      "flex";
+
+
+    verso.style.display =
+      "none";
+
+
+    botao.textContent =
+      "Ver verso";
+
+
+    ajustarNome();
+
+    ajustarFoto();
+
+  }
+
+}
+
+
+/* =====================================================
+   ERRO
+   ===================================================== */
+
+function mostrarErro(mensagem) {
+
+  const app =
+    document.getElementById(
+      "app"
+    );
+
+
+  app.innerHTML = `
+
+    <div class="erro">
+
+      <h2>
+        Carteira não encontrada
+      </h2>
+
+      <p>
+        ${escapeHtml(
+          mensagem ||
+          "Não foi possível carregar a carteira."
+        )}
+      </p>
+
+      <p>
+        Verifique o número informado
+        e tente novamente.
+      </p>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =====================================================
+   CARREGAMENTO PRINCIPAL
+   ===================================================== */
+
+async function carregarCarteira() {
+
+  try {
 
     const numero =
       obterNumeroMembro();
 
-    const iframe =
-      document.getElementById(
-        "walletFrame"
+
+    const membro =
+      await buscarDadosMembro(
+        numero
       );
 
-    const loading =
-      document.getElementById(
-        "loading"
-      );
 
-    const error =
-      document.getElementById(
-        "error"
-      );
+    criarCarteira(
+      membro
+    );
 
-    const url =
-      WEB_APP_URL +
-      "?membro=" +
-      encodeURIComponent(numero) +
-      "&pwa=4";
-
-    let carregou = false;
-
-
-    iframe.onload = function() {
-
-      carregou = true;
-
-      loading.style.display =
-        "none";
-
-      error.style.display =
-        "none";
-
-      iframe.style.display =
-        "block";
-    };
-
-
-    iframe.onerror = function() {
-
-      loading.style.display =
-        "none";
-
-      iframe.style.display =
-        "none";
-
-      error.style.display =
-        "flex";
-    };
-
-
-    iframe.src = url;
-
-
-    setTimeout(function() {
-
-      if (!carregou) {
-
-        loading.style.display =
-          "none";
-
-        iframe.style.display =
-          "block";
-      }
-
-    }, 12000);
 
   }
 
+  catch (erro) {
 
-  /*
-   * Registro do Service Worker
-   */
+    console.error(
+      erro
+    );
 
-  if ("serviceWorker" in navigator) {
 
-    window.addEventListener(
-      "load",
-      function() {
-
-        navigator.serviceWorker
-          .register(
-            "./service-worker.js?v=8"
-          )
-          .catch(function(error) {
-
-            console.log(
-              "Service Worker:",
-              error
-            );
-
-          });
-
-      }
+    mostrarErro(
+      erro.message
     );
 
   }
 
+}
 
-  /*
-   * Inicia a carteira
-   */
 
-  carregarCarteira();
+/* =====================================================
+   SERVICE WORKER
+   ===================================================== */
+
+if (
+  "serviceWorker" in navigator
+) {
+
+  window.addEventListener(
+    "load",
+    function() {
+
+      navigator.serviceWorker
+        .register(
+          "./service-worker.js?v=9"
+        )
+
+        .catch(
+          function(erro) {
+
+            console.log(
+              "Service Worker:",
+              erro
+            );
+
+          }
+        );
+
+    }
+  );
+
+}
+
+
+/* =====================================================
+   REDIMENSIONAMENTO
+   ===================================================== */
+
+window.addEventListener(
+  "resize",
+  function() {
+
+    ajustarNome();
+
+    ajustarFoto();
+
+  }
+);
+
+
+/* =====================================================
+   INICIA
+   ===================================================== */
+
+carregarCarteira();
 
 </script>
+
 
 </body>
 </html>
