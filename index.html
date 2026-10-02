@@ -111,7 +111,7 @@ body {
 
   width: 100%;
 
-  max-width: 760px;
+  max-width: 930px;
 
   margin: 0 auto;
 
@@ -886,6 +886,35 @@ body {
 
 
 /* =====================================================
+   TENTAR ABRIR NA HORIZONTAL
+   ===================================================== */
+
+async function abrirNaHorizontal() {
+
+  try {
+
+    if (
+      screen.orientation &&
+      typeof screen.orientation.lock === "function"
+    ) {
+
+      await screen.orientation.lock("landscape");
+      return;
+
+    }
+
+  } catch (erro) {
+    // Alguns aparelhos/navegadores não permitem o bloqueio.
+  }
+
+  alert(
+    "O aparelho não permitiu alterar a orientação automaticamente.\n\nVire o celular de lado para usar a carteira na horizontal."
+  );
+
+}
+
+
+/* =====================================================
    ERRO
    ===================================================== */
 
@@ -1200,7 +1229,7 @@ body {
       100%,
       calc((100dvh - 105px) * 1.586)
     );
-    max-width: 760px;
+    max-width: 930px;
   }
 
   .carteira {
@@ -1351,10 +1380,11 @@ body {
 
   .area-carteira {
     width: min(
-      100%,
-      calc((100dvh - 78px) * 1.586)
+      96vw,
+      calc((100dvh - 78px) * 1.586),
+      930px
     );
-    max-width: 760px;
+    max-width: 930px;
   }
 
   .cabecalho {
@@ -1761,15 +1791,12 @@ function criarCarteira(membro) {
               </div>
 
 
-              <!--
-
-              A LOGO OFICIAL SERÁ INSERIDA
-              NA PRÓXIMA ETAPA.
-
-              NÃO ESTAMOS USANDO UMA LOGO
-              INVENTADA OU DIFERENTE.
-
-              -->
+              <!-- LOGO OFICIAL DA CONFRARIA -->
+              <img
+                class="logo-frente"
+                src="./logo-confraria.png"
+                alt="Confraria Companhia da Cachaça"
+              >
 
             </div>
 
@@ -1928,6 +1955,12 @@ function criarCarteira(membro) {
           id="verso"
         >
 
+          <img
+            class="logo-verso"
+            src="./logo-confraria.png"
+            alt="Confraria Companhia da Cachaça"
+          >
+
           <div
             class="lema-verso"
           >
@@ -1950,6 +1983,14 @@ function criarCarteira(membro) {
       Ver verso
     </button>
 
+    <button
+      class="botao-horizontal"
+      id="botaoHorizontal"
+      type="button"
+    >
+      ↔ Abrir na horizontal
+    </button>
+
   `;
 
 
@@ -1968,6 +2009,19 @@ function criarCarteira(membro) {
     "click",
     alternarLado
   );
+
+
+  const botaoHorizontal =
+    document.getElementById(
+      "botaoHorizontal"
+    );
+
+  if (botaoHorizontal) {
+    botaoHorizontal.addEventListener(
+      "click",
+      abrirNaHorizontal
+    );
+  }
 
 
   ajustarNome();
@@ -2292,6 +2346,29 @@ function mostrarErro(mensagem) {
 
 }
 
+
+/* =====================================================
+   COMANDO PARA USAR A CARTEIRA NA HORIZONTAL
+   ===================================================== */
+
+.botao-horizontal {
+  display: none;
+  margin-top: 10px;
+  padding: 10px 18px;
+  border: 1px solid #B58A2C;
+  border-radius: 24px;
+  background: transparent;
+  color: #6E5A32;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+@media (orientation: portrait) {
+  .botao-horizontal {
+    display: inline-block;
+  }
+}
 
 /* =====================================================
    CARREGAMENTO PRINCIPAL
