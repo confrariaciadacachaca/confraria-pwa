@@ -1,4 +1,5 @@
-const CACHE_NAME = "confraria-pwa-v4";
+const CACHE_NAME = "confraria-pwa-v5";
+
 
 const APP_SHELL = [
   "./",
@@ -9,197 +10,119 @@ const APP_SHELL = [
 ];
 
 
-self.addEventListener("install", event => {
 
-  event.waitUntil(
+/* =====================================================
+   INSTALAÇÃO
+   ===================================================== */
 
-    caches
-      .open(CACHE_NAME)
-      .then(cache => {
+self.addEventListener(
+  "install",
+  function(event) {
 
-        return cache.addAll(APP_SHELL);
+    event.waitUntil(
 
-      })
+      caches
+        .open(CACHE_NAME)
+        .then(
+          function(cache) {
 
-  );
+            return cache.addAll(
+              APP_SHELL
+            );
 
-  self.skipWaiting();
-
-});
-
-
-self.addEventListener("activate", event => {
-
-  event.waitUntil(
-
-    caches.keys().then(keys => {
-
-      return Promise.all(
-
-        keys
-          .filter(key => key !== CACHE_NAME)
-          .map(key => caches.delete(key))
-
-      );
-
-    })
-
-  );
-
-  self.clients.claim();
-
-});
-
-
-self.addEventListener("fetch", event => {
-
-  const request =
-    event.request;
-
-  const url =
-    new URL(request.url);
-
-
-  /*
-   * O PWA só controla arquivos
-   * da própria origem.
-   *
-   * O Google Apps Script continua
-   * sendo carregado diretamente
-   * pela internet.
-   */
-
-  if (url.origin !== self.location.origin) {
-    return;
-  }
-
-
-  /*
-   * Navegação:
-   *
-   * primeiro tenta buscar a versão
-   * atual na rede.
-   *
-   * Se não houver internet,
-   * utiliza o index.html armazenado.
-   */
-
-  if (request.mode === "navigate") {
-
-    event.respondWith(
-
-      fetch(
-        request,
-        {
-          cache: "no-store"
-        }
-      )
-
-      .then(response => {
-
-        return response;
-
-      })
-
-      .catch(() => {
-
-        return caches.match(
-          "./index.html"
-        );
-
-      })
+          }
+        )
 
     );
 
-    return;
+
+    /*
+     * Ativa imediatamente a nova versão.
+     */
+
+    self.skipWaiting();
+
   }
+);
 
 
-  /*
-   * index.html e manifest:
-   *
-   * sempre tenta buscar a versão
-   * atualizada na rede.
-   */
 
-  if (
-    url.pathname.endsWith("/index.html") ||
-    url.pathname.endsWith("/manifest.json")
-  ) {
+/* =====================================================
+   ATIVAÇÃO
+   ===================================================== */
 
-    event.respondWith(
+self.addEventListener(
+  "activate",
+  function(event) {
 
-      fetch(
-        request,
-        {
-          cache: "no-store"
-        }
-      )
+    event.waitUntil(
 
-      .catch(() => {
+      caches
+        .keys()
+        .then(
+          function(keys) {
 
-        return caches.match(
-          "./" +
-          url.pathname.split("/").pop()
-        );
+            return Promise.all(
 
-      })
+              keys
+                .filter(
+                  function(key) {
+
+                    return (
+                      key !==
+                      CACHE_NAME
+                    );
+
+                  }
+                )
+
+                .map(
+                  function(key) {
+
+                    return caches.delete(
+                      key
+                    );
+
+                  }
+                )
+
+            );
+
+          }
+        )
 
     );
 
-    return;
+
+    /*
+     * Assume imediatamente o controle
+     * das páginas abertas.
+     */
+
+    self.clients.claim();
+
   }
+);
 
 
-  /*
-   * Outros arquivos:
-   *
-   * utiliza o cache quando disponível.
-   *
-   * Caso contrário, busca na rede.
-   */
 
-  event.respondWith(
+/* =====================================================
+   IMPORTANTE
+   =====================================================
 
-    caches
-      .match(request)
-      .then(cached => {
+   NÃO HÁ EVENTO "fetch" NESTA VERSÃO.
 
-        if (cached) {
-          return cached;
-        }
+   O navegador fará normalmente:
 
+   GitHub Pages
+        ↓
+   index.html
+        ↓
+   Apps Script
+        ↓
+   JSON
 
-        return fetch(request)
-          .then(response => {
+   O Service Worker não vai interferir
+   nesse processo.
 
-            if (
-              response &&
-              response.ok
-            ) {
-
-              const copy =
-                response.clone();
-
-              caches
-                .open(CACHE_NAME)
-                .then(cache => {
-
-                  cache.put(
-                    request,
-                    copy
-                  );
-
-                });
-
-            }
-
-            return response;
-
-          });
-
-      })
-
-  );
-
-});
+   ===================================================== */
