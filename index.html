@@ -1499,6 +1499,28 @@ async function abrirNaHorizontal() {
 
 }
 
+
+
+/* Botão para tentar abrir a carteira em horizontal */
+.botao-horizontal {
+  display: none;
+  margin-top: 10px;
+  padding: 10px 18px;
+  border: 1px solid #B58A2C;
+  border-radius: 24px;
+  background: transparent;
+  color: #6E5A32;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+@media (orientation: portrait) {
+  .botao-horizontal {
+    display: inline-block;
+  }
+}
+
 </style>
 
 </head>
@@ -2351,24 +2373,6 @@ function mostrarErro(mensagem) {
    COMANDO PARA USAR A CARTEIRA NA HORIZONTAL
    ===================================================== */
 
-.botao-horizontal {
-  display: none;
-  margin-top: 10px;
-  padding: 10px 18px;
-  border: 1px solid #B58A2C;
-  border-radius: 24px;
-  background: transparent;
-  color: #6E5A32;
-  font-family: inherit;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-@media (orientation: portrait) {
-  .botao-horizontal {
-    display: inline-block;
-  }
-}
 
 /* =====================================================
    CARREGAMENTO PRINCIPAL
