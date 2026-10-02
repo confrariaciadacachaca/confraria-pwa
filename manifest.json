@@ -1,25 +1,18 @@
 {
-  "id": "https://confrariadacachaca.github.io/confraria-pwa/",
+  "id": "https://confrariaciadacachaca.github.io/confraria-pwa/",
   "name": "Identidade Confraria",
   "short_name": "Identidade Confraria",
   "description": "Carteira Digital da Confraria Companhia da Cachaça",
   "lang": "pt-BR",
-
-  "start_url": "./?launcher=homescreen&pwa=4",
-
+  "start_url": "./",
   "scope": "./",
-
   "display_override": [
     "standalone"
   ],
-
   "display": "standalone",
-
   "orientation": "landscape",
-
   "background_color": "#000000",
   "theme_color": "#000000",
-
   "icons": [
     {
       "src": "./icon-192.png",
