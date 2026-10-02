@@ -111,7 +111,7 @@ body {
 
   width: 100%;
 
-  max-width: 930px;
+  max-width: 760px;
 
   margin: 0 auto;
 
@@ -886,35 +886,6 @@ body {
 
 
 /* =====================================================
-   TENTAR ABRIR NA HORIZONTAL
-   ===================================================== */
-
-async function abrirNaHorizontal() {
-
-  try {
-
-    if (
-      screen.orientation &&
-      typeof screen.orientation.lock === "function"
-    ) {
-
-      await screen.orientation.lock("landscape");
-      return;
-
-    }
-
-  } catch (erro) {
-    // Alguns aparelhos/navegadores não permitem o bloqueio.
-  }
-
-  alert(
-    "O aparelho não permitiu alterar a orientação automaticamente.\n\nVire o celular de lado para usar a carteira na horizontal."
-  );
-
-}
-
-
-/* =====================================================
    ERRO
    ===================================================== */
 
@@ -1211,314 +1182,45 @@ async function abrirNaHorizontal() {
 }
 
 
-
 /* =====================================================
-   AJUSTE DE TAMANHO PARA CABER INTEIRO NA TELA
-   ETAPA 2
+   AJUSTE RESPONSIVO HORIZONTAL
    ===================================================== */
 
-@media (max-width: 650px) {
+@media (orientation: landscape) {
 
   #app {
-    min-height: 100dvh;
-    padding: 14px 10px 16px;
+    min-height: 100vh;
+    padding: 18px 10px;
+    align-items: flex-start;
   }
 
   .area-carteira {
-    width: min(
-      100%,
-      calc((100dvh - 105px) * 1.586)
-    );
-    max-width: 930px;
-  }
-
-  .carteira {
     width: 100%;
-    aspect-ratio: 1.586 / 1;
+    max-width: min(1000px, calc((100vh - 60px) * 1.586));
   }
 
-  .botao {
-    margin-top: 12px;
-  }
-
-}
-
-/* =====================================================
-   CELULAR VERTICAL
-   Reduz somente os elementos internos para que logo e QR
-   permaneçam totalmente dentro da carteira.
-   ===================================================== */
-
-@media (max-width: 650px) and (orientation: portrait) {
-
-  .cabecalho {
-    padding: 13px 18px 9px;
-  }
-
-  .titulo {
-    font-size: 13px;
-    letter-spacing: 0.95px;
-  }
-
-  .subtitulo {
-    margin-top: 4px;
-    font-size: 7px;
-    letter-spacing: 1px;
-  }
-
-  .corpo {
-    padding: 9px 10px 12px;
-  }
-
-  .corpo::before,
-  .corpo::after {
-    width: 95px;
-    height: 70px;
-  }
-
-  .corpo {
-    background-size: 95px 70px, 95px 70px;
-  }
-
-  .coluna-foto {
-    transform: translateX(6px);
-  }
-
-  .foto,
-  .sem-foto {
-    width: 72px;
-    height: 92px;
-    border-radius: 9px;
-  }
-
-  .coluna-central {
-    padding: 0 5px;
-    transform: translateY(-1px);
-  }
-
-  .nome {
-    font-size: 15px;
-  }
-
-  .cargo {
-    margin-top: 5px;
-    font-size: 10px;
-  }
-
-  .numero {
-    margin-top: 5px;
-    font-size: 8px;
-  }
-
-  .status {
-    margin-top: 8px;
-    padding: 4px 9px;
-    font-size: 7px;
-  }
-
-  .lema {
-    margin-top: 7px;
-    font-size: 6px;
-    letter-spacing: 0.7px;
-  }
-
-  .logo-frente {
-    max-width: 58px;
-    max-height: 26px;
-    margin-top: 6px;
-  }
-
-  .coluna-direita {
-    padding-left: 7px;
-  }
-
-  .linha {
-    min-height: 20px;
-    font-size: 6px;
-    gap: 5px;
-  }
-
-  .qr-area {
-    margin-top: 9px;
-  }
-
-  .qr {
-    width: 52px;
-    height: 52px;
-  }
-
-  .qr-texto {
-    margin-top: 2px;
-    font-size: 5px;
-    letter-spacing: 0.25px;
-  }
-
-  .logo-verso {
-    max-width: 58%;
-    max-height: 95px;
-  }
-
-  .lema-verso {
-    margin-top: 10px;
-    font-size: 7px;
-    letter-spacing: 1.2px;
-  }
-
-}
-
-/* =====================================================
-   CELULAR HORIZONTAL
-   A altura útil é o limite principal.
-   ===================================================== */
-
-@media (max-width: 900px) and (orientation: landscape) {
-
-  #app {
-    min-height: 100dvh;
-    padding: 10px 10px 12px;
-  }
-
-  .area-carteira {
-    width: min(
-      96vw,
-      calc((100dvh - 78px) * 1.586),
-      930px
-    );
-    max-width: 930px;
-  }
-
-  .cabecalho {
-    padding: 10px 18px 7px;
-  }
-
-  .titulo {
-    font-size: 12px;
-    letter-spacing: 0.9px;
-  }
-
-  .subtitulo {
-    margin-top: 3px;
-    font-size: 7px;
-  }
-
-  .corpo {
-    padding: 8px 10px 10px;
-  }
-
-  .corpo::before,
-  .corpo::after {
-    width: 92px;
-    height: 68px;
-  }
-
-  .corpo {
-    background-size: 92px 68px, 92px 68px;
-  }
-
-  .coluna-foto {
-    transform: translateX(6px);
-  }
-
-  .foto,
-  .sem-foto {
-    width: 72px;
-    height: 92px;
-    border-radius: 9px;
-  }
-
-  .coluna-central {
-    padding: 0 5px;
-  }
-
-  .nome {
-    font-size: 15px;
-  }
-
-  .cargo {
-    margin-top: 5px;
-    font-size: 10px;
-  }
-
-  .numero {
-    margin-top: 5px;
-    font-size: 8px;
-  }
-
-  .status {
-    margin-top: 8px;
-    padding: 4px 9px;
-    font-size: 7px;
-  }
-
-  .lema {
-    margin-top: 7px;
-    font-size: 6px;
-    letter-spacing: 0.7px;
-  }
-
-  .logo-frente {
-    max-width: 58px;
-    max-height: 26px;
-    margin-top: 6px;
-  }
-
-  .coluna-direita {
-    padding-left: 7px;
-  }
-
-  .linha {
-    min-height: 20px;
-    font-size: 6px;
-    gap: 5px;
-  }
-
-  .qr-area {
-    margin-top: 8px;
-  }
-
-  .qr {
-    width: 52px;
-    height: 52px;
-  }
-
-  .qr-texto {
-    margin-top: 2px;
-    font-size: 5px;
-  }
-
-  .logo-verso {
-    max-width: 58%;
-    max-height: 95px;
-  }
-
-  .lema-verso {
-    margin-top: 9px;
-    font-size: 7px;
-    letter-spacing: 1.2px;
-  }
-
-}
-
-
-
-/* Botão para tentar abrir a carteira em horizontal */
-.botao-horizontal {
-  display: none;
-  margin-top: 10px;
-  padding: 10px 18px;
-  border: 1px solid #B58A2C;
-  border-radius: 24px;
-  background: transparent;
-  color: #6E5A32;
-  font-family: inherit;
-  font-size: 14px;
-  cursor: pointer;
 }
 
 @media (orientation: portrait) {
   .botao-horizontal {
     display: inline-block;
   }
+}
+
+.botao-horizontal {
+  display: none;
+  margin: 12px auto 0;
+  padding: 8px 18px;
+  border: 1px solid #B58A2C;
+  border-radius: 20px;
+  background: transparent;
+  color: #806C51;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+@media (orientation: portrait) {
+  .botao-horizontal { display: block; }
 }
 
 </style>
@@ -1813,7 +1515,6 @@ function criarCarteira(membro) {
               </div>
 
 
-              <!-- LOGO OFICIAL DA CONFRARIA -->
               <img
                 class="logo-frente"
                 src="./logo-confraria.png"
@@ -2005,13 +1706,14 @@ function criarCarteira(membro) {
       Ver verso
     </button>
 
-    <button
-      class="botao-horizontal"
-      id="botaoHorizontal"
-      type="button"
-    >
-      ↔ Abrir na horizontal
-    </button>
+  <button
+    class="botao-horizontal"
+    id="botaoHorizontal"
+    type="button"
+    onclick="abrirHorizontal()"
+  >
+    ↔ Abrir na horizontal
+  </button>
 
   `;
 
@@ -2031,19 +1733,6 @@ function criarCarteira(membro) {
     "click",
     alternarLado
   );
-
-
-  const botaoHorizontal =
-    document.getElementById(
-      "botaoHorizontal"
-    );
-
-  if (botaoHorizontal) {
-    botaoHorizontal.addEventListener(
-      "click",
-      abrirNaHorizontal
-    );
-  }
 
 
   ajustarNome();
@@ -2370,8 +2059,24 @@ function mostrarErro(mensagem) {
 
 
 /* =====================================================
-   COMANDO PARA USAR A CARTEIRA NA HORIZONTAL
+   TENTATIVA DE ABERTURA HORIZONTAL
    ===================================================== */
+
+function abrirHorizontal() {
+
+  try {
+
+    if (screen.orientation && screen.orientation.lock) {
+
+      screen.orientation.lock("landscape").catch(function() {});
+
+    }
+
+  } catch (erro) {
+    console.log("Orientação horizontal não disponível.");
+  }
+
+}
 
 
 /* =====================================================
