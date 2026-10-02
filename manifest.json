@@ -10,7 +10,6 @@
     "standalone"
   ],
   "display": "standalone",
-  "orientation": "landscape",
   "background_color": "#000000",
   "theme_color": "#000000",
   "icons": [
