@@ -109,24 +109,25 @@ body {
 
 .area-carteira {
 
-  width: 100%;
-
-  max-width: 760px;
+  width: calc(760px * var(--card-scale, 1));
+  height: calc(479px * var(--card-scale, 1));
 
   margin: 0 auto;
+  position: relative;
 
 }
 
 
 .carteira {
 
-  width: 100%;
-
-  aspect-ratio: 1.586 / 1;
+  width: 760px;
+  height: 479px;
 
   position: relative;
-
   perspective: 1200px;
+
+  transform: scale(var(--card-scale, 1));
+  transform-origin: top left;
 
 }
 
@@ -952,260 +953,12 @@ body {
    CELULAR
    ===================================================== */
 
-@media (max-width: 650px) {
 
-  #app {
-
-    padding:
-      20px 10px;
-
-  }
-
-
-  .area-carteira {
-
-    max-width:
-      100%;
-
-  }
-
-
-  .titulo {
-
-    font-size:
-      14px;
-
-  }
-
-
-  .subtitulo {
-
-    font-size:
-      8px;
-
-  }
-
-
-  .corpo {
-
-    grid-template-columns:
-      27% 45% 28%;
-
-    padding:
-      13px 12px;
-
-    background:
-
-      linear-gradient(
-        146deg,
-        transparent 0%,
-        transparent 47%,
-        #B58A2C 47%,
-        #B58A2C 52%,
-        transparent 52%
-      )
-      top left / 110px 82px no-repeat,
-
-
-      linear-gradient(
-        326deg,
-        transparent 0%,
-        transparent 47%,
-        #B58A2C 47%,
-        #B58A2C 52%,
-        transparent 52%
-      )
-      bottom right / 110px 82px no-repeat;
-
-  }
-
-
-  .corpo::before,
-  .corpo::after {
-
-    width:
-      110px;
-
-    height:
-      82px;
-
-  }
-
-
-  .coluna-foto {
-
-    transform:
-      translateX(8px);
-
-  }
-
-
-  .foto,
-  .sem-foto {
-
-    width:
-      82px;
-
-    height:
-      105px;
-
-  }
-
-
-  .coluna-central {
-
-    padding:
-      0 7px;
-
-  }
-
-
-  .nome {
-
-    font-size:
-      17px;
-
-  }
-
-
-  .cargo {
-
-    font-size:
-      12px;
-
-  }
-
-
-  .numero {
-
-    font-size:
-      9px;
-
-    margin-top:
-      6px;
-
-  }
-
-
-  .status {
-
-    font-size:
-      8px;
-
-    padding:
-      5px 11px;
-
-  }
-
-
-  .lema {
-
-    font-size:
-      7px;
-
-    margin-top:
-      10px;
-
-  }
-
-
-  .coluna-direita {
-
-    padding-left:
-      9px;
-
-  }
-
-
-  .linha {
-
-    min-height:
-      23px;
-
-    font-size:
-      7px;
-
-  }
-
-
-  .logo-frente {
-
-    max-width:
-      78px;
-
-    max-height:
-      34px;
-
-    margin-top:
-      10px;
-
-  }
-
-
-  .qr {
-
-    width:
-      62px;
-
-    height:
-      62px;
-
-  }
-
-
-  .qr-texto {
-
-    font-size:
-      6px;
-
-  }
-
-
-  .logo-verso {
-
-    max-width:
-      70%;
-
-    max-height:
-      120px;
-
-  }
-
-
-  .lema-verso {
-
-    font-size:
-      8px;
-
-  }
-
-}
 
 
 /* =====================================================
-   AJUSTE RESPONSIVO HORIZONTAL
+   ORIENTAÇÃO / BOTÃO HORIZONTAL
    ===================================================== */
-
-@media (orientation: landscape) {
-
-  #app {
-    min-height: 100vh;
-    padding: 18px 10px;
-    align-items: flex-start;
-  }
-
-  .area-carteira {
-    width: 100%;
-    max-width: min(1000px, calc((100vh - 60px) * 1.586));
-  }
-
-}
-
-@media (orientation: portrait) {
-  .botao-horizontal {
-    display: inline-block;
-  }
-}
 
 .botao-horizontal {
   display: none;
@@ -1220,7 +973,9 @@ body {
 }
 
 @media (orientation: portrait) {
-  .botao-horizontal { display: block; }
+  .botao-horizontal {
+    display: block;
+  }
 }
 
 </style>
@@ -1722,6 +1477,8 @@ function criarCarteira(membro) {
     area
   );
 
+  ajustarTamanhoCarteira();
+
 
   const botao =
     document.getElementById(
@@ -2062,15 +1819,29 @@ function mostrarErro(mensagem) {
    TENTATIVA DE ABERTURA HORIZONTAL
    ===================================================== */
 
-function abrirNaHorizontal() {
+async function abrirNaHorizontal() {
 
   try {
 
-    if (screen.orientation && screen.orientation.lock) {
-      screen.orientation.lock("landscape").catch(function() {
-        console.log("Orientação horizontal não disponível.");
-      });
+    if (document.documentElement.requestFullscreen) {
+      try {
+        await document.documentElement.requestFullscreen();
+      } catch (erroTelaCheia) {
+        console.log("Tela cheia não disponível.");
+      }
     }
+
+    if (screen.orientation && screen.orientation.lock) {
+      try {
+        await screen.orientation.lock("landscape");
+      } catch (erroOrientacao) {
+        console.log("Bloqueio horizontal não disponível.");
+      }
+    }
+
+    setTimeout(function() {
+      ajustarTamanhoCarteira();
+    }, 250);
 
   } catch (erro) {
     console.log("Orientação horizontal não disponível.");
@@ -2081,6 +1852,37 @@ function abrirNaHorizontal() {
 // Mantém compatibilidade caso alguma versão anterior use este nome.
 function abrirHorizontal() {
   abrirNaHorizontal();
+}
+
+
+/* =====================================================
+   CÁLCULO RESPONSIVO DA CARTEIRA
+   ===================================================== */
+
+function ajustarTamanhoCarteira() {
+
+  const area = document.querySelector(".area-carteira");
+  if (!area) return;
+
+  const BASE_W = 760;
+  const BASE_H = 479;
+
+  // Mantém a carteira inteira visível em qualquer aparelho.
+  // Reservamos espaço para margens e para o botão abaixo da carteira.
+  const margemHorizontal = 20;
+  const margemVertical = 34;
+  const espacoBotoes = 82;
+
+  const larguraDisponivel = Math.max(280, window.innerWidth - margemHorizontal);
+  const alturaDisponivel = Math.max(260, window.innerHeight - margemVertical - espacoBotoes);
+
+  const escalaPorLargura = larguraDisponivel / BASE_W;
+  const escalaPorAltura = alturaDisponivel / BASE_H;
+
+  const escala = Math.min(escalaPorLargura, escalaPorAltura);
+
+  area.style.setProperty("--card-scale", escala.toFixed(4));
+
 }
 
 
@@ -2167,10 +1969,21 @@ window.addEventListener(
   "resize",
   function() {
 
+    ajustarTamanhoCarteira();
     ajustarNome();
-
     ajustarFoto();
 
+  }
+);
+
+window.addEventListener(
+  "orientationchange",
+  function() {
+    setTimeout(function() {
+      ajustarTamanhoCarteira();
+      ajustarNome();
+      ajustarFoto();
+    }, 120);
   }
 );
 
