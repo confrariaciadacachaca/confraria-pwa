@@ -819,8 +819,12 @@ body {
 
   display: block;
 
-  margin:
-    16px auto 0;
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 14px);
+  transform: translateX(-50%);
+
+  margin: 0;
 
   padding:
     8px 18px;
@@ -963,7 +967,11 @@ body {
 
 .botao-horizontal {
   display: none;
-  margin: 12px auto 0;
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 66px);
+  transform: translateX(-50%);
+  margin: 0;
   padding: 8px 18px;
   border: 1px solid #B58A2C;
   border-radius: 20px;
@@ -1879,7 +1887,7 @@ function ajustarTamanhoCarteira() {
   // para os botões abaixo da carteira.
   const margemHorizontal = 24;
   const margemVertical = 24;
-  const espacoBotoes = 118;
+  const espacoBotoes = 94;
 
   const larguraDisponivel = Math.max(280, larguraTela - margemHorizontal);
   const alturaDisponivel = Math.max(260, alturaTela - margemVertical - espacoBotoes);
