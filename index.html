@@ -821,7 +821,7 @@ body {
 
   position: absolute;
   left: 50%;
-  top: calc(100% + 14px);
+  top: calc(479px * var(--card-scale, 1) + 10px);
   transform: translateX(-50%);
 
   margin: 0;
@@ -969,7 +969,7 @@ body {
   display: none;
   position: absolute;
   left: 50%;
-  top: calc(100% + 66px);
+  top: calc(479px * var(--card-scale, 1) + 58px);
   transform: translateX(-50%);
   margin: 0;
   padding: 8px 18px;
@@ -1887,7 +1887,12 @@ function ajustarTamanhoCarteira() {
   // para os botões abaixo da carteira.
   const margemHorizontal = 24;
   const margemVertical = 24;
-  const espacoBotoes = 94;
+
+  // No modo horizontal o botão de orientação fica oculto,
+  // portanto não precisamos reservar espaço para ele. Isso
+  // permite aproveitar melhor a altura disponível da tela.
+  const emRetrato = alturaTela >= larguraTela;
+  const espacoBotoes = emRetrato ? 76 : 18;
 
   const larguraDisponivel = Math.max(280, larguraTela - margemHorizontal);
   const alturaDisponivel = Math.max(260, alturaTela - margemVertical - espacoBotoes);
