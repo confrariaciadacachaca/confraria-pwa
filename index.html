@@ -2062,20 +2062,25 @@ function mostrarErro(mensagem) {
    TENTATIVA DE ABERTURA HORIZONTAL
    ===================================================== */
 
-function abrirHorizontal() {
+function abrirNaHorizontal() {
 
   try {
 
     if (screen.orientation && screen.orientation.lock) {
-
-      screen.orientation.lock("landscape").catch(function() {});
-
+      screen.orientation.lock("landscape").catch(function() {
+        console.log("Orientação horizontal não disponível.");
+      });
     }
 
   } catch (erro) {
     console.log("Orientação horizontal não disponível.");
   }
 
+}
+
+// Mantém compatibilidade caso alguma versão anterior use este nome.
+function abrirHorizontal() {
+  abrirNaHorizontal();
 }
 
 
